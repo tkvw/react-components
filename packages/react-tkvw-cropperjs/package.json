@@ -1,0 +1,8 @@
+{
+  "name": "react-tkvw-cropperjs",
+  "version": "1.0.0",
+  "description": "Cropperjs wrapper",
+  "main": "index.js",
+  "author": "Dennie de Lange",
+  "license": "MIT"
+}
