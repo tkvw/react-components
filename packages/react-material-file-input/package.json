@@ -1,0 +1,29 @@
+{
+  "name": "react-material-file-input",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dennie de Lange",
+  "license": "MIT",
+  "peerDependencies": {
+    "material-ui": "^1.0.0-beta.32",
+    "material-ui-icons": "^1.0.0-beta.17"
+  },
+  "devDependencies": {
+    "material-ui": "^1.0.0-beta.32",
+    "material-ui-icons": "^1.0.0-beta.17",
+    "recompose": "^0.26.0"
+  },
+  "dependencies": {
+    "attr-accept": "^1.1.0",
+    "blueimp-load-image": "^2.18.0",
+    "classnames": "^2.2.5",
+    "mdi-svg": "^2.1.19",
+    "react-dropzone": "^4.2.7",
+    "react-image-transformation": "^1.0.0",
+    "react-material-cropperjs": "^1.0.0"
+  }
+}

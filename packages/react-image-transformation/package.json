@@ -1,0 +1,11 @@
+{
+  "name": "react-image-transformation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dennie de Lange",
+  "license": "MIT"
+}
