@@ -1,11 +1,14 @@
 {
-  "name": "react-image-transformation",
-  "version": "1.0.0",
+  "name": "@tkvw/react-image-transformation",
+  "version": "1.0.1",
   "description": "",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dennie de Lange",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "blueimp-load-image": "^2.18.0"
+  }
 }

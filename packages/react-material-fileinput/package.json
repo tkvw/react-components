@@ -1,8 +1,9 @@
 {
-  "name": "react-material-fileinput",
-  "version": "1.0.0",
+  "name": "@tkvw/react-material-fileinput",
+  "version": "1.0.1",
   "description": "",
   "main": "build/index.js",
+  "jsnext:main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,12 +19,12 @@
     "recompose": "^0.26.0"
   },
   "dependencies": {
+    "@tkvw/react-image-transformation": "^1.0.1",
+    "@tkvw/react-material-cropperjs": "^1.0.1",
     "attr-accept": "^1.1.0",
     "blueimp-load-image": "^2.18.0",
     "classnames": "^2.2.5",
     "mdi-svg": "^2.1.19",
-    "react-dropzone": "^4.2.7",
-    "react-image-transformation": "^1.0.0",
-    "react-material-cropperjs": "^1.0.0"
+    "react-dropzone": "^4.2.7"
   }
 }

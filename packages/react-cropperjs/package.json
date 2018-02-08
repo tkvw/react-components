@@ -1,6 +1,6 @@
 {
-  "name": "react-cropperjs",
-  "version": "1.0.0",
+  "name": "@tkvw/react-cropperjs",
+  "version": "1.0.1",
   "description": "Cropperjs wrapper",
   "main": "build/index.js",
   "module": "src/index.js",
