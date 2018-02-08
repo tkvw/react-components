@@ -39,14 +39,22 @@ class ImageTransformation extends React.Component {
         });
     };
 
-    loadTransformation = ({ revokeObjectURL, options, src } = this.props) => {
+    loadTransformation = (
+        {
+            revokeObjectURL,
+            options: { conversion = [], ...options } = {},
+            src,
+        } = this.props
+    ) => {
         this.setState({ loading: true }, () =>
             new Promise(resolve => {
                 if (src) {
                     loadImage(
                         src,
                         img => {
-                            if (img) resolve(img.toDataURL());
+                            if (img) {
+                                img.toBlob(resolve, ...conversion);
+                            }
                         },
                         {
                             crop: true,
@@ -54,12 +62,12 @@ class ImageTransformation extends React.Component {
                         }
                     );
                 }
-            }).then(url =>
+            }).then(blob =>
                 this.setState(({ url: previousUrl }) => {
                     if (previousUrl) revokeObjectURL(previousUrl);
                     return {
                         loading: false,
-                        url,
+                        blob,
                     };
                 })
             )

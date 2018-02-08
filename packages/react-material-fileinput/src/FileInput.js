@@ -45,15 +45,20 @@ class FileInput extends React.Component {
     handleAdd = filesAccepted => {
         const { onChange, maxItems, transform } = this.props;
         filesAccepted = filesAccepted.slice(0, maxItems).map(transform);
-        this.setState({
-            files: filesAccepted,
-        });
-        onChange && onChange(filesAccepted);
+        this.setState(
+            {
+                files: filesAccepted,
+            },
+            () => onChange && onChange(filesAccepted)
+        );
     };
-    handleRemove = file =>
-        this.setState(({ files }) => ({
-            files: files.filter(f => f !== file),
-        }));
+    handleRemove = (file, { onChange } = this.props) =>
+        this.setState(
+            ({ files }) => ({
+                files: files.filter(f => f !== file),
+            }),
+            () => onChange && onChange(this.state.filesAccepted)
+        );
 
     createHandleRemove = file => event => {
         event.preventDefault();

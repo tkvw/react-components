@@ -5,6 +5,7 @@
         "setupTestFrameworkScriptFile": "./test-setup.js"
     },
     "scripts": {
+        "build:react-blob-image": "rimraf ./packages/react-blob-image/build && cross-env NODE_ENV=production babel ./packages/react-blob-image/src -d ./packages/react-blob-image/build --ignore **/*.spec.js,**/*.stories.js",
         "build:react-image-transformation": "rimraf ./packages/react-image-transformation/build && cross-env NODE_ENV=production babel ./packages/react-image-transformation/src -d ./packages/react-image-transformation/build --ignore **/*.spec.js,**/*.stories.js",
         "yalc:react-image-transformation":"yarn run build:react-image-transformation && yalc publish ./packages/react-image-transformation",
         "build:react-cropperjs": "rimraf ./packages/react-cropperjs/build && cross-env NODE_ENV=production babel ./packages/react-cropperjs/src -d ./packages/react-cropperjs/build --ignore **/*.spec.js,**/*.stories.js",
@@ -13,7 +14,8 @@
         "yalc:react-material-cropperjs":"yarn run build:react-material-cropperjs && yalc publish ./packages/react-material-cropperjs",
         "build:react-material-fileinput": "rimraf ./packages/react-material-fileinput/build && cross-env NODE_ENV=production babel ./packages/react-material-fileinput/src -d ./packages/react-material-fileinput/build --ignore **/*.spec.js,**/*.stories.js",
         "yalc:react-material-fileinput":"yarn run build:react-material-fileinput && yalc publish ./packages/react-material-fileinput",
-        "build:all":"yarn run build:react-cropperjs && yarn run build:react-material-cropperjs && yarn run build:react-image-transformation && yarn run build:react-material-fileinput",
+        "build:all":"yarn run build:react-blob-image && yarn run build:react-cropperjs && yarn run build:react-material-cropperjs && yarn run build:react-image-transformation && yarn run build:react-material-fileinput",
+        "publish:all":"yarn run build:all && lerna publish",
         "yalc:all":"yarn run yalc:react-cropperjs && yarn run yalc:react-material-cropperjs && yarn run yalc:react-image-transformation && yarn run yalc:react-material-fileinput",
         "storybook": "start-storybook -p 9001 -s ./.storybook/public -c .storybook"
     },

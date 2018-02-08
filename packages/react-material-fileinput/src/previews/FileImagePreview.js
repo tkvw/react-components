@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Modal from 'material-ui/Modal';
 import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
-import Cropper from 'react-material-cropperjs';
-import ImageTransformation from 'react-image-transformation';
+import Cropper from '@tkvw/react-material-cropperjs';
+import ImageTransformation from '@tkvw/react-image-transformation';
 
 import Preview from '../Preview';
 

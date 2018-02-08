@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCropper from 'react-cropperjs';
+import ReactCropper from '@tkvw/react-cropperjs';
 import Tooltip from 'material-ui/Tooltip';
 import ToolbarButton from './ToolbarButton';
 
