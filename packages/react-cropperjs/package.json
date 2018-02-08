@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-cropperjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cropperjs wrapper",
   "main": "build/index.js",
   "module": "src/index.js",
@@ -9,6 +9,9 @@
   "peerDependencies": {
     "react": "^15.4.0 || ~16.0.0",
     "react-dom": "^15.4.0 || ~16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "cropperjs": "^1.2.2",
