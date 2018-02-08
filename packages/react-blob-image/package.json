@@ -1,0 +1,15 @@
+{
+  "name": "@tkvw/react-blob-image",
+  "version": "1.0.1",
+  "description": "",
+  "main": "build/index.js",
+  "jsnext:main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Dennie de Lange",
+  "license": "MIT"
+}

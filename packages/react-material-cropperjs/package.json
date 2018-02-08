@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-cropperjs",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "description",
   "main": "build/index",
   "jsnext:main": "src/index",
