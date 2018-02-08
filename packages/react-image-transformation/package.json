@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-image-transformation",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -13,7 +13,7 @@
   "author": "Dennie de Lange",
   "license": "MIT",
   "devDependencies": {
-    "@tkvw/react-blob-image": "^1.0.2"
+    "@tkvw/react-blob-image": "^1.0.3"
   },
   "dependencies": {
     "blueimp-load-image": "^2.18.0"

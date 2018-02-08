@@ -1,15 +1,19 @@
 {
   "name": "@tkvw/react-blob-image",
-  "version": "1.0.2",
-  "description": "",
+  "version": "1.0.3",
+  "description": "Render blob as image",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
+  "author": "Dennie de Lange",
+  "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "peerDependencies": {
+    "react": "^15.4.0 || ~16.0.0",
+    "react-dom": "^15.4.0 || ~16.0.0"
+  },
   "publishConfig": {
     "access": "public"
-  },
-  "author": "Dennie de Lange",
-  "license": "MIT"
+  }
 }
