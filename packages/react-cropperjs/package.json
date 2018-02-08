@@ -1,9 +1,9 @@
 {
   "name": "@tkvw/react-cropperjs",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Cropperjs wrapper",
-  "main": "build/index.js",
-  "module": "src/index.js",
+  "main": "build/index",
+  "jsnext:main": "src/index",
   "author": "Dennie de Lange",
   "license": "MIT",
   "peerDependencies": {

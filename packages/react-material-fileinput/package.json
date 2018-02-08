@@ -1,8 +1,8 @@
 {
   "name": "@tkvw/react-material-fileinput",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
-  "main": "build/index.js",
+  "main": "build/index",
   "jsnext:main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,8 +22,8 @@
     "recompose": "^0.26.0"
   },
   "dependencies": {
-    "@tkvw/react-image-transformation": "^1.0.2",
-    "@tkvw/react-material-cropperjs": "^1.0.3",
+    "@tkvw/react-image-transformation": "^1.0.3",
+    "@tkvw/react-material-cropperjs": "^1.0.4",
     "attr-accept": "^1.1.0",
     "blueimp-load-image": "^2.18.0",
     "classnames": "^2.2.5",

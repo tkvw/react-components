@@ -1,8 +1,9 @@
 {
   "name": "@tkvw/react-image-transformation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
-  "main": "build/index.js",
+  "main": "build/index",
+  "jsnext:main": "src/index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
