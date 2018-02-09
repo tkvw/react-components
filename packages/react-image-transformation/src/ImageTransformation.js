@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import loadImage from 'blueimp-load-image';
+import 'blueimp-canvas-to-blob';
 
 class ImageTransformation extends React.Component {
     static propTypes = {
         src: PropTypes.any,
         render: PropTypes.func,
-        revokeObjectURL: PropTypes.func,
     };
 
-    static defaultProps = {
-        revokeObjectURL: window.URL.revokeObjectURL,
-    };
+    state = {};
 
     componentWillMount() {
         this.loadTransformation();
@@ -24,27 +22,14 @@ class ImageTransformation extends React.Component {
         }
     }
 
-    componentWillUnmount() {
-        const { revokeObjectURL } = this.props;
-        const { url } = this.state;
-        if (url) revokeObjectURL(url);
-    }
-
-    handleUpdateUrl = (url, { revokeObjectURL } = this.props) => {
-        this.setState(({ url: previousUrl }) => {
-            if (previousUrl) revokeObjectURL(previousUrl);
-            return {
-                url,
-            };
+    handleUpdateBlob = blob => {
+        this.setState({
+            blob,
         });
     };
 
     loadTransformation = (
-        {
-            revokeObjectURL,
-            options: { conversion = [], ...options } = {},
-            src,
-        } = this.props
+        { options: { conversion = [], ...options } = {}, src } = this.props
     ) => {
         this.setState({ loading: true }, () =>
             new Promise(resolve => {
@@ -63,12 +48,9 @@ class ImageTransformation extends React.Component {
                     );
                 }
             }).then(blob =>
-                this.setState(({ url: previousUrl }) => {
-                    if (previousUrl) revokeObjectURL(previousUrl);
-                    return {
-                        loading: false,
-                        blob,
-                    };
+                this.setState({
+                    blob,
+                    loading: false,
                 })
             )
         );
@@ -77,7 +59,7 @@ class ImageTransformation extends React.Component {
         const { render } = this.props;
         return render({
             ...this.state,
-            updateURL: this.handleUpdateUrl,
+            updateBlob: this.handleUpdateBlob,
         });
     }
 }

@@ -29,7 +29,11 @@ const styles = theme => ({
 
 class ReactCropperMaterial extends React.Component {
     static propTypes = {
-        src: PropTypes.string,
+        src: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.instanceOf(Blob),
+            PropTypes.instanceOf(File),
+        ]),
         zoomInLabel: PropTypes.string,
         zoomOutLabel: PropTypes.string,
         moveLeftLabel: PropTypes.string,

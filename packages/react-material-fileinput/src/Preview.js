@@ -34,6 +34,7 @@ export class Preview extends Component {
         return (
             <Button
                 className={classnames(classes.root, className)}
+                component="div"
                 {...rest}
                 variant="raised"
             >

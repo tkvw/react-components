@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import { CircularProgress } from 'material-ui/Progress';
 import Cropper from '@tkvw/react-material-cropperjs';
 import ImageTransformation from '@tkvw/react-image-transformation';
-
+import Image from '@tkvw/react-image';
 import Preview from '../Preview';
 
 const styles = theme => ({
@@ -95,9 +95,8 @@ class FileImagePreview extends React.Component {
         });
     };
 
-    handleCropImage = (cropper, updateURL) => {
-        const croppedData = cropper.getCroppedCanvas().toDataURL();
-        updateURL(croppedData);
+    handleCropImage = (cropper, updateBlob) => {
+        cropper.getCroppedCanvas().toBlob(updateBlob, 'image/jpeg', 1);
         this.setState({
             showModal: false,
         });
@@ -117,15 +116,25 @@ class FileImagePreview extends React.Component {
         return (
             <ImageTransformation
                 src={getFile(file)}
-                options={imageTransformationOptions}
-                render={({ url: image, loading: imageLoading, updateURL }) => {
+                options={{
+                    conversion: ['image/jpeg', 0.95],
+                    ...imageTransformationOptions,
+                }}
+                render={({
+                    blob: image,
+                    loading: imageLoading,
+                    updateBlob,
+                }) => {
                     file.image = image;
                     return (
                         <ImageTransformation
                             src={image}
-                            options={previewTransformationOptions}
+                            options={{
+                                conversion: ['image/jpeg', 0.8],
+                                ...previewTransformationOptions,
+                            }}
                             render={({
-                                url: preview,
+                                blob: preview,
                                 loading: previewLoading,
                             }) => {
                                 file.preview = preview;
@@ -138,7 +147,7 @@ class FileImagePreview extends React.Component {
                                             {imageLoading || previewLoading ? (
                                                 <CircularProgress />
                                             ) : (
-                                                <img src={preview} />
+                                                <Image src={preview} />
                                             )}
                                         </Preview>
                                         <Modal
@@ -157,7 +166,7 @@ class FileImagePreview extends React.Component {
                                                     onSelect={cropper =>
                                                         this.handleCropImage(
                                                             cropper,
-                                                            updateURL
+                                                            updateBlob
                                                         )
                                                     }
                                                 />

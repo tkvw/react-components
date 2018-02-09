@@ -52,13 +52,14 @@ class FileInput extends React.Component {
             () => onChange && onChange(filesAccepted)
         );
     };
-    handleRemove = (file, { onChange } = this.props) =>
+    handleRemove = (file, { onChange } = this.props) =>{
         this.setState(
             ({ files }) => ({
                 files: files.filter(f => f !== file),
             }),
             () => onChange && onChange(this.state.filesAccepted)
-        );
+        )
+    };
 
     createHandleRemove = file => event => {
         event.preventDefault();

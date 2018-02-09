@@ -1,3 +1,4 @@
+import 'airbnb-js-shims';
 import { configure, setAddon } from "@storybook/react";
 import infoAddon from "@storybook/addon-info";
 import { setOptions } from "@storybook/addon-options";

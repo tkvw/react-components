@@ -1,13 +1,13 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import ImageTransformation from './ImageTransformation';
-import BlobImage from '@tkvw/react-blob-image';
+import Image from '@tkvw/react-image';
 
 const toKb = length => Math.round(length / 1024 * 100) / 100;
 const ShowResult = ({ description, blob }) => (
     <div>
         <div>
-            <BlobImage blob={blob} />
+            <Image src={blob} />
         </div>
         <div>
             {description} Kb: {toKb(blob.size)}
@@ -27,7 +27,7 @@ storiesOf('ImageTransformation', module)
                 maxWidth: 500,
             }}
             render={({ blob, loading }) =>
-                loading ? <div>Loading</div> : <BlobImage blob={blob} />
+                loading ? <div>Loading</div> : <Image src={blob} />
             }
         />
     ))
@@ -178,8 +178,8 @@ storiesOf('ImageTransformation', module)
                             <div>Loading</div>
                         ) : (
                             <div>
-                                <img src={resized} />
-                                <img src={preview} />
+                                <Image src={resized} />
+                                <Image src={preview} />
                             </div>
                         );
                     }}

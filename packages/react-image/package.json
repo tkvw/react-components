@@ -1,5 +1,5 @@
 {
-  "name": "@tkvw/react-blob-image",
+  "name": "@tkvw/react-image",
   "version": "1.0.5",
   "description": "Render blob as image",
   "main": "build/index.js",

@@ -2,10 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import Cropper from 'cropperjs';
+import Image from '@tkvw/react-image';
 
 class ReactCropper extends React.Component {
     static propTypes = {
-        src: PropTypes.string,
+        src: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.instanceOf(Blob),
+            PropTypes.instanceOf(File),
+        ]),
         onReady: PropTypes.func,
         onCrop: PropTypes.func,
         cropperRef: PropTypes.func,
@@ -78,13 +83,12 @@ class ReactCropper extends React.Component {
             cropperRef,
             ...props
         } = this.props;
-
         return (
             <div {...props}>
-                <img
+                <Image
                     className={imageClassname}
                     src={src}
-                    ref={this.registerImage}
+                    imageRef={this.registerImage}
                     onLoad={this.imageLoaded}
                     style={{ maxWidth: '100%' }}
                 />
