@@ -1,0 +1,17 @@
+{
+  "name": "@tkvw/sparse-updates",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dennie de Lange",
+  "license": "MIT",
+  "dependencies": {
+    "deep-diff": "^0.3.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
