@@ -1,6 +1,6 @@
 {
-  "name": "@tkvw/sparse-updates",
-  "version": "1.0.3",
+  "name": "@tkvw/react-material-image",
+  "version": "1.0.1",
   "description": "",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
@@ -10,9 +10,12 @@
   "author": "Dennie de Lange",
   "license": "MIT",
   "dependencies": {
-    "deep-diff": "^0.3.8"
+    "react-image": "^1.3.1"
   },
-  "publishConfig": {
-    "access": "public"
+  "devDependencies": {
+    "material-ui": "next"
+  },
+  "peerDependencies": {
+    "material-ui": "next"
   }
 }

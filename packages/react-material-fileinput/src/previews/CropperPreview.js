@@ -6,7 +6,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import Cropper from '@tkvw/react-material-cropperjs';
 import ImageTransformation from '@tkvw/react-image-transformation';
 import Image from '@tkvw/react-image';
-import Preview from '../Preview';
+import Preview from './Preview';
 
 const styles = theme => ({
     image: {
@@ -63,7 +63,6 @@ class FileImagePreview extends React.Component {
         file: PropTypes.shape({
             rawFile: PropTypes.any.isRequired,
         }).isRequired,
-        onRemove: PropTypes.func,
     };
 
     static defaultProps = {
