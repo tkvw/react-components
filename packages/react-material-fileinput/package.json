@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-fileinput",
-  "version": "1.0.0-custom3",
+  "version": "1.0.0-custom4",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -22,9 +22,9 @@
     "recompose": "^0.26.0"
   },
   "dependencies": {
-    "@tkvw/react-image-transformation": "^1.0.0-custom3",
-    "@tkvw/react-material-cropperjs": "^1.0.0-custom3",
-    "@tkvw/react-material-image": "^1.0.0-custom3",
+    "@tkvw/react-image-transformation": "^1.0.0-custom4",
+    "@tkvw/react-material-cropperjs": "^1.0.0-custom4",
+    "@tkvw/react-material-image": "^1.0.0-custom4",
     "attr-accept": "^1.1.0",
     "blueimp-load-image": "^2.18.0",
     "classnames": "^2.2.5",
