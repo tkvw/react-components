@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-cropperjs",
-  "version": "1.0.11",
+  "version": "1.0.0-custom2",
   "description": "description",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -30,7 +30,7 @@
     "material-ui-icons": "^1.0.0-beta.17"
   },
   "dependencies": {
-    "@tkvw/react-cropperjs": "^1.0.6",
+    "@tkvw/react-cropperjs": "^1.0.0-custom2",
     "classnames": "^2.2.5"
   }
 }

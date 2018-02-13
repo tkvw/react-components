@@ -1,18 +1,20 @@
 {
-  "name": "@tkvw/sparse-updates",
+  "name": "@tkvw/react-admin-fileinput",
   "version": "1.0.0-custom2",
   "description": "",
-  "main": "build/index.js",
-  "jsnext:main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dennie de Lange",
   "license": "MIT",
   "dependencies": {
-    "deep-diff": "^0.3.8"
+    "@tkvw/react-material-fileinput": "^1.0.0-custom2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "react-admin": "^2.0.0-beta4"
   }
 }
