@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-admin-customizable-forms",
-  "version": "1.0.0-custom8",
+  "version": "1.0.0-custom9",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
