@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-admin-fileinput",
-  "version": "1.0.0-custom6",
+  "version": "1.0.0-custom7",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Dennie de Lange",
   "license": "MIT",
   "dependencies": {
-    "@tkvw/react-material-fileinput": "^1.0.0-custom6"
+    "@tkvw/react-material-fileinput": "^1.0.0-custom7"
   },
   "publishConfig": {
     "access": "public"
