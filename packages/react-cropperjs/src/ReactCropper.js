@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 import Cropper from 'cropperjs';
 import Image from '@tkvw/react-image';
+import classnames from 'classnames';
 
 class ReactCropper extends React.Component {
     static propTypes = {
@@ -11,14 +12,25 @@ class ReactCropper extends React.Component {
             PropTypes.instanceOf(Blob),
             PropTypes.instanceOf(File),
         ]),
+        imageComponent: PropTypes.func,
         onReady: PropTypes.func,
         onCrop: PropTypes.func,
         cropperRef: PropTypes.func,
-        imageClassname: PropTypes.string,
         cropperOptions: PropTypes.shape({
             aspectRatio: PropTypes.number,
             viewMode: PropTypes.number,
         }),
+        className: PropTypes.string,
+        classes: PropTypes.shape({
+            root: PropTypes.string,
+            image: PropTypes.string,
+            imageContent: PropTypes.string,
+            hidden: PropTypes.string,
+        }),
+    };
+
+    static defaultProps = {
+        imageComponent: Image,
     };
 
     state = {
@@ -77,22 +89,26 @@ class ReactCropper extends React.Component {
 
     render() {
         const {
+            classes,
+            className,
             src,
-            imageClassname,
+            imageComponent: ImageComponent,
             cropperOptions,
             cropperRef,
             ...props
         } = this.props;
         return (
-            <div {...props}>
-                <Image
-                    className={imageClassname}
-                    src={src}
-                    imageRef={this.registerImage}
-                    onLoad={this.imageLoaded}
-                    style={{ maxWidth: '100%' }}
-                />
-            </div>
+            <ImageComponent
+                classes={{
+                    image: classes.imageContent,
+                    hidden: classes.hidden,
+                }}
+                className={classnames(classes.root, className)}
+                src={src}
+                imageRef={this.registerImage}
+                onLoad={this.imageLoaded}
+                {...props}
+            />
         );
     }
 }

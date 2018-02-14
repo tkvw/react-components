@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'material-ui/Modal';
 import { withStyles } from 'material-ui/styles';
+import classnames from 'classnames';
 import { CircularProgress } from 'material-ui/Progress';
 import Cropper from '@tkvw/react-material-cropperjs';
 import ImageTransformation from '@tkvw/react-image-transformation';
-import Image from '@tkvw/react-image';
+import LoadingImage from '@tkvw/react-material-image';
 import Preview from './Preview';
 
 const styles = theme => ({
     image: {
         width: '100%',
-        height: '100%',
         cursor: 'pointer',
     },
     imageSrc: {
@@ -23,23 +23,8 @@ const styles = theme => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center 40%',
     },
-    hidden: {
-        display: 'none',
-    },
     cropperEditor: {
-        height: theme.spacing.unit * 45,
-        width: theme.spacing.unit * 80,
-    },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: `translate(-50%,-50%)`,
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
+        width: '100%',
     },
 });
 
@@ -73,45 +58,28 @@ class FileImagePreview extends React.Component {
             maxWidth: 1920,
         },
         previewTransformationOptions: {
-            maxWidth: 128,
-            maxHeight: 128,
+            maxWidth: 256,
+            maxHeight: 256,
         },
     };
 
-    state = {
-        file: null,
-        showModal: false,
-    };
-
-    handleImageClick = () => {
-        this.setState({
-            showModal: true,
-        });
-    };
-    handleModalClose = () => {
-        this.setState({
-            showModal: false,
-        });
-    };
-
-    handleCropImage = (cropper, updateBlob) => {
+    handleCropImage = (cropper, updateBlob, closePreview) => {
         cropper.getCroppedCanvas().toBlob(updateBlob, 'image/jpeg', 1);
-        this.setState({
-            showModal: false,
-        });
+        closePreview();
     };
 
     render() {
         const {
             classes,
+            className,
             cropperOptions,
             file,
             getFile,
             imageTransformationOptions,
             previewTransformationOptions,
+            onRemove,
             ...props
         } = this.props;
-        const { showModal } = this.state;
         return (
             <ImageTransformation
                 src={getFile(file)}
@@ -119,11 +87,7 @@ class FileImagePreview extends React.Component {
                     conversion: ['image/jpeg', 0.95],
                     ...imageTransformationOptions,
                 }}
-                render={({
-                    blob: image,
-                    loading: imageLoading,
-                    updateBlob,
-                }) => {
+                render={({ blob: image, updateBlob }) => {
                     file.image = image;
                     return (
                         <ImageTransformation
@@ -132,46 +96,31 @@ class FileImagePreview extends React.Component {
                                 conversion: ['image/jpeg', 0.8],
                                 ...previewTransformationOptions,
                             }}
-                            render={({
-                                blob: preview,
-                                loading: previewLoading,
-                            }) => {
+                            render={({ blob: preview }) => {
                                 file.preview = preview;
                                 return (
-                                    <div>
-                                        <Preview
-                                            {...sanitizeProps(props)}
-                                            onClick={this.handleImageClick}
-                                        >
-                                            {imageLoading || previewLoading ? (
-                                                <CircularProgress />
-                                            ) : (
-                                                <Image src={preview} />
-                                            )}
-                                        </Preview>
-                                        <Modal
-                                            open={showModal}
-                                            onClose={this.handleModalClose}
-                                        >
-                                            <div className={classes.modal}>
-                                                <Cropper
-                                                    className={
-                                                        classes.cropperEditor
-                                                    }
-                                                    cropperOptions={
-                                                        cropperOptions
-                                                    }
-                                                    src={image}
-                                                    onSelect={cropper =>
-                                                        this.handleCropImage(
-                                                            cropper,
-                                                            updateBlob
-                                                        )
-                                                    }
-                                                />
-                                            </div>
-                                        </Modal>
-                                    </div>
+                                    <Preview
+                                        className={className}
+                                        onRemove={onRemove}
+                                        renderViewer={({ closePreview }) => (
+                                            <Cropper
+                                                className={
+                                                    classes.cropperEditor
+                                                }
+                                                cropperOptions={cropperOptions}
+                                                src={image}
+                                                onSelect={cropper =>
+                                                    this.handleCropImage(
+                                                        cropper,
+                                                        updateBlob,
+                                                        closePreview
+                                                    )
+                                                }
+                                            />
+                                        )}
+                                    >
+                                        <LoadingImage src={preview} />
+                                    </Preview>
                                 );
                             }}
                         />

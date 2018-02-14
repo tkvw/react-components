@@ -1,3 +1,6 @@
-import { convertObjectToFormData } from './convertObjectToFormData';
+import flattenObject from './flattenObject';
+import flattenObjectAsFormData from './flattenObjectAsFormData';
 
-export default convertObjectToFormData;
+export default flattenObject;
+
+export { flattenObject, flattenObjectAsFormData };

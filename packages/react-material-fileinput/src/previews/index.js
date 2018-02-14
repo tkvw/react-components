@@ -1,1 +1,2 @@
-export { default as FileImagePreview } from './FileImagePreview';
+export { default as CropperPreview } from './CropperPreview';
+export { default as ImagePreview } from './ImagePreview';

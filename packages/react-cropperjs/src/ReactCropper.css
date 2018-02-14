@@ -1,0 +1,9 @@
+.react-cropper-img{
+    width: 100%;
+}
+.react-cropper-hidden{
+    display:none;
+}
+.react-cropper-wrapper{
+    flex-grow:1;
+}

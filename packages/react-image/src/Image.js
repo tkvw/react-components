@@ -1,21 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+
+const sanitizeProps = ({ createObjectURL, revokeObjectURL, ...props }) => props;
 
 class Image extends React.PureComponent {
-    state = {};
+    state = {
+        loading: true,
+    };
     static propTypes = {
+        classes: PropTypes.shape({
+            image: PropTypes.string,
+            loading: PropTypes.string,
+            hidden: PropTypes.string.isRequired,
+        }).isRequired,
+        className: PropTypes.string,
         src: PropTypes.oneOfType([
             PropTypes.string,
             PropTypes.instanceOf(Blob),
             PropTypes.instanceOf(File),
         ]),
+        imageRef: PropTypes.func,
         createObjectURL: PropTypes.func,
         revokeObjectURL: PropTypes.func,
+        loadingComponent: PropTypes.func,
     };
 
     static defaultProps = {
         createObjectURL: window.URL.createObjectURL,
         revokeObjectURL: window.URL.revokeObjectURL,
+        loadingComponent: props => <div {...props}>Loading</div>,
     };
 
     componentWillMount() {
@@ -47,22 +61,50 @@ class Image extends React.PureComponent {
         blob && revokeObjectURL(blob);
     }
 
+    handleLoaded = () => {
+        this.setState({
+            loading: false,
+        });
+    };
+
     render() {
-        const { blob } = this.state;
+        const { blob, loading } = this.state;
         const {
-            createObjectURL,
+            classes,
             imageRef,
-            revokeObjectURL,
+            loadingComponent,
             src,
-            ...props
+            ...rest
         } = this.props;
 
         return (
-            <img
-                {...props}
-                ref={imageRef}
-                src={src instanceof Blob || src instanceof File ? blob : src}
-            />
+            <div {...sanitizeProps(rest)}>
+                {React.createElement(loadingComponent, {
+                    className: classnames(
+                        {
+                            [classes.hidden]: !loading,
+                        },
+                        classes.loading
+                    ),
+                })}
+                {src && (
+                    <img
+                        className={classnames(
+                            {
+                                [classes.hidden]: loading,
+                            },
+                            classes.image
+                        )}
+                        onLoad={this.handleLoaded}
+                        ref={imageRef}
+                        src={
+                            src instanceof Blob || src instanceof File
+                                ? blob
+                                : src
+                        }
+                    />
+                )}
+            </div>
         );
     }
 }

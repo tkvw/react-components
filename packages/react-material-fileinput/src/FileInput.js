@@ -25,44 +25,37 @@ class FileInput extends React.Component {
         dropperComponent: PropTypes.func,
         maxItems: PropTypes.number.isRequired,
         previewRenderer: PropTypes.func,
-        onChange: PropTypes.func,
         classes: PropTypes.object,
         tileSize: PropTypes.number,
         tileWidth: PropTypes.number,
         tileHeight: PropTypes.number,
         transform: PropTypes.func,
+        onChange: PropTypes.func.isRequired,
+        value: PropTypes.arrayOf(
+            PropTypes.shape({
+                rawFile: PropTypes.instanceOf(File),
+                name: PropTypes.string,
+            })
+        ).isRequired,
     };
 
     static defaultProps = {
         transform: a => a,
         dropperComponent: Dropper,
-    };
-
-    state = {
-        files: [],
+        value: [],
     };
 
     handleAdd = filesAccepted => {
         const { onChange, maxItems, transform } = this.props;
         filesAccepted = filesAccepted.slice(0, maxItems).map(transform);
-        this.setState(
-            {
-                files: filesAccepted,
-            },
-            () => onChange && onChange(filesAccepted)
-        );
+        onChange(filesAccepted);
     };
-    handleRemove = (file, { onChange } = this.props) =>{
-        this.setState(
-            ({ files }) => ({
-                files: files.filter(f => f !== file),
-            }),
-            () => onChange && onChange(this.state.filesAccepted)
-        )
+    handleRemove = (file, { value, onChange } = this.props) => {
+        onChange(value.filter(f => f !== file));
     };
 
     createHandleRemove = file => event => {
-        event.preventDefault();
+        event.stopPropagation();
         this.handleRemove(file);
     };
 
@@ -93,14 +86,13 @@ class FileInput extends React.Component {
             dropperComponent: DropperComponent,
             dropperProps,
             maxItems,
+            value,
         } = this.props;
-        const { files } = this.state;
 
-        const shouldHideDropzone = files.length >= maxItems;
-
+        const shouldHideDropzone = value.length >= maxItems;
         return (
             <div className={classes.tiles}>
-                {files.map(this.renderPreview)}
+                {value.map(this.renderPreview)}
                 <ReactDropzone
                     disablePreview
                     multiple={maxItems > 1}

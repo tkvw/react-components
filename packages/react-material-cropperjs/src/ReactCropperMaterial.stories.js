@@ -13,10 +13,14 @@ const styles = theme => ({
         top: '50%',
         left: '50%',
         transform: `translate(-50%,-50%)`,
-        width: theme.spacing.unit * 80,
+        height: 300,
+        minWidth: 200,
+        maxWidth: 600,
+        width: '100%',
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
+        border: '2px solid red',
     },
 });
 
@@ -24,18 +28,33 @@ const Wrapper = withStyles(styles)(({ classes, ...props }) => (
     <div className={classes.paper} {...props} />
 ));
 
-storiesOf('ReactCropperMaterial', module).add('without props', () => (
-    <Modal open>
-        <Wrapper>
+storiesOf('ReactCropperMaterial', module)
+    .add('without props', () => (
+        <Modal open>
+            <Wrapper>
+                <ReactCropperMaterial
+                    src="https://source.unsplash.com/random/1920x1200?1"
+                    cropperOptions={{
+                        aspectRatio: 1,
+                    }}
+                />
+            </Wrapper>
+        </Modal>
+    ))
+    .add('simple', () => (
+        <div
+            style={{
+                border: '2px solid red',
+                minWidth: 300,
+                maxWidth: 600,
+                width: '100%',
+            }}
+        >
             <ReactCropperMaterial
                 src="https://source.unsplash.com/random/1920x1200?1"
-                style={{
-                    width: 450,
-                }}
                 cropperOptions={{
                     aspectRatio: 1,
                 }}
             />
-        </Wrapper>
-    </Modal>
-));
+        </div>
+    ));
