@@ -1,4 +1,4 @@
-import { TOGGLE_MENU_ITEM } from '../../actions';
+import { TOGGLE_MENU_ITEM } from '../../../actions/index';
 
 const initialState = {};
 

@@ -1,14 +1,23 @@
-import { modalsReducer } from 'redux-promising-modals';
-import { combineReducers } from 'redux';
+import { createAppReducer } from 'react-admin';
+import {
+    overrideReducers,
+    combineOverrideReducers,
+} from '@tkvw/redux-override-reducer';
+import admin from './admin';
+import addons from './addons';
 
-import menuReducer from './menu';
-
-const addonsReducer = combineReducers({
-    menu: menuReducer,
-    modals: modalsReducer,
+const overrideAdminReducer = combineOverrideReducers({
+    admin,
 });
 
-export default reducers => ({
-    admin_addons: addonsReducer,
-    ...reducers,
-});
+export default (customReducers, locale, messages) =>
+    overrideReducers(overrideAdminReducer)(
+        createAppReducer(
+            {
+                ...customReducers,
+                addons,
+            },
+            locale,
+            messages
+        )
+    );

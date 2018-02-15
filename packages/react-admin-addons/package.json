@@ -39,6 +39,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@tkvw/redux-override-reducer": "^1.0.0",
     "react-popper": "^0.8.2",
     "redux-promising-modals": "^2.1.2"
   }

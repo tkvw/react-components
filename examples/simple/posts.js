@@ -5,7 +5,6 @@ import {
     CheckboxGroupInput,
     ChipField,
     Create,
-    Datagrid,
     DateField,
     DateInput,
     DisabledInput,
@@ -15,7 +14,6 @@ import {
     FormTab,
     ImageField,
     ImageInput,
-    List,
     LongTextInput,
     NumberField,
     NumberInput,
@@ -24,17 +22,14 @@ import {
     ReferenceManyField,
     Responsive,
     RichTextField,
-    SaveButton,
     SelectField,
     SelectArrayInput,
     SelectInput,
     Show,
     ShowButton,
-    SimpleForm,
     SimpleList,
     SingleFieldList,
     Tab,
-    TabbedForm,
     TabbedShowLayout,
     TextField,
     TextInput,
@@ -44,6 +39,14 @@ import {
     required,
     translate,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
+import {
+    Datagrid,
+    List,
+    SaveButton,
+    SimpleForm,
+    TabbedForm,
+} from '@tkvw/react-admin-addons';
+
 import RichTextInput from 'ra-input-rich-text';
 import Chip from 'material-ui/Chip';
 import { withStyles } from 'material-ui/styles';

@@ -5,14 +5,9 @@ import { translate } from 'react-admin';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { compose } from 'recompose';
-import inflection from 'inflection';
-
-import { MenuItem } from 'material-ui/Menu';
 import Collapse from 'material-ui/transitions/Collapse';
 import List from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
 
 import { toggleMenuItem } from '../../actions/menuActions';
 import NestedMenuItem from './NestedMenuItem';
@@ -38,7 +33,7 @@ const styles = theme => ({
     },
 });
 
-const defaultMenuStateSelector = state => state.admin_addons.menu;
+const defaultMenuStateSelector = state => state.addons.menu;
 
 const mapStateToProps = createSelector(
     (state, { menuStateSelector = defaultMenuStateSelector }) =>

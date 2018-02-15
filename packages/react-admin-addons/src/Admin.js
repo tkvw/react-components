@@ -13,7 +13,6 @@ import { modalsMiddleware } from 'redux-promising-modals';
 
 import {
     USER_LOGOUT,
-    createAppReducer,
     Login,
     Logout,
     NotFound,
@@ -24,7 +23,7 @@ import {
 import { crudSaga } from './sideEffect/saga';
 
 import { Layout as DefaultLayout, NestedMenu } from './mui';
-import createAddonsReducer from './reducer';
+import createAppReducer from './reducer';
 
 const Wrapper = ({ children }) => React.Children.only(children);
 
@@ -54,11 +53,7 @@ const Admin = ({
     appLayout = withProps({ customModals })(appLayout);
 
     const messages = i18nProvider(locale);
-    const appReducer = createAppReducer(
-        createAddonsReducer(customReducers),
-        locale,
-        messages
-    );
+    const appReducer = createAppReducer(customReducers, locale, messages);
 
     const resettableAppReducer = (state, action) =>
         appReducer(action.type !== USER_LOGOUT ? state : undefined, action);

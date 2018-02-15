@@ -1,4 +1,5 @@
 export * from './button';
+export * from './detail';
 export * from './form';
 export * from './layout';
 export * from './list';

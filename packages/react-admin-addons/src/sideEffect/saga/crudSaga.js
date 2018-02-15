@@ -8,6 +8,7 @@ import {
 import auth from './auth';
 import crudFetch from './crudFetch';
 import form from './form';
+import bulkActionResponse from './bulkActionResponse';
 
 /**
  * @param {Object} dataProvider A Data Provider function
@@ -20,6 +21,7 @@ export default (dataProvider, authProvider, i18nProvider) =>
             form(),
             crudFetch(dataProvider)(),
             crudResponse(),
+            bulkActionResponse(),
             referenceFetch(),
         ]);
     };

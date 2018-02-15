@@ -1,4 +1,4 @@
-import { ADD_MENU_ITEM, REMOVE_MENU_ITEM } from '../../actions';
+import { ADD_MENU_ITEM, REMOVE_MENU_ITEM } from '../../../actions/index';
 
 const initialState = [];
 

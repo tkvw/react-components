@@ -22,7 +22,7 @@ Modal.propTypes = {
     showType: PropTypes.string,
     showProps: PropTypes.object,
 };
-const defaultModalStateSelector = state => state.admin_addons.modals;
+const defaultModalStateSelector = state => state.addons.modals;
 
 const mapState = (
     state,

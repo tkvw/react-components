@@ -14,8 +14,9 @@
         "build:react-material-cropperjs": "rimraf ./packages/react-material-cropperjs/build && cross-env NODE_ENV=production babel ./packages/react-material-cropperjs/src -d ./packages/react-material-cropperjs/build --ignore **/*.spec.js,**/*.stories.js",
         "build:react-material-image": "rimraf ./packages/react-material-image/build && cross-env NODE_ENV=production babel ./packages/react-material-image/src -d ./packages/react-material-image/build --ignore **/*.spec.js,**/*.stories.js",
         "build:react-material-fileinput": "rimraf ./packages/react-material-fileinput/build && cross-env NODE_ENV=production babel ./packages/react-material-fileinput/src -d ./packages/react-material-fileinput/build --ignore **/*.spec.js,**/*.stories.js",
+        "build:redux-override-reducer": "rimraf ./packages/redux-override-reducer/build && cross-env NODE_ENV=production babel ./packages/redux-override-reducer/src -d ./packages/redux-override-reducer/build --ignore **/*.spec.js,**/*.stories.js",
         "build:sparse-updates": "rimraf ./packages/sparse-updates/build && cross-env NODE_ENV=production babel ./packages/sparse-updates/src -d ./packages/sparse-updates/build --ignore **/*.spec.js,**/*.stories.js",
-        "build:all": "yarn run build:react-image && yarn run build:react-material-image && yarn run build:react-cropperjs && yarn run build:react-material-cropperjs && yarn run build:react-image-transformation && yarn run build:react-material-fileinput && yarn run build:react-admin-customizable-forms",
+        "build:all": "yarn run build:react-image && yarn run build:react-material-image && yarn run build:react-cropperjs && yarn run build:react-material-cropperjs && yarn run build:react-image-transformation && yarn run build:react-material-fileinput && yarn run build:react-admin-customizable-forms && yarn run build:redux-override-reducer",
         "publish:all": "yarn run build:all && lerna publish",
         "storybook": "start-storybook -p 9001 -s ./.storybook/public -c .storybook",
         "run:simple":"cd examples/simple && ./node_modules/.bin/webpack-dev-server --hot --inline --config ./webpack.config.js"

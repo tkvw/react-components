@@ -37,7 +37,7 @@ class MenuButton extends React.Component {
         const {
             children,
             classes,
-            button: ButtonComponent = Button,
+            buttonComponent: ButtonComponent = Button,
             ...rest
         } = this.props;
         const { open } = this.state;
@@ -68,13 +68,7 @@ class MenuButton extends React.Component {
                         >
                             <Paper>
                                 <MenuList role="menu">
-                                    {React.Children.toArray(children).map(
-                                        (child, index) =>
-                                            React.cloneElement(child, {
-                                                key: `menu-item-${index + 1}`,
-                                                onClick: this.handleClose,
-                                            })
-                                    )}
+                                    {children(this.handleClose)}
                                 </MenuList>
                             </Paper>
                         </Grow>
@@ -86,8 +80,9 @@ class MenuButton extends React.Component {
 }
 
 MenuButton.propTypes = {
+    children: PropTypes.func,
     classes: PropTypes.object.isRequired,
-    button: PropTypes.func,
+    buttonComponent: PropTypes.func,
 };
 
 export default withStyles(styles)(MenuButton);
