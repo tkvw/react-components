@@ -1,5 +1,5 @@
 {
-  "name": "@tkvw/sparse-updates",
+  "name": "@tkvw/redux-override-reducer",
   "version": "1.0.0-custom21",
   "description": "",
   "main": "build/index.js",
@@ -8,11 +8,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Dennie de Lange",
-  "license": "MIT",
-  "dependencies": {
-    "deep-diff": "^0.3.8"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+  "license": "MIT"
 }
