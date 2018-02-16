@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-admin-addons",
-  "version": "1.0.0-custom23",
+  "version": "1.0.0-custom24",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
-    "@tkvw/react-material-fileinput": "^1.0.0-custom23",
-    "@tkvw/redux-override-reducer": "^1.0.0-custom23",
+    "@tkvw/react-material-fileinput": "^1.0.0-custom24",
+    "@tkvw/redux-override-reducer": "^1.0.0-custom24",
     "react-popper": "^0.8.2",
     "redux-promising-modals": "^2.1.2"
   }
