@@ -42,11 +42,10 @@ class WithResourceData extends React.Component {
 }
 
 const mapStateToProps = createSelector(
-    (state, { resource }) => state.addons.resources.single.data[resource],
-    (state, { resource }) => state.addons.resources.single.loaded[resource],
-    (resourceState, loaded) => ({
-        loaded: !!loaded,
-        data: resourceState,
+    (state, { resource }) => state.addons.resources[resource],
+    resourceState => ({
+        loaded: resourceState && !!resourceState.loaded,
+        data: resourceState && resourceState.data,
     })
 );
 

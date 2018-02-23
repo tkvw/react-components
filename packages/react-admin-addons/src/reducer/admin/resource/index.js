@@ -9,7 +9,11 @@ const resourceReducer = combineOverrideReducers({
 });
 
 export default (previousState, action) => {
-    if (!action.meta || !action.meta.resource) {
+    if (
+        !action.meta ||
+        !action.meta.resource ||
+        !previousState[action.meta.resource]
+    ) {
         return previousState;
     }
 

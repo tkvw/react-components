@@ -12,7 +12,7 @@ const styles = theme => ({
         position: 'absolute',
         top: '50%',
         left: '50%',
-        transform: `translate(-50%,-50%)`,
+        transformFile: `translate(-50%,-50%)`,
         height: 300,
         minWidth: 200,
         maxWidth: 600,

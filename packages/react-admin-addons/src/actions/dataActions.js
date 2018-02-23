@@ -1,4 +1,5 @@
-import { UPDATE, BULK_ACTION, GET_SINGLE } from '../dataFetchActions';
+import { UPDATE } from 'react-admin';
+import { CUSTOM, BULK_ACTION, GET_SINGLE } from '../dataFetchActions';
 
 export const CRUD_CUSTOM = 'RA/CRUD_CUSTOM';
 export const CRUD_CUSTOM_LOADING = 'RA/CRUD_CUSTOM_LOADING';

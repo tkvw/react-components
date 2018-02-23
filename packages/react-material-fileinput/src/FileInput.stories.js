@@ -3,74 +3,89 @@ import { storiesOf } from '@storybook/react';
 import FileInput from './FileInput';
 import { CropperPreview, ImagePreview } from './previews';
 import ImageIcon from 'material-ui-icons/Image';
-import { acceptFile, and } from './matcher';
 
-const acceptDroppedImages = and(
-    file => file.rawFile,
-    acceptFile({
-        patterns: ['image/*'],
-        getFile: file => file.rawFile,
-    })
-);
-const acceptImageUrls = file => file.sources && file.sources.thumbnail;
-
-const toRecord = file => ({ rawFile: file, name: file.name });
-const fromRecord = file => file && file.rawFile;
-
-class Wrapper extends React.Component {
+class WithValue extends React.Component {
     state = {
-        value: [
-            {
-                name: 'dede',
-                sources: {
-                    thumbnail:
-                        'https://static.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg',
-                },
-            },
-        ],
+        value: [],
     };
-
-    handleChange = value => this.setState({ value });
-
+    componentWillMount() {
+        this.updateState();
+    }
+    componentWillReceiveProps(nextProps) {
+        this.updateState(nextProps);
+    }
+    updateState = ({ value } = this.props) => {
+        this.setState({ value });
+    };
+    handleChange = value => {
+        this.setState({ value });
+    };
     render() {
-        return React.cloneElement(this.props.story, {
-            ...this.state,
+        return React.cloneElement(React.Children.only(this.props.children), {
             onChange: this.handleChange,
+            value: this.state.value,
         });
     }
 }
 
+const value = [
+    {
+        name: 'dede.jpg',
+        sources: {
+            thumbnail:
+                'https://static.pexels.com/photos/39517/rose-flower-blossom-bloom-39517.jpeg',
+        },
+    },
+];
 storiesOf('FileInput', module)
-    .addDecorator(story => <Wrapper story={story()} />)
     .add('without props', () => <FileInput maxItems={3} />)
     .add('with image preview', () => (
-        <FileInput maxItems={3} transform={toRecord}>
+        <FileInput maxItems={3} multiple>
             <CropperPreview
-                accept={acceptDroppedImages}
+                source={file => (file && file.rawFile ? file : null)}
                 cropperOptions={{ aspectRatio: 1 }}
-                getFile={fromRecord}
             />
         </FileInput>
     ))
     .add('profile image', () => (
-        <FileInput
-            dropperProps={{
-                icon: ImageIcon,
-                secondaryText: 'Drop image here',
-            }}
-            maxItems={1}
-            transform={toRecord}
-        >
-            <CropperPreview
-                accept={acceptDroppedImages}
-                cropperOptions={{
-                    aspectRatio: 16 / 9,
+        <WithValue>
+            <FileInput
+                dropperProps={{
+                    icon: ImageIcon,
+                    secondaryText: 'Drop image here',
                 }}
-                getFile={fromRecord}
-            />
-            <ImagePreview
-                accept={file => file.name && file.sources}
-                thumbnail={file => file.sources.thumbnail}
-            />
-        </FileInput>
+            >
+                <CropperPreview
+                    source={file => (file && file.rawFile ? file : null)}
+                    cropperOptions={{ aspectRatio: 1 }}
+                />
+                <ImagePreview
+                    accept={file => file.name && file.sources}
+                    thumbnail={file => file.sources.thumbnail}
+                />
+            </FileInput>
+        </WithValue>
+    ))
+    .add('profile image with value', () => (
+        <WithValue value={value}>
+            <FileInput
+                dropperProps={{
+                    icon: ImageIcon,
+                    secondaryText: 'Drop image here',
+                }}
+            >
+                <CropperPreview
+                    source={file => (file && file.rawFile ? file : null)}
+                    cropperOptions={{ aspectRatio: 1 }}
+                />
+                <ImagePreview
+                    source={(file, accept) =>
+                        file && accept(file, ['image/*', '.jpg', '.jpeg'])
+                            ? file
+                            : null
+                    }
+                    thumbnail={file => file.sources.thumbnail}
+                />
+            </FileInput>
+        </WithValue>
     ));

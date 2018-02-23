@@ -1,12 +1,9 @@
-import { DELETE } from '../../../../dataFetchActions';
+import { DELETE } from 'react-admin';
 
-import {
-    CRUD_BULK_ACTION_SUCCESS,
-} from '../../../../actions/dataActions';
+import { CRUD_BULK_ACTION_SUCCESS } from '../../../../actions/dataActions';
 
 const deleteRecordIds = (previousState, ids) =>
     previousState.filter(id => !ids.find(it => it == id)); // eslint-disable-line eqeqeq
-
 
 export default (previousState, { meta, payload, requestPayload, type }) => {
     switch (type) {

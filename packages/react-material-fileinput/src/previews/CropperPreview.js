@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'material-ui/Modal';
 import { withStyles } from 'material-ui/styles';
-import classnames from 'classnames';
-import { CircularProgress } from 'material-ui/Progress';
 import Cropper from '@tkvw/react-material-cropperjs';
 import ImageTransformation from '@tkvw/react-image-transformation';
 import LoadingImage from '@tkvw/react-material-image';
 import Preview from './Preview';
 
-const styles = theme => ({
+const styles = () => ({
     image: {
         width: '100%',
         cursor: 'pointer',
@@ -28,14 +25,6 @@ const styles = theme => ({
     },
 });
 
-const sanitizeProps = ({
-    accept,
-    imageTransformationOptions,
-    maxItems,
-    previewTransformationOptions,
-    ...rest
-}) => rest;
-
 class FileImagePreview extends React.Component {
     static propTypes = {
         accept: PropTypes.func,
@@ -44,10 +33,10 @@ class FileImagePreview extends React.Component {
         imageTransformationOptions: PropTypes.object,
         previewTransformationOptions: PropTypes.object,
         cropperOptions: PropTypes.object,
-        getFile: PropTypes.func.isRequired,
         file: PropTypes.shape({
             rawFile: PropTypes.any.isRequired,
         }).isRequired,
+        source: PropTypes.func,
     };
 
     static defaultProps = {
@@ -74,7 +63,6 @@ class FileImagePreview extends React.Component {
             className,
             cropperOptions,
             file,
-            getFile,
             imageTransformationOptions,
             previewTransformationOptions,
             onRemove,
@@ -82,7 +70,7 @@ class FileImagePreview extends React.Component {
         } = this.props;
         return (
             <ImageTransformation
-                src={getFile(file)}
+                src={file.rawFile}
                 options={{
                     conversion: ['image/jpeg', 0.95],
                     ...imageTransformationOptions,

@@ -40,12 +40,10 @@ class WithResourceData extends React.Component {
 
 const mapStateToProps = createSelector(
     (state, { resource }) => state.admin.resources[resource],
-    (state, { resource }) => state.customAdmin.resources.loaded[resource],
-    (resourceState, loaded) => ({
-        loaded: !!loaded,
-        data:
-            resourceState &&
-            Object.values(resourceState.data).sort(it => it.sequence),
+    (state, { resource }) => state.addons.resources[resource],
+    (resourceState, addonsResourceState) => ({
+        loaded: !!addonsResourceState.loaded,
+        data: resourceState && resourceState.data,
     })
 );
 

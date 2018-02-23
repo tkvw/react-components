@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 import { REGISTER_RESOURCE, UNREGISTER_RESOURCE } from 'react-admin';
 import list from './list';
-import single from './single';
+import data from './data';
+import loaded from './loaded';
 
 const resourceReducer = combineReducers({
     list,
-    single,
+    data,
+    loaded,
 });
 
 const initialState = {};
@@ -31,8 +33,6 @@ export default (previousState = initialState, action) => {
     const nextResourceState = resourceReducer(previousResourceState, action);
 
     return previousResourceState !== nextResourceState
-        ? Object.assign({}, previousState, {
-              [action.meta.resource]: nextResourceState,
-          })
+        ? { ...previousState, [action.meta.resource]: nextResourceState }
         : previousState;
 };

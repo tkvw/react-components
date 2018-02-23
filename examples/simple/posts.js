@@ -40,7 +40,10 @@ import {
     translate,
 } from 'react-admin'; // eslint-disable-line import/no-unresolved
 import {
+    CropperPreview,
     Datagrid,
+    ImageFileInput,
+    ImagePreview,
     List,
     SaveButton,
     SimpleForm,
@@ -95,7 +98,8 @@ export const PostList = withStyles(styles)(({ classes, ...props }) => (
                     primaryText={record => record.title}
                     secondaryText={record => `${record.views} views`}
                     tertiaryText={record =>
-                        new Date(record.published_at).toLocaleDateString()}
+                        new Date(record.published_at).toLocaleDateString()
+                    }
                 />
             }
             medium={
@@ -198,9 +202,24 @@ export const PostEdit = props => (
                     ]}
                 />
                 <LongTextInput source="teaser" validate={required} />
-                <ImageInput multiple source="pictures" accept="image/*">
-                    <ImageField source="src" title="title" />
-                </ImageInput>
+
+                <ImageFileInput maxItems={3} source="pictures" fullWidth>
+                    <CropperPreview
+                        cropperOptions={{
+                            aspectRatio: 1,
+                        }}
+                        source={(file, accept) =>
+                            file.rawFile && accept(file, 'image/*')
+                                ? file
+                                : null
+                        }
+                    />
+                    <ImagePreview
+                        source={(file, accept) =>
+                            file && accept(file, 'image/*')
+                        }
+                    />
+                </ImageFileInput>
             </FormTab>
             <FormTab label="post.form.body">
                 <RichTextInput

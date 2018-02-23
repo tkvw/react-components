@@ -1,5 +1,6 @@
+import { UPDATE } from 'react-admin';
 import { FETCH_END } from '../../../actions/fetchActions';
-import { UPDATE, BULK_ACTION } from '../../../dataFetchActions';
+import { BULK_ACTION } from '../../../dataFetchActions';
 import { addRecordsFactory } from 'react-admin/lib/reducer/admin/resource/data';
 import getFetchedAt from 'react-admin/lib/util/getFetchedAt';
 

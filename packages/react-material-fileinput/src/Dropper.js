@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import AddIcon from 'material-ui-icons/Add';
 import classnames from 'classnames';
 
-const styles = theme => ({
+const styles = () => ({
     button: {},
     icon: {
         width: 48,

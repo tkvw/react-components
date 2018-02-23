@@ -1,12 +1,9 @@
-import { CRUD_GET_SINGLE_SUCCESS } from '../../../../actions';
+import { CRUD_GET_SINGLE_SUCCESS } from '../../../actions/index';
 
 export default (data = {}, action) => {
     switch (action.type) {
         case CRUD_GET_SINGLE_SUCCESS:
-            return {
-                ...data,
-                [action.meta.resource]: action.payload.data,
-            };
+            return action.payload.data;
         default:
             return data;
     }

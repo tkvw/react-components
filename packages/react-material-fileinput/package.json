@@ -17,6 +17,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "file-api": "^0.10.4",
     "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.17",
     "recompose": "^0.26.0"

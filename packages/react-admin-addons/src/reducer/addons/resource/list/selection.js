@@ -5,10 +5,9 @@ import {
     SET_LIST_SELECTED_IDS,
 } from 'react-admin';
 import {
-    CRUD_CHANGE_LIST_SELECTION,
     CRUD_BULK_ACTION_SUCCESS,
 } from '../../../../actions';
-import { DELETE } from '../../../../dataFetchActions';
+import { DELETE } from 'react-admin';
 
 const defaultState = {
     mode: 'bulk',
