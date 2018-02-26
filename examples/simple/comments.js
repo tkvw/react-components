@@ -24,7 +24,7 @@ import {
     ShowButton,
     SimpleShowLayout,
     required,
-} from 'react-admin'; // eslint-disable-line import/no-unresolved
+} from '@tkvw/react-admin'; // eslint-disable-line import/no-unresolved
 
 import PersonIcon from 'material-ui-icons/Person';
 import Avatar from 'material-ui/Avatar';

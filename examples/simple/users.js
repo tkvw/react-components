@@ -18,14 +18,12 @@ import {
     Toolbar,
     required,
     translate,
-} from 'react-admin'; // eslint-disable-line import/no-unresolved
-import {
     Datagrid,
     List,
     SaveButton,
     SimpleForm,
     TabbedForm,
-} from '@tkvw/react-admin-addons';
+} from '@tkvw/react-admin';
 import PeopleIcon from 'material-ui-icons/People';
 export const UserIcon = PeopleIcon;
 

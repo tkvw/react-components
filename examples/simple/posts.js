@@ -12,8 +12,6 @@ import {
     EditButton,
     Filter,
     FormTab,
-    ImageField,
-    ImageInput,
     LongTextInput,
     NumberField,
     NumberInput,
@@ -35,20 +33,16 @@ import {
     TextInput,
     Toolbar,
     minValue,
+    minLength,
     number,
     required,
     translate,
-} from 'react-admin'; // eslint-disable-line import/no-unresolved
-import {
-    CropperPreview,
     Datagrid,
-    ImageFileInput,
-    ImagePreview,
     List,
     SaveButton,
     SimpleForm,
     TabbedForm,
-} from '@tkvw/react-admin-addons';
+} from '@tkvw/react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
 import Chip from 'material-ui/Chip';
@@ -65,6 +59,7 @@ const PostFilter = props => (
     <Filter {...props}>
         <TextInput label="post.list.search" source="q" alwaysOn />
         <TextInput
+            validate={minLength(2)}
             source="title"
             defaultValue="Qui tempore rerum et voluptates"
         />
@@ -154,39 +149,6 @@ const PostCreateToolbar = props => (
     </Toolbar>
 );
 
-const getDefaultDate = () => new Date();
-
-export const PostCreate = props => (
-    <Create {...props}>
-        <SimpleForm
-            toolbar={<PostCreateToolbar />}
-            defaultValue={{ average_note: 0 }}
-            validate={values => {
-                const errors = {};
-                ['title', 'teaser'].forEach(field => {
-                    if (!values[field]) {
-                        errors[field] = ['Required field'];
-                    }
-                });
-
-                if (values.average_note < 0 || values.average_note > 5) {
-                    errors.average_note = ['Should be between 0 and 5'];
-                }
-
-                return errors;
-            }}
-        >
-            <TextInput source="title" />
-            <TextInput source="password" type="password" />
-            <LongTextInput source="teaser" />
-            <RichTextInput source="body" />
-            <DateInput source="published_at" defaultValue={getDefaultDate} />
-            <NumberInput source="average_note" />
-            <BooleanInput source="commentable" defaultValue />
-        </SimpleForm>
-    </Create>
-);
-
 export const PostEdit = props => (
     <Edit title={<PostTitle />} {...props}>
         <TabbedForm defaultValue={{ average_note: 0 }}>
@@ -203,23 +165,6 @@ export const PostEdit = props => (
                 />
                 <LongTextInput source="teaser" validate={required} />
 
-                <ImageFileInput maxItems={3} source="pictures" fullWidth>
-                    <CropperPreview
-                        cropperOptions={{
-                            aspectRatio: 1,
-                        }}
-                        source={(file, accept) =>
-                            file.rawFile && accept(file, 'image/*')
-                                ? file
-                                : null
-                        }
-                    />
-                    <ImagePreview
-                        source={(file, accept) =>
-                            file && accept(file, 'image/*')
-                        }
-                    />
-                </ImageFileInput>
             </FormTab>
             <FormTab label="post.form.body">
                 <RichTextInput
@@ -266,6 +211,39 @@ export const PostEdit = props => (
             </FormTab>
         </TabbedForm>
     </Edit>
+);
+
+const getDefaultDate = () => new Date();
+
+export const PostCreate = props => (
+    <Create {...props}>
+        <SimpleForm
+            toolbar={<PostCreateToolbar />}
+            defaultValue={{ average_note: 0 }}
+            validate={values => {
+                const errors = {};
+                ['title', 'teaser'].forEach(field => {
+                    if (!values[field]) {
+                        errors[field] = ['Required field'];
+                    }
+                });
+
+                if (values.average_note < 0 || values.average_note > 5) {
+                    errors.average_note = ['Should be between 0 and 5'];
+                }
+
+                return errors;
+            }}
+        >
+            <TextInput source="title" />
+            <TextInput source="password" type="password" />
+            <LongTextInput source="teaser" />
+            <RichTextInput source="body" />
+            <DateInput source="published_at" defaultValue={getDefaultDate} />
+            <NumberInput source="average_note" />
+            <BooleanInput source="commentable" defaultValue />
+        </SimpleForm>
+    </Create>
 );
 
 export const PostShow = props => (

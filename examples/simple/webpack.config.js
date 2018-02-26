@@ -16,12 +16,12 @@ module.exports = {
     },
     resolve: {
         alias: {
-            '@tkvw/react-admin-addons': path.join(
+            '@tkvw/react-admin': path.join(
                 __dirname,
                 '..',
                 '..',
                 'packages',
-                'react-admin-addons',
+                'react-admin',
                 'src'
             ),
             //            'react-admin': path.join(

@@ -854,12 +854,6 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "http://localhost:4873/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-attr-accept@^1.0.3:
-  version "1.1.2"
-  resolved "http://localhost:4873/attr-accept/-/attr-accept-1.1.2.tgz#6836bfe054e4ef1ee3076fdde56cec9bb3ffead6"
-  dependencies:
-    core-js "^2.5.0"
-
 autoprefixer@^6.3.1:
   version "6.7.7"
   resolved "http://localhost:4873/autoprefixer/-/autoprefixer-6.7.7.tgz#1dbd1c835658e35ce3f9984099db00585c782014"
@@ -870,12 +864,6 @@ autoprefixer@^6.3.1:
     num2fraction "^1.2.2"
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
-
-autosuggest-highlight@^3.1.1:
-  version "3.1.1"
-  resolved "http://localhost:4873/autosuggest-highlight/-/autosuggest-highlight-3.1.1.tgz#70bb4f9125fe8a849e85f825f7bb2a1a4806743d"
-  dependencies:
-    diacritic "0.0.2"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -901,7 +889,7 @@ babel-loader@^8.0.0-beta.0:
     loader-utils "^1.0.2"
     mkdirp "^0.5.1"
 
-babel-runtime@^6.22.0, babel-runtime@^6.26.0, babel-runtime@~6.26.0:
+babel-runtime@^6.22.0, babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "http://localhost:4873/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   dependencies:
@@ -1202,7 +1190,7 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classnames@^2.2.5, classnames@~2.2.5:
+classnames@^2.2.5:
   version "2.2.5"
   resolved "http://localhost:4873/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -1354,7 +1342,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "http://localhost:4873/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.3:
+core-js@^2.4.0, core-js@^2.5.3:
   version "2.5.3"
   resolved "http://localhost:4873/core-js/-/core-js-2.5.3.tgz#8acc38345824f16d8365b7c9b4259168e8ed603e"
 
@@ -1534,10 +1522,6 @@ decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "http://localhost:4873/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
 
-decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "http://localhost:4873/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-
 deep-equal@^1.0.1, deep-equal@~1.0.1:
   version "1.0.1"
   resolved "http://localhost:4873/deep-equal/-/deep-equal-1.0.1.tgz#f5d260292b660e084eff4cdbc9f08ad3247448b5"
@@ -1549,13 +1533,6 @@ deep-extend@~0.4.0:
 deepmerge@^2.0.1:
   version "2.0.1"
   resolved "http://localhost:4873/deepmerge/-/deepmerge-2.0.1.tgz#25c1c24f110fb914f80001b925264dd77f3f4312"
-
-define-properties@^1.1.2:
-  version "1.1.2"
-  resolved "http://localhost:4873/define-properties/-/define-properties-1.1.2.tgz#83a73f2fea569898fb737193c8f873caf6d45c94"
-  dependencies:
-    foreach "^2.0.5"
-    object-keys "^1.0.8"
 
 defined@^1.0.0:
   version "1.0.0"
@@ -1606,10 +1583,6 @@ detect-libc@^1.0.2:
 detect-node@^2.0.3:
   version "2.0.3"
   resolved "http://localhost:4873/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
-
-diacritic@0.0.2:
-  version "0.0.2"
-  resolved "http://localhost:4873/diacritic/-/diacritic-0.0.2.tgz#fc2a887b5a5bc0a0a854fb614c7c2f209061ee04"
 
 diffie-hellman@^5.0.0:
   version "5.0.2"
@@ -1709,34 +1682,12 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
-es-abstract@^1.5.0:
-  version "1.10.0"
-  resolved "http://localhost:4873/es-abstract/-/es-abstract-1.10.0.tgz#1ecb36c197842a00d8ee4c2dfd8646bb97d60864"
-  dependencies:
-    es-to-primitive "^1.1.1"
-    function-bind "^1.1.1"
-    has "^1.0.1"
-    is-callable "^1.1.3"
-    is-regex "^1.0.4"
-
-es-to-primitive@^1.1.1:
-  version "1.1.1"
-  resolved "http://localhost:4873/es-to-primitive/-/es-to-primitive-1.1.1.tgz#45355248a88979034b6792e19bb81f2b7975dd0d"
-  dependencies:
-    is-callable "^1.1.1"
-    is-date-object "^1.0.1"
-    is-symbol "^1.0.1"
-
 es5-ext@^0.10.14, es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14:
   version "0.10.39"
   resolved "http://localhost:4873/es5-ext/-/es5-ext-0.10.39.tgz#fca21b67559277ca4ac1a1ed7048b107b6f76d87"
   dependencies:
     es6-iterator "~2.0.3"
     es6-symbol "~3.1.1"
-
-es6-error@^4.0.0:
-  version "4.1.1"
-  resolved "http://localhost:4873/es6-error/-/es6-error-4.1.1.tgz#9e3af407459deed47e9a91f9b885a84eb05c561d"
 
 es6-iterator@^2.0.1, es6-iterator@~2.0.1, es6-iterator@~2.0.3:
   version "2.0.3"
@@ -2026,12 +1977,6 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "http://localhost:4873/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-for-each@^0.3.2:
-  version "0.3.2"
-  resolved "http://localhost:4873/for-each/-/for-each-0.3.2.tgz#2c40450b9348e97f281322593ba96704b9abd4d4"
-  dependencies:
-    is-function "~1.0.0"
-
 for-in@^1.0.1:
   version "1.0.2"
   resolved "http://localhost:4873/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2041,10 +1986,6 @@ for-own@^0.1.4:
   resolved "http://localhost:4873/for-own/-/for-own-0.1.5.tgz#5265c681a4f294dabbf17c9509b6763aa84510ce"
   dependencies:
     for-in "^1.0.1"
-
-foreach@^2.0.5:
-  version "2.0.5"
-  resolved "http://localhost:4873/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
 
 forever-agent@~0.6.1:
   version "0.6.1"
@@ -2094,7 +2035,7 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-function-bind@^1.0.2, function-bind@^1.1.1:
+function-bind@^1.0.2:
   version "1.1.1"
   resolved "http://localhost:4873/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
@@ -2242,16 +2183,6 @@ hawk@3.1.3, hawk@~3.1.3:
     hoek "2.x.x"
     sntp "1.x.x"
 
-history@^4.7.2:
-  version "4.7.2"
-  resolved "http://localhost:4873/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
-  dependencies:
-    invariant "^2.2.1"
-    loose-envify "^1.2.0"
-    resolve-pathname "^2.2.0"
-    value-equal "^0.4.0"
-    warning "^3.0.0"
-
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "http://localhost:4873/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -2264,7 +2195,7 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "http://localhost:4873/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1:
   version "2.5.0"
   resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
 
@@ -2370,10 +2301,6 @@ indexof@0.0.1:
   version "0.0.1"
   resolved "http://localhost:4873/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
 
-inflection@~1.12.0:
-  version "1.12.0"
-  resolved "http://localhost:4873/inflection/-/inflection-1.12.0.tgz#a200935656d6f5f6bc4dc7502e1aecb703228416"
-
 inflight@^1.0.4:
   version "1.0.6"
   resolved "http://localhost:4873/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -2403,7 +2330,7 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
+invariant@^2.2.0, invariant@^2.2.2:
   version "2.2.3"
   resolved "http://localhost:4873/invariant/-/invariant-2.2.3.tgz#1a827dfde7dcbd7c323f0ca826be8fa7c5e9d688"
   dependencies:
@@ -2445,14 +2372,6 @@ is-builtin-module@^1.0.0:
   dependencies:
     builtin-modules "^1.0.0"
 
-is-callable@^1.1.1, is-callable@^1.1.3:
-  version "1.1.3"
-  resolved "http://localhost:4873/is-callable/-/is-callable-1.1.3.tgz#86eb75392805ddc33af71c92a0eedf74ee7604b2"
-
-is-date-object@^1.0.1:
-  version "1.0.1"
-  resolved "http://localhost:4873/is-date-object/-/is-date-object-1.0.1.tgz#9aa20eb6aeebbff77fbd33e74ca01b33581d3a16"
-
 is-dotfile@^1.0.0:
   version "1.0.3"
   resolved "http://localhost:4873/is-dotfile/-/is-dotfile-1.0.3.tgz#a6a2f32ffd2dfb04f5ca25ecd0f6b83cf798a1e1"
@@ -2487,7 +2406,7 @@ is-fullwidth-code-point@^1.0.0:
   dependencies:
     number-is-nan "^1.0.0"
 
-is-function@^1.0.1, is-function@~1.0.0:
+is-function@^1.0.1:
   version "1.0.1"
   resolved "http://localhost:4873/is-function/-/is-function-1.0.1.tgz#12cfb98b65b57dd3d193a3121f5f6e2f437602b5"
 
@@ -2553,16 +2472,6 @@ is-primitive@^2.0.0:
   version "2.0.0"
   resolved "http://localhost:4873/is-primitive/-/is-primitive-2.0.0.tgz#207bab91638499c07b2adf240a41a87210034575"
 
-is-promise@^2.1.0:
-  version "2.1.0"
-  resolved "http://localhost:4873/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
-
-is-regex@^1.0.4:
-  version "1.0.4"
-  resolved "http://localhost:4873/is-regex/-/is-regex-1.0.4.tgz#5517489b547091b0930e095654ced25ee97e9491"
-  dependencies:
-    has "^1.0.1"
-
 is-stream@^1.0.1:
   version "1.1.0"
   resolved "http://localhost:4873/is-stream/-/is-stream-1.1.0.tgz#12d4a3dd4e68e0b79ceb8dbc84173ae80d91ca44"
@@ -2573,10 +2482,6 @@ is-svg@^2.0.0:
   dependencies:
     html-comment-regex "^1.1.0"
 
-is-symbol@^1.0.1:
-  version "1.0.1"
-  resolved "http://localhost:4873/is-symbol/-/is-symbol-1.0.1.tgz#3cc59f00025194b6ab2e38dbae6689256b660572"
-
 is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
@@ -2584,10 +2489,6 @@ is-typedarray@~1.0.0:
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "http://localhost:4873/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
-
-isarray@0.0.1:
-  version "0.0.1"
-  resolved "http://localhost:4873/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
 
 isarray@1.0.0, isarray@^1.0.0, isarray@~1.0.0:
   version "1.0.0"
@@ -2814,10 +2715,6 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.3, lodash-es@^4.17.5, lodash-es@^4.2.1:
-  version "4.17.5"
-  resolved "http://localhost:4873/lodash-es/-/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
-
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "http://localhost:4873/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
@@ -2826,35 +2723,15 @@ lodash.debounce@~4.0.8:
   version "4.0.8"
   resolved "http://localhost:4873/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
-lodash.defaultsdeep@~4.6.0:
-  version "4.6.0"
-  resolved "http://localhost:4873/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.0.tgz#bec1024f85b1bd96cbea405b23c14ad6443a6f81"
-
-lodash.get@~4.4.2:
-  version "4.4.2"
-  resolved "http://localhost:4873/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-
-lodash.isequal@~4.5.0:
-  version "4.5.0"
-  resolved "http://localhost:4873/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "http://localhost:4873/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.pickby@~4.6.0:
-  version "4.6.0"
-  resolved "http://localhost:4873/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
-
-lodash.set@~4.3.2:
-  version "4.3.2"
-  resolved "http://localhost:4873/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
-
-lodash.uniq@^4.5.0, lodash.uniq@~4.5.0:
+lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://localhost:4873/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.14.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1:
+lodash@^4.14.0, lodash@^4.17.2, lodash@^4.2.0:
   version "4.17.5"
   resolved "http://localhost:4873/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -2862,7 +2739,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "http://localhost:4873/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.2.0, loose-envify@^1.3.1:
+loose-envify@^1.0.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "http://localhost:4873/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -3111,15 +2988,6 @@ node-libs-browser@^2.0.0:
     util "^0.10.3"
     vm-browserify "0.0.4"
 
-node-polyglot@2.2.2:
-  version "2.2.2"
-  resolved "http://localhost:4873/node-polyglot/-/node-polyglot-2.2.2.tgz#1a3f76d7392f836ea0823836ede817e6ea6ec26c"
-  dependencies:
-    for-each "^0.3.2"
-    has "^1.0.1"
-    string.prototype.trim "^1.1.2"
-    warning "^3.0.0"
-
 node-pre-gyp@^0.6.39:
   version "0.6.39"
   resolved "http://localhost:4873/node-pre-gyp/-/node-pre-gyp-0.6.39.tgz#c00e96860b23c0e1420ac7befc5044e1d78d8649"
@@ -3196,17 +3064,9 @@ oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "http://localhost:4873/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
 
-object-assign@^3.0.0:
-  version "3.0.0"
-  resolved "http://localhost:4873/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
-
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
   resolved "http://localhost:4873/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
-
-object-keys@^1.0.8:
-  version "1.0.11"
-  resolved "http://localhost:4873/object-keys/-/object-keys-1.0.11.tgz#c54601778ad560f1142ce0e01bcca8b56d13426d"
 
 object.omit@^2.0.0:
   version "2.0.1"
@@ -3359,12 +3219,6 @@ path-parse@^1.0.5:
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "http://localhost:4873/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
-
-path-to-regexp@^1.7.0:
-  version "1.7.0"
-  resolved "http://localhost:4873/path-to-regexp/-/path-to-regexp-1.7.0.tgz#59fde0f435badacba103a84e9d3bc64e96b9937d"
-  dependencies:
-    isarray "0.0.1"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -3700,7 +3554,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.0"
   resolved "http://localhost:4873/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -3763,14 +3617,6 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@~5.0.0:
-  version "5.0.1"
-  resolved "http://localhost:4873/query-string/-/query-string-5.0.1.tgz#6e2b86fe0e08aef682ecbe86e85834765402bd88"
-  dependencies:
-    decode-uri-component "^0.2.0"
-    object-assign "^4.1.0"
-    strict-uri-encode "^1.0.0"
-
 querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "http://localhost:4873/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -3806,78 +3652,27 @@ quill@~1.1.9:
     parchment "1.0.8"
     quill-delta "3.4.3"
 
-ra-core@^2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta4.tgz#d72c61bae056bb7b066f5f8ab187ed803797e88e"
-  dependencies:
-    babel-runtime "~6.26.0"
-    classnames "~2.2.5"
-    inflection "~1.12.0"
-    lodash.debounce "~4.0.8"
-    lodash.defaultsdeep "~4.6.0"
-    lodash.get "~4.4.2"
-    lodash.pickby "~4.6.0"
-    lodash.set "~4.3.2"
-    lodash.uniq "~4.5.0"
-    node-polyglot "2.2.2"
-    prop-types "~15.5.7"
-    query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta4"
-    react-redux "~5.0.4"
-    react-router "~4.2.0"
-    react-router-dom "~4.2.2"
-    react-router-redux "~5.0.0-alpha.6"
-    recompose "~0.25.0"
-    redux "~3.7.2"
-    redux-form "~7.0.3"
-    redux-saga "~0.16.0"
-    reselect "~3.0.0"
-    warning "~3.0.0"
-
-ra-data-fakerest@2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-data-fakerest/-/ra-data-fakerest-2.0.0-beta4.tgz#b1eb4cc20a2d00aa22882d08ec8997b1e90cb2a8"
+ra-data-fakerest@2.0.0-beta8:
+  version "2.0.0-beta8"
+  resolved "http://localhost:4873/ra-data-fakerest/-/ra-data-fakerest-2.0.0-beta8.tgz#72a343a1b74ce0ed8294481eb8fdbf58f4952a2b"
   dependencies:
     fakerest "~2.1.0"
 
-ra-input-rich-text@2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-input-rich-text/-/ra-input-rich-text-2.0.0-beta4.tgz#eb6a4349f63f80e51f5f59eeb43661696f2bb327"
+ra-input-rich-text@2.0.0-beta8:
+  version "2.0.0-beta8"
+  resolved "http://localhost:4873/ra-input-rich-text/-/ra-input-rich-text-2.0.0-beta8.tgz#b4b0663d43b2e06bc70ab82ff188cd9207802e0d"
   dependencies:
     lodash.debounce "~4.0.8"
     prop-types "~15.5.7"
     quill "~1.1.9"
 
-ra-language-english@2.0.0-beta4, ra-language-english@^2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta4.tgz#158c819b116a13fa6e4d80f9731f73ca491b76c5"
+ra-language-english@2.0.0-beta8:
+  version "2.0.0-beta8"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta8.tgz#c9669d542bbbcd4f37b79a80eeadb40ff3367fae"
 
-ra-language-french@2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-language-french/-/ra-language-french-2.0.0-beta4.tgz#40eab9e49d70e029475a3642c887f6408e432d45"
-
-ra-ui-materialui@^2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta4.tgz#7d35770b652edfdc128df9afd8157d9746bd034e"
-  dependencies:
-    autosuggest-highlight "^3.1.1"
-    classnames "~2.2.5"
-    inflection "~1.12.0"
-    lodash.debounce "~4.0.8"
-    lodash.get "~4.4.2"
-    lodash.isequal "~4.5.0"
-    lodash.set "~4.3.2"
-    material-ui "1.0.0-beta.32"
-    material-ui-icons "~1.0.0-beta.17"
-    prop-types "~15.5.7"
-    ra-core "^2.0.0-beta4"
-    react-autosuggest "^9.3.2"
-    react-dropzone "~4.0.1"
-    react-redux "~5.0.4"
-    react-router-dom "~4.2.2"
-    recompose "~0.25.0"
-    redux "~3.7.2"
-    redux-form "~7.0.3"
+ra-language-french@2.0.0-beta8:
+  version "2.0.0-beta8"
+  resolved "http://localhost:4873/ra-language-french/-/ra-language-french-2.0.0-beta8.tgz#24ccbc711d5993095d3a2c92c005869538458429"
 
 rafl@~1.2.1:
   version "1.2.2"
@@ -3927,46 +3722,6 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-admin@2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://localhost:4873/react-admin/-/react-admin-2.0.0-beta4.tgz#56485108d163e79d8b9d1703e1ee3a8f1a9d7b7c"
-  dependencies:
-    ra-core "^2.0.0-beta4"
-    ra-language-english "^2.0.0-beta4"
-    ra-ui-materialui "^2.0.0-beta4"
-
-react-autosuggest@^9.3.2:
-  version "9.3.4"
-  resolved "http://localhost:4873/react-autosuggest/-/react-autosuggest-9.3.4.tgz#e47ff800081b2f7c678165bfb7cc84b07f462336"
-  dependencies:
-    prop-types "^15.5.10"
-    react-autowhatever "^10.1.0"
-    shallow-equal "^1.0.0"
-
-react-autowhatever@^10.1.0:
-  version "10.1.0"
-  resolved "http://localhost:4873/react-autowhatever/-/react-autowhatever-10.1.0.tgz#41f6d69382437d3447a0a3c8913bb8ca2feaabc1"
-  dependencies:
-    prop-types "^15.5.8"
-    react-themeable "^1.1.0"
-    section-iterator "^2.0.0"
-
-react-dom@~16.0.0:
-  version "16.0.0"
-  resolved "http://localhost:4873/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
-
-react-dropzone@~4.0.1:
-  version "4.0.1"
-  resolved "http://localhost:4873/react-dropzone/-/react-dropzone-4.0.1.tgz#4d71d6f0fc5d7ac8a50dfa46582c96fe35ae3ca4"
-  dependencies:
-    attr-accept "^1.0.3"
-    prop-types "^15.5.7"
-
 react-event-listener@^0.5.1:
   version "0.5.3"
   resolved "http://localhost:4873/react-event-listener/-/react-event-listener-0.5.3.tgz#a8b492596ad601865314fcc2c18cb87b6ce3876e"
@@ -3993,48 +3748,6 @@ react-popper@^0.7.4:
     popper.js "^1.12.5"
     prop-types "^15.5.10"
 
-react-redux@~5.0.4:
-  version "5.0.7"
-  resolved "http://localhost:4873/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
-  dependencies:
-    hoist-non-react-statics "^2.5.0"
-    invariant "^2.0.0"
-    lodash "^4.17.5"
-    lodash-es "^4.17.5"
-    loose-envify "^1.1.0"
-    prop-types "^15.6.0"
-
-react-router-dom@~4.2.2:
-  version "4.2.2"
-  resolved "http://localhost:4873/react-router-dom/-/react-router-dom-4.2.2.tgz#c8a81df3adc58bba8a76782e946cbd4eae649b8d"
-  dependencies:
-    history "^4.7.2"
-    invariant "^2.2.2"
-    loose-envify "^1.3.1"
-    prop-types "^15.5.4"
-    react-router "^4.2.0"
-    warning "^3.0.0"
-
-react-router-redux@~5.0.0-alpha.6:
-  version "5.0.0-alpha.9"
-  resolved "http://localhost:4873/react-router-redux/-/react-router-redux-5.0.0-alpha.9.tgz#825431516e0e6f1fd93b8807f6bd595e23ec3d10"
-  dependencies:
-    history "^4.7.2"
-    prop-types "^15.6.0"
-    react-router "^4.2.0"
-
-react-router@^4.2.0, react-router@~4.2.0:
-  version "4.2.0"
-  resolved "http://localhost:4873/react-router/-/react-router-4.2.0.tgz#61f7b3e3770daeb24062dae3eedef1b054155986"
-  dependencies:
-    history "^4.7.2"
-    hoist-non-react-statics "^2.3.0"
-    invariant "^2.2.2"
-    loose-envify "^1.3.1"
-    path-to-regexp "^1.7.0"
-    prop-types "^15.5.4"
-    warning "^3.0.0"
-
 react-scrollbar-size@^2.0.2:
   version "2.1.0"
   resolved "http://localhost:4873/react-scrollbar-size/-/react-scrollbar-size-2.1.0.tgz#105e797135cab92b1f9e16f00071db7f29f80754"
@@ -4043,12 +3756,6 @@ react-scrollbar-size@^2.0.2:
     prop-types "^15.6.0"
     react-event-listener "^0.5.1"
     stifle "^1.0.2"
-
-react-themeable@^1.1.0:
-  version "1.1.0"
-  resolved "http://localhost:4873/react-themeable/-/react-themeable-1.1.0.tgz#7d4466dd9b2b5fa75058727825e9f152ba379a0e"
-  dependencies:
-    object-assign "^3.0.0"
 
 react-transition-group@^2.2.1:
   version "2.2.1"
@@ -4060,15 +3767,6 @@ react-transition-group@^2.2.1:
     loose-envify "^1.3.1"
     prop-types "^15.5.8"
     warning "^3.0.0"
-
-react@~16.0.0:
-  version "16.0.0"
-  resolved "http://localhost:4873/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
-  dependencies:
-    fbjs "^0.8.16"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -4115,15 +3813,6 @@ recompose@^0.26.0:
     hoist-non-react-statics "^2.3.1"
     symbol-observable "^1.0.4"
 
-recompose@~0.25.0:
-  version "0.25.1"
-  resolved "http://localhost:4873/recompose/-/recompose-0.25.1.tgz#5eb9d6cf6e25a9ffad73cbbae5658b5b55d6e728"
-  dependencies:
-    change-emitter "^0.1.2"
-    fbjs "^0.8.1"
-    hoist-non-react-statics "^2.3.1"
-    symbol-observable "^1.0.4"
-
 redent@^1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -4144,32 +3833,6 @@ reduce-function-call@^1.0.1:
   resolved "http://localhost:4873/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
-
-redux-form@~7.0.3:
-  version "7.0.4"
-  resolved "http://localhost:4873/redux-form/-/redux-form-7.0.4.tgz#2297b6bed40fda8bb58132e261ba0976fb4e530c"
-  dependencies:
-    deep-equal "^1.0.1"
-    es6-error "^4.0.0"
-    hoist-non-react-statics "^2.2.1"
-    invariant "^2.2.2"
-    is-promise "^2.1.0"
-    lodash "^4.17.3"
-    lodash-es "^4.17.3"
-    prop-types "^15.5.9"
-
-redux-saga@~0.16.0:
-  version "0.16.0"
-  resolved "http://localhost:4873/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
-
-redux@~3.7.2:
-  version "3.7.2"
-  resolved "http://localhost:4873/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
-  dependencies:
-    lodash "^4.2.1"
-    lodash-es "^4.2.1"
-    loose-envify "^1.1.0"
-    symbol-observable "^1.0.3"
 
 regenerate-unicode-properties@^5.1.1:
   version "5.1.3"
@@ -4293,14 +3956,6 @@ requires-port@1.0.x, requires-port@1.x.x, requires-port@~1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
 
-reselect@~3.0.0:
-  version "3.0.1"
-  resolved "http://localhost:4873/reselect/-/reselect-3.0.1.tgz#efdaa98ea7451324d092b2b2163a6a1d7a9a2147"
-
-resolve-pathname@^2.2.0:
-  version "2.2.0"
-  resolved "http://localhost:4873/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
-
 resolve@^1.3.2:
   version "1.5.0"
   resolved "http://localhost:4873/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
@@ -4345,10 +4000,6 @@ scroll@^2.0.1:
   resolved "http://localhost:4873/scroll/-/scroll-2.0.3.tgz#0951b785544205fd17753bc3d294738ba16fc2ab"
   dependencies:
     rafl "~1.2.1"
-
-section-iterator@^2.0.0:
-  version "2.0.0"
-  resolved "http://localhost:4873/section-iterator/-/section-iterator-2.0.0.tgz#bf444d7afeeb94ad43c39ad2fb26151627ccba2a"
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -4429,10 +4080,6 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
-
-shallow-equal@^1.0.0:
-  version "1.0.0"
-  resolved "http://localhost:4873/shallow-equal/-/shallow-equal-1.0.0.tgz#508d1838b3de590ab8757b011b25e430900945f7"
 
 signal-exit@^3.0.0:
   version "3.0.2"
@@ -4576,14 +4223,6 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string.prototype.trim@^1.1.2:
-  version "1.1.2"
-  resolved "http://localhost:4873/string.prototype.trim/-/string.prototype.trim-1.1.2.tgz#d04de2c89e137f4d7d206f086b5ed2fae6be8cea"
-  dependencies:
-    define-properties "^1.1.2"
-    es-abstract "^1.5.0"
-    function-bind "^1.0.2"
-
 string_decoder@^1.0.0, string_decoder@~1.0.3:
   version "1.0.3"
   resolved "http://localhost:4873/string_decoder/-/string_decoder-1.0.3.tgz#0fc67d7c141825de94282dd536bec6b9bce860ab"
@@ -4651,7 +4290,7 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-symbol-observable@^1.0.3, symbol-observable@^1.0.4, symbol-observable@^1.1.0:
+symbol-observable@^1.0.4, symbol-observable@^1.1.0:
   version "1.2.0"
   resolved "http://localhost:4873/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
 
@@ -4862,10 +4501,6 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "~1.0.0"
     spdx-expression-parse "~1.0.0"
 
-value-equal@^0.4.0:
-  version "0.4.0"
-  resolved "http://localhost:4873/value-equal/-/value-equal-0.4.0.tgz#c5bdd2f54ee093c04839d71ce2e4758a6890abc7"
-
 vary@~1.1.2:
   version "1.1.2"
   resolved "http://localhost:4873/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -4888,7 +4523,7 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-warning@^3.0.0, warning@~3.0.0:
+warning@^3.0.0:
   version "3.0.0"
   resolved "http://localhost:4873/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
   dependencies:

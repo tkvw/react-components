@@ -4,9 +4,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Route } from 'react-router';
 
-import { Admin, Page, Resource, Content } from '@tkvw/react-admin-addons';
+import { Admin, Page, Resource, Content } from '@tkvw/react-admin';
 
-import { Delete } from 'react-admin'; // eslint-disable-line import/no-unresolved
 import jsonRestDataProvider from 'ra-data-fakerest';
 
 import addUploadFeature from './addUploadFeature';
@@ -61,8 +60,7 @@ render(
                 create={PostCreate}
                 edit={PostEdit}
                 show={PostShow}
-                showInMenu={!!permissions}
-                remove={Delete}
+                hideInMenu={!permissions}
                 icon={PostIcon}
             />,
             <Resource
@@ -73,7 +71,6 @@ render(
                 edit={CommentEdit}
                 show={CommentShow}
                 showInMenu={!!permissions}
-                remove={Delete}
                 icon={CommentIcon}
             />,
             <Page
@@ -92,7 +89,6 @@ render(
                     create={UserCreate}
                     edit={UserEdit}
                     showInMenu={!!permissions}
-                    remove={Delete}
                     icon={UserIcon}
                     show={UserShow}
                 />
