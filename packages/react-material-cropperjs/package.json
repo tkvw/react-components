@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-cropperjs",
-  "version": "1.0.0-custom24",
+  "version": "1.0.0-beta1",
   "description": "description",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -17,20 +17,16 @@
   "author": "Dennie de Lange",
   "license": "MIT",
   "peerDependencies": {
-    "material-ui": "~1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-beta.17",
-    "react": "^15.4.0 || ~16.0.0",
-    "react-dom": "^15.4.0 || ~16.0.0"
+    "react": "~16.0.0 || ~16.1.0 || ~16.2.0",
+    "react-dom": "~16.0.0 || ~16.1.0 || ~16.2.0"
   },
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {
+  "dependencies": {
+    "@tkvw/react-cropperjs": "^1.0.0-beta1",
+    "classnames": "^2.2.5",
     "material-ui": "^1.0.0-beta.32",
     "material-ui-icons": "^1.0.0-beta.17"
-  },
-  "dependencies": {
-    "@tkvw/react-cropperjs": "^1.0.0-custom24",
-    "classnames": "^2.2.5"
   }
 }

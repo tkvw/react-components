@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-fileinput",
-  "version": "1.0.0-custom24",
+  "version": "1.0.0-beta1",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -9,27 +9,23 @@
   },
   "author": "Dennie de Lange",
   "license": "MIT",
-  "peerDependencies": {
-    "material-ui": "^1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-beta.17"
-  },
   "publishConfig": {
     "access": "public"
   },
   "devDependencies": {
-    "file-api": "^0.10.4",
-    "material-ui": "^1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-beta.17",
-    "recompose": "^0.26.0"
+    "file-api": "^0.10.4"
   },
   "dependencies": {
-    "@tkvw/react-image-transformation": "^1.0.0-custom24",
-    "@tkvw/react-material-cropperjs": "^1.0.0-custom24",
-    "@tkvw/react-material-image": "^1.0.0-custom24",
+    "@tkvw/react-image-transformation": "^1.0.0-beta1",
+    "@tkvw/react-material-cropperjs": "^1.0.0-beta1",
+    "@tkvw/react-material-image": "^1.0.0-beta1",
     "attr-accept": "^1.1.0",
     "blueimp-load-image": "^2.18.0",
     "classnames": "^2.2.5",
+    "material-ui": "^1.0.0-beta.32",
+    "material-ui-icons": "^1.0.0-beta.17",
     "mdi-svg": "^2.1.19",
-    "react-dropzone": "^4.2.7"
+    "react-dropzone": "^4.2.7",
+    "recompose": "^0.26.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-image",
-  "version": "1.0.0-custom24",
+  "version": "1.0.0-beta1",
   "description": "Render blob as image",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "peerDependencies": {
-    "react": "^15.4.0 || ~16.0.0",
-    "react-dom": "^15.4.0 || ~16.0.0"
+    "react": "~16.0.0 || ~16.1.0 || ~16.2.0",
+    "react-dom": "~16.0.0 || ~16.1.0 || ~16.2.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,20 +1,20 @@
 {
   "name": "@tkvw/react-cropperjs",
-  "version": "1.0.0-custom24",
+  "version": "1.0.0-beta1",
   "description": "Cropperjs wrapper",
   "main": "build/index",
   "jsnext:main": "src/index",
   "author": "Dennie de Lange",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^15.4.0 || ~16.0.0",
-    "react-dom": "^15.4.0 || ~16.0.0"
+    "react": "~16.0.0 || ~16.1.0 || ~16.2.0",
+    "react-dom": "~16.0.0 || ~16.1.0 || ~16.2.0"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@tkvw/react-image": "^1.0.0-custom24",
+    "@tkvw/react-image": "^1.0.0-beta1",
     "classnames": "^2.2.5",
     "cropperjs": "^1.2.2",
     "lodash.isequal": "^4.5.0",
