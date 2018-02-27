@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/flatten-object",
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta7",
   "description": "Convert a Object to a standarized formData format",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",

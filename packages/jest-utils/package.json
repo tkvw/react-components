@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/jest-utils",
-  "version": "1.0.0-beta3",
+  "version": "1.0.0-beta7",
   "description": "",
   "main": "index.js",
   "scripts": {

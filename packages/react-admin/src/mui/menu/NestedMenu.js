@@ -9,7 +9,7 @@ import Collapse from 'material-ui/transitions/Collapse';
 import { withStyles } from 'material-ui/styles';
 
 import { toggleMenuItem } from '../../actions/menuActions';
-import NestedMenuItem from './NestedMenuItem';
+import MenuItem from './MenuItem';
 
 const DRAWER_WIDTH = 240;
 
@@ -20,6 +20,7 @@ const styles = {
         justifyContent: 'flex-start',
         width: DRAWER_WIDTH,
     },
+    nestedMenu: {},
 };
 
 const defaultMenuStateSelector = state => state.addons.menu;
@@ -29,9 +30,11 @@ const mapStateToProps = createSelector(
         menuStateSelector(state).items,
     (state, { menuStateSelector = defaultMenuStateSelector }) =>
         menuStateSelector(state).state,
+    state => state.admin.ui.sidebarOpen,
     (items, selectionState) => ({
         items,
         selectionState,
+        open,
     })
 );
 
@@ -41,17 +44,7 @@ const enhance = compose(
     connect(mapStateToProps, { toggleMenuItem })
 );
 
-const sanitizeRestProps = ({
-    dense,
-    items,
-    logout,
-    theme,
-    toggleMenuItem,
-    translate,
-    ...rest
-}) => rest;
-
-class NestedMenu extends React.Component {
+class Menu extends React.Component {
     static propTypes = {
         classes: PropTypes.object,
         menuItemsSelector: PropTypes.func,
@@ -87,7 +80,6 @@ class NestedMenu extends React.Component {
         );
         const {
             classes,
-            className,
             hasDashboard,
             onMenuClick,
             selectionState,
@@ -95,62 +87,58 @@ class NestedMenu extends React.Component {
             ...rest
         } = this.props;
 
-        return (
-            <div
-                className={classnames(classes.main, className)}
-                {...sanitizeRestProps(rest)}
-            >
-                {rootItems.reduce((acc, item) => {
-                    const hasChildren = otherItems.find(
-                        it => it.parent === item.name
-                    );
-                    const open = selectionState[item.name];
-                    acc.push(
-                        <NestedMenuItem
-                            key={item.name}
-                            item={item}
-                            {...rest}
-                            hasChildren={!!hasChildren}
-                            open={open}
-                            onClick={this.handleMenuClick}
-                            toggleMenuItem={this.toggleExpandCollapse}
-                        />
-                    );
+        return rootItems.reduce((acc, item) => {
+            const hasChildren = otherItems.find(it => it.parent === item.name);
+            const open = selectionState[item.name];
+            acc.push(
+                <MenuItem
+                    key={item.name}
+                    item={item}
+                    {...rest}
+                    hasChildren={!!hasChildren}
+                    open={open}
+                    onClick={this.handleMenuClick}
+                    toggleMenuItem={this.toggleExpandCollapse}
+                />
+            );
 
-                    if (hasChildren) {
-                        acc.push(
-                            <Collapse
-                                in={open}
-                                timeout="auto"
-                                unmountOnExit
-                                key={`${item.name}-children`}
-                            >
-                                {this.renderNested(
-                                    otherItems,
-                                    item.name,
-                                    depth + 1,
-                                    {
-                                        disablePadding: true,
-                                        style: {
-                                            marginLeft:
-                                                this.props.theme.spacing.unit *
-                                                2,
-                                        },
-                                    }
-                                )}
-                            </Collapse>
-                        );
-                    }
-                    return acc;
-                }, [])}
-            </div>
-        );
+            if (hasChildren) {
+                acc.push(
+                    <Collapse
+                        in={open}
+                        timeout="auto"
+                        unmountOnExit
+                        key={`${item.name}-children`}
+                    >
+                        <div
+                            className={classes.nestedMenu}
+                            style={{
+                                marginLeft: theme.spacing.unit * 2,
+                            }}
+                        >
+                            {this.renderNested(
+                                otherItems,
+                                item.name,
+                                depth + 1
+                            )}
+                        </div>
+                    </Collapse>
+                );
+            }
+            return acc;
+        }, []);
     };
     render() {
-        const { classes } = this.props;
-        return this.renderNested(this.props.items, '', 0, {
-            className: classes.root,
-        });
+        const { children, classes, className, open, items } = this.props;
+
+        return (
+            <div className={classnames(classes.root, className)}>
+                {children({
+                    items: this.renderNested(items, ''),
+                    open,
+                })}
+            </div>
+        );
     }
 }
-export default enhance(NestedMenu);
+export default enhance(Menu);
