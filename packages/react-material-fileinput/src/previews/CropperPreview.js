@@ -25,18 +25,18 @@ const styles = () => ({
     },
 });
 
-class FileImagePreview extends React.Component {
+class CropperPreview extends React.Component {
     static propTypes = {
         accept: PropTypes.func,
         className: PropTypes.string,
         classes: PropTypes.object,
-        imageTransformationOptions: PropTypes.object,
-        previewTransformationOptions: PropTypes.object,
         cropperOptions: PropTypes.object,
         file: PropTypes.shape({
             rawFile: PropTypes.any.isRequired,
         }).isRequired,
-        source: PropTypes.func,
+        imageTransformationOptions: PropTypes.object,
+        onRemove: PropTypes.func,
+        previewTransformationOptions: PropTypes.object,
     };
 
     static defaultProps = {
@@ -66,7 +66,6 @@ class FileImagePreview extends React.Component {
             imageTransformationOptions,
             previewTransformationOptions,
             onRemove,
-            ...props
         } = this.props;
         return (
             <ImageTransformation
@@ -118,4 +117,4 @@ class FileImagePreview extends React.Component {
         );
     }
 }
-export default withStyles(styles)(FileImagePreview);
+export default withStyles(styles)(CropperPreview);

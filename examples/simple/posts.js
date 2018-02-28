@@ -5,6 +5,7 @@ import {
     CheckboxGroupInput,
     ChipField,
     Create,
+    CropperPreview,
     DateField,
     DateInput,
     DisabledInput,
@@ -12,6 +13,8 @@ import {
     EditButton,
     Filter,
     FormTab,
+    ImageFileInput,
+    ImagePreview,
     LongTextInput,
     NumberField,
     NumberInput,
@@ -44,6 +47,9 @@ import {
     TabbedForm,
 } from '@tkvw/react-admin';
 
+import { InputAdornment } from 'material-ui/Input';
+import SearchIcon from 'material-ui-icons/Search';
+
 import RichTextInput from 'ra-input-rich-text';
 import Chip from 'material-ui/Chip';
 import { withStyles } from 'material-ui/styles';
@@ -57,7 +63,18 @@ const QuickFilter = translate(({ label, translate }) => (
 
 const PostFilter = props => (
     <Filter {...props}>
-        <TextInput label="post.list.search" source="q" alwaysOn />
+        <TextInput
+            label="post.list.search"
+            source="q"
+            alwaysOn
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <SearchIcon color="disabled" />
+                    </InputAdornment>
+                ),
+            }}
+        />
         <TextInput
             validate={minLength(2)}
             source="title"
@@ -80,6 +97,19 @@ const styles = {
     },
     publishedAt: { fontStyle: 'italic' },
 };
+
+const PostListActionToolbar = withStyles({
+    toolbar: {
+        alignItems: 'center',
+        display: 'flex',
+    },
+})(({ classes, children, ...props }) => (
+    <div className={classes.toolbar}>
+        {React.Children.map(children, button =>
+            React.cloneElement(button, props)
+        )}
+    </div>
+));
 
 export const PostList = withStyles(styles)(({ classes, ...props }) => (
     <List
@@ -119,8 +149,10 @@ export const PostList = withStyles(styles)(({ classes, ...props }) => (
                             <ChipField source="name" />
                         </SingleFieldList>
                     </ReferenceArrayField>
-                    <EditButton />
-                    <ShowButton />
+                    <PostListActionToolbar>
+                        <EditButton />
+                        <ShowButton />
+                    </PostListActionToolbar>
                 </Datagrid>
             }
         />
@@ -164,7 +196,28 @@ export const PostEdit = props => (
                     ]}
                 />
                 <LongTextInput source="teaser" validate={required} />
-
+                <ImageFileInput
+                    multiple
+                    maxItems={3}
+                    source="pictures"
+                    fullWidth
+                >
+                    <CropperPreview
+                        cropperOptions={{
+                            aspectRatio: 1,
+                        }}
+                        source={(file, accept) =>
+                            file.rawFile && accept(file, 'image/*')
+                                ? file
+                                : null
+                        }
+                    />
+                    <ImagePreview
+                        source={(file, accept) =>
+                            file && accept(file, 'image/*')
+                        }
+                    />
+                </ImageFileInput>
             </FormTab>
             <FormTab label="post.form.body">
                 <RichTextInput

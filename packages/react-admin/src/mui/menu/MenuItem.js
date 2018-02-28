@@ -1,16 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import inflection from 'inflection';
+
 import classnames from 'classnames';
-
-import { NavLink } from 'react-router-dom';
-import { MenuItem } from 'material-ui/Menu';
-import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import compose from 'recompose/compose';
+import { translate } from 'ra-core';
+import { ListItem, ListItemText } from 'material-ui/List';
 import Tooltip from 'material-ui/Tooltip';
-
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
-
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
@@ -22,90 +17,83 @@ const styles = theme => ({
     active: {
         color: theme.palette.text.primary,
     },
-    icon: { paddingRight: '1.2em' },
+    icon: {},
     text: {
         flex: '1 1 auto',
     },
 });
 
-const santizeRestProps = ({ items, logout, toggleMenuItem, ...rest }) => rest;
-
-class NestedMenuItem extends React.Component {
-    static propTypes = {
-        classes: PropTypes.shape({
-            active: PropTypes.string,
-            icon: PropTypes.string,
-            text: PropTypes.string,
-        }),
-        hasChildren: PropTypes.bool,
-        item: PropTypes.shape({
-            label: PropTypes.string,
-            name: PropTypes.string,
-            link: PropTypes.string,
-        }),
-        open: PropTypes.bool,
-        toggleMenuItem: PropTypes.func,
-        translate: PropTypes.func,
-    };
-    handleClick = event => {
-        const { onClick, item } = this.props;
-
-        onClick && onClick(item, event);
-    };
-
-    handleToggleCollapseExpand = event => {
-        const { toggleMenuItem, item } = this.props;
-        toggleMenuItem && toggleMenuItem(item, event);
-        event.preventDefault();
-    };
-
-    render() {
-        const {
-            classes,
-            className,
-            collapsed,
-            hasChildren,
-            item,
-            open,
-            translate,
-            ...props
-        } = this.props;
-        if (typeof item.icon === 'string') {
-            item.icon = translate(item.icon, {
-                _: item.icon,
-            });
-        }
-        const primary = translate(item.label, {
-            _: translate(item.name, {
-                smart_count: 2,
-                _: inflection.humanize(inflection.pluralize(item.name)),
-            }),
-        });
-
-        return (
-            <ListItem
-                className={classnames(classes.root, className)}
-                activeClassName={classes.active}
-                to={item.link}
-                component={NavLink}
-                onClick={this.handleClick}
-                {...santizeRestProps(props)}
+const MenuItem = ({
+    classes,
+    className,
+    endAdornment,
+    icon,
+    primary,
+    secondary,
+    open,
+    translate,
+    tooltip,
+    variant,
+    ...props
+}) => {
+    primary =
+        typeof primary === 'string'
+            ? translate(primary, {
+                  _: primary,
+              })
+            : primary;
+    secondary =
+        typeof secondary === 'string'
+            ? translate(secondary, {
+                  _: secondary,
+              })
+            : secondary;
+    tooltip =
+        typeof tooltip === 'string'
+            ? translate(tooltip, {
+                  _: tooltip,
+              })
+            : tooltip;
+    return (
+        <ListItem
+            button
+            className={classnames(classes.root, className)}
+            {...props}
+        >
+            <Tooltip
+                title={variant === 'mini' ? tooltip || primary : ''}
+                placement="right"
             >
-                <Tooltip title={collapsed ? primary : ''} placement="right">
-                    <ListItemIcon>
-                        {item.icon && React.createElement(item.icon)}
-                    </ListItemIcon>
-                </Tooltip>
-                <span className={classes.text}>{primary}</span>
-                {hasChildren ? (
-                    open ? (
-                        <ExpandLess onClick={this.handleToggleCollapseExpand} />
-                    ) : (
-                        <ExpandMore onClick={this.handleToggleCollapseExpand} />
-                    )
-                ) : null}
-            </ListItem>
-        );
-    }
-}
-export default withStyles(styles)(NestedMenuItem);
+                <span className={classes.icon}>
+                    {icon && React.createElement(icon)}
+                </span>
+            </Tooltip>
+            <ListItemText primary={primary} secondary={secondary} />
+            {endAdornment}
+        </ListItem>
+    );
+};
+MenuItem.propTypes = {
+    classes: PropTypes.shape({
+        active: PropTypes.string,
+        icon: PropTypes.string,
+        text: PropTypes.string,
+    }),
+    className: PropTypes.string,
+    dense: PropTypes.bool,
+    endAdornment: PropTypes.node,
+    icon: PropTypes.func,
+    open: PropTypes.bool,
+    primary: PropTypes.node,
+    secondary: PropTypes.node,
+    tooltip: PropTypes.node,
+    toggleMenuItem: PropTypes.func,
+    translate: PropTypes.func,
+    variant: PropTypes.oneOf(['full', 'mini']),
+};
+MenuItem.defaultProps = {
+    dense: true,
+};
+const enhance = compose(withStyles(styles), translate);
+
+export default enhance(MenuItem);

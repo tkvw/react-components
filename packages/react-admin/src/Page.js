@@ -3,13 +3,27 @@ import PropTypes from 'prop-types';
 import { WithPermissions } from 'ra-core';
 import { RegisterMenuItem } from './mui';
 
-const Render = ({ context, component, ...props }) =>
+/*
+ * This should be a seperate component, because RegisterMenuItem expects a single child
+ */
+const Render = ({ context, component, resource, ...props }) =>
     context === 'registration' ? null : (
         <WithPermissions
-            render={props => React.createElement(component, props)}
+            authParams={{ resource }}
+            render={({ authParams, ...props }) =>
+                React.createElement(component, {
+                    ...props,
+                    resource,
+                })
+            }
             {...props}
         />
     );
+Render.propTypes = {
+    context: PropTypes.string,
+    component: PropTypes.func,
+    resource: PropTypes.string,
+};
 
 const Page = ({
     name,

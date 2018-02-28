@@ -24,30 +24,62 @@ module.exports = {
                 'react-admin',
                 'src'
             ),
-            //            'react-admin': path.join(
-            //                __dirname,
-            //                '..',
-            //                '..',
-            //                'packages',
-            //                'react-admin',
-            //                'src'
-            //            ),
-            //            'ra-data-fakerest': path.join(
-            //                __dirname,
-            //                '..',
-            //                '..',
-            //                'packages',
-            //                'ra-data-fakerest',
-            //                'src'
-            //            ),
-            //            'ra-input-rich-text': path.join(
-            //                __dirname,
-            //                '..',
-            //                '..',
-            //                'packages',
-            //                'ra-input-rich-text',
-            //                'src'
-            //            ),
+            '@tkvw/react-cropperjs': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-cropperjs',
+                'src'
+            ),
+            '@tkvw/react-image': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-image',
+                'src'
+            ),
+            '@tkvw/react-image-transformation': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-image-transformation',
+                'src'
+            ),
+            '@tkvw/react-material-cropperjs': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-material-cropperjs',
+                'src'
+            ),
+            '@tkvw/react-material-fileinput': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-material-fileinput',
+                'src'
+            ),
+            '@tkvw/react-material-image': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-material-image',
+                'src'
+            ),
+            '@tkvw/react-override-reducer': path.join(
+                __dirname,
+                '..',
+                '..',
+                'packages',
+                'react-override-reducer',
+                'src'
+            ),
         },
     },
 };

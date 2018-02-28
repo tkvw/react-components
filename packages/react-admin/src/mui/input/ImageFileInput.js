@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import FileInput, {
     CropperPreview,
     ImagePreview,
+    FileFilter,
 } from '@tkvw/react-material-fileinput';
 import { addField } from 'ra-core';
 import { Labeled } from 'ra-ui-materialui';
@@ -58,4 +59,8 @@ class ImageFileInput extends React.Component {
 const enhance = compose(withStyles(styles), addField);
 
 export default enhance(ImageFileInput);
-export { CropperPreview, ImagePreview };
+export {
+    CropperPreview as ImageFileInputCropperPreview,
+    ImagePreview as ImageFileInputImagePreview,
+    FileFilter as ImageFileInputFileFilter,
+};

@@ -9,11 +9,16 @@ import Collapse from 'material-ui/transitions/Collapse';
 import { withStyles } from 'material-ui/styles';
 
 import { toggleMenuItem } from '../../actions/menuActions';
-import MenuItem from './MenuItem';
+import NestedMenuItem, { NestedMenuItemShape } from './NestedMenuItem';
 
 const DRAWER_WIDTH = 240;
 
 const styles = {
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+    },
     main: {
         display: 'flex',
         flexDirection: 'column',
@@ -30,11 +35,11 @@ const mapStateToProps = createSelector(
         menuStateSelector(state).items,
     (state, { menuStateSelector = defaultMenuStateSelector }) =>
         menuStateSelector(state).state,
-    state => state.admin.ui.sidebarOpen,
-    (items, selectionState) => ({
+    state => (state.admin.ui.sidebarOpen ? 'full' : 'mini'),
+    (items, selectionState, variant) => ({
         items,
         selectionState,
-        open,
+        variant,
     })
 );
 
@@ -44,14 +49,20 @@ const enhance = compose(
     connect(mapStateToProps, { toggleMenuItem })
 );
 
-class Menu extends React.Component {
+const sanitizeRestProps = ({ className, render, theme, ...rest }) => rest;
+
+class NestedMenu extends React.Component {
     static propTypes = {
+        render: PropTypes.func,
         classes: PropTypes.object,
+        className: PropTypes.string,
+        items: PropTypes.arrayOf(NestedMenuItemShape),
         menuItemsSelector: PropTypes.func,
         menuStateSelector: PropTypes.func,
         onMenuClick: PropTypes.func,
         selectionState: PropTypes.object,
         toggleMenuItem: PropTypes.func,
+        variant: PropTypes.string,
     };
 
     toggleExpandCollapse = (item, event) => {
@@ -89,12 +100,12 @@ class Menu extends React.Component {
 
         return rootItems.reduce((acc, item) => {
             const hasChildren = otherItems.find(it => it.parent === item.name);
-            const open = selectionState[item.name];
+            const open = !!selectionState[item.name];
             acc.push(
-                <MenuItem
+                <NestedMenuItem
                     key={item.name}
                     item={item}
-                    {...rest}
+                    {...sanitizeRestProps(rest)}
                     hasChildren={!!hasChildren}
                     open={open}
                     onClick={this.handleMenuClick}
@@ -129,16 +140,16 @@ class Menu extends React.Component {
         }, []);
     };
     render() {
-        const { children, classes, className, open, items } = this.props;
+        const { render, classes, className, items, ...props } = this.props;
 
         return (
             <div className={classnames(classes.root, className)}>
-                {children({
+                {render({
+                    ...props,
                     items: this.renderNested(items, ''),
-                    open,
                 })}
             </div>
         );
     }
 }
-export default enhance(Menu);
+export default enhance(NestedMenu);

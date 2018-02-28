@@ -4,7 +4,15 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Route } from 'react-router';
 
-import { Admin, Page, Resource, Content } from '@tkvw/react-admin';
+import {
+    Admin,
+    Page,
+    Resource,
+    Content,
+    NestedMenu,
+    MenuItem,
+    Responsive,
+} from '@tkvw/react-admin';
 
 import jsonRestDataProvider from 'ra-data-fakerest';
 
@@ -19,6 +27,10 @@ import {
     CommentIcon,
 } from './comments';
 import { UserList, UserEdit, UserCreate, UserIcon, UserShow } from './users';
+
+import { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import InfoIcon from 'material-ui-icons/Info';
+
 import CustomRouteNoLayout from './customRouteNoLayout';
 import CustomRouteLayout from './customRouteLayout';
 
@@ -43,6 +55,28 @@ render(
         i18nProvider={i18nProvider}
         title="Example Admin"
         locale="en"
+        menu={props => (
+            <NestedMenu
+                {...props}
+                render={({ items, variant }) => (
+                    <div style={{ height: '100%' }}>
+                        <Responsive
+                            xsmall={<div>Small title</div>}
+                            small={
+                                variant === 'full' ? <div>Dennie</div> : null
+                            }
+                        />
+                        {items}
+                        <MenuItem
+                            button={false}
+                            icon={InfoIcon}
+                            primary="Primary"
+                            secondary="secondary"
+                        />
+                    </div>
+                )}
+            />
+        )}
         customRoutes={[
             <Route
                 exact
@@ -70,7 +104,7 @@ render(
                 create={CommentCreate}
                 edit={CommentEdit}
                 show={CommentShow}
-                showInMenu={!!permissions}
+                hideInMenu={!permissions}
                 icon={CommentIcon}
             />,
             <Page
@@ -88,7 +122,7 @@ render(
                     list={UserList}
                     create={UserCreate}
                     edit={UserEdit}
-                    showInMenu={!!permissions}
+                    hideInMenu={!permissions}
                     icon={UserIcon}
                     show={UserShow}
                 />

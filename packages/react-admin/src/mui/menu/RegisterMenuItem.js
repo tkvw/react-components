@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { branch, compose, renderNothing, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 
 import { addMenuItem, removeMenuItem } from '../../actions/menuActions';

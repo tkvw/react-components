@@ -1,4 +1,5 @@
 import React, { createElement } from 'react';
+import 'cropperjs/dist/cropper.min.css';
 import PropTypes from 'prop-types';
 import withProps from 'recompose/withProps';
 import { createStore, compose, applyMiddleware } from 'redux';

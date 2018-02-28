@@ -5,6 +5,7 @@ import Dropzone from 'react-dropzone';
 import accept from 'attr-accept';
 import { withStyles } from 'material-ui/styles';
 import Dropper from './Dropper';
+import { FileFilterInterface } from './FileFilter';
 
 const styles = () => ({
     tiles: {
@@ -20,15 +21,17 @@ const styles = () => ({
     dropper: {},
 });
 
-const FileShape = PropTypes.shape({
+export const FileInterface = PropTypes.shape({
     rawFile: PropTypes.instanceOf(File),
     name: PropTypes.string,
     type: PropTypes.string,
     size: PropTypes.number,
     lastModified: PropTypes.number,
 });
+
 export class FileInput extends React.Component {
     static propTypes = {
+        children: PropTypes.arrayOf(PropTypes.shape(FileFilterInterface)),
         dropperProps: PropTypes.object,
         dropperComponent: PropTypes.func,
         maxItems: PropTypes.number,
@@ -40,8 +43,10 @@ export class FileInput extends React.Component {
         tileHeight: PropTypes.number,
         transformFile: PropTypes.func,
         onChange: PropTypes.func.isRequired,
-        value: PropTypes.oneOfType([PropTypes.arrayOf(FileShape), FileShape])
-            .isRequired,
+        value: PropTypes.oneOfType([
+            PropTypes.arrayOf(FileInterface),
+            FileInterface,
+        ]).isRequired,
     };
 
     static defaultProps = {
@@ -98,7 +103,7 @@ export class FileInput extends React.Component {
         onChange(multiple ? filesAccepted : filesAccepted[0]);
     };
     handleRemove = (file, { multiple, value, onChange } = this.props) => {
-        onChange(multiple ? value.filter(f => f !== file) : null);
+        onChange(multiple ? value.filter(f => f !== file) : []);
     };
 
     createHandleRemove = file => event => {
@@ -113,11 +118,17 @@ export class FileInput extends React.Component {
         { children, classes } = this.props
     ) => {
         // First lookup the applicable child
-        const previewComponent = React.Children.toArray(children).find(
-            ({ props: { source } }) => source(file, accept)
+        const acceptedFilter = React.Children.toArray(children).find(
+            ({ props: { accept: acceptFilter } }) =>
+                acceptFilter
+                    ? typeof acceptFilter === 'function'
+                      ? acceptFilter(file, accept)
+                      : accept(file, acceptFilter)
+                    : true
         );
-        return previewComponent
-            ? React.cloneElement(previewComponent, {
+
+        const preview = acceptedFilter
+            ? React.cloneElement(acceptedFilter, {
                   key: `preview-${file.name ? file.name : index}`,
                   file,
                   index,
@@ -125,6 +136,7 @@ export class FileInput extends React.Component {
                   onRemove: this.createHandleRemove(file),
               })
             : null;
+        return preview;
     };
 
     render() {
