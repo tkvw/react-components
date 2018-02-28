@@ -1,12 +1,7 @@
 import React, { createElement } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
-import {
-    MuiThemeProvider,
-    createMuiTheme,
-    withStyles,
-} from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Hidden from 'material-ui/Hidden';
 import compose from 'recompose/compose';
 import { YesNoModal } from '../modals';
@@ -20,6 +15,45 @@ import {
 } from 'ra-ui-materialui';
 
 const sanitizeRestProps = ({ staticContext, ...props }) => props;
+
+const overrideStyles = theme => ({
+    appFrame: {
+        flexGrow: 1,
+    },
+    content: {
+        paddingTop: 0,
+        [theme.breakpoints.up('xs')]: {
+            marginTop: 0,
+        },
+        [theme.breakpoints.down('sm')]: {
+            paddingTop: 0,
+            paddingRight: theme.spacing.unit,
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginTop: 0,
+        },
+    },
+});
+
+const additionalStyles = theme => ({
+    appBar: {
+        marginBottom: theme.spacing.unit,
+        [theme.breakpoints.up('md')]: {
+            marginBottom: theme.spacing.unit * 3,
+        },
+    },
+    appFrame: {},
+    content: {},
+    contentWithSidebar: {},
+    root: {},
+    sideBar: {
+        height: '100%',
+        marginTop: 0,
+        [theme.breakpoints.up('md')]: {
+            marginTop: 0,
+        },
+    },
+});
 
 const Layout = ({
     children,
@@ -102,4 +136,10 @@ Layout.propTypes = {
     title: PropTypes.node.isRequired,
 };
 
-export default layoutWithThemeAndState(Layout);
+const enhanced = compose(
+    withStyles(overrideStyles),
+    layoutWithThemeAndState,
+    withStyles(additionalStyles)
+);
+
+export default enhanced(Layout);
