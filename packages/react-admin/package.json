@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-admin",
-  "version": "1.0.0-beta24",
+  "version": "1.0.0-beta25",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
-    "@tkvw/react-material-fileinput": "^1.0.0-beta24",
-    "@tkvw/redux-override-reducer": "^1.0.0-beta24",
+    "@tkvw/react-material-fileinput": "^1.0.0-beta25",
+    "@tkvw/redux-override-reducer": "^1.0.0-beta25",
     "ra-core": "2.0.0-beta-tkvw9",
     "ra-ui-materialui": "2.0.0-beta-tkvw9",
     "react-popper": "^0.8.2",
