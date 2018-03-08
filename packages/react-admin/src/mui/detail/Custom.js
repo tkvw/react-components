@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { translate } from 'ra-core';
 import { crudCustom } from '../../actions';
 
 class Custom extends Component {
@@ -39,17 +38,17 @@ class Custom extends Component {
         
 
     render() {
-        const { children, resource, translate } = this.props;
+        const { children, resource, ...props } = this.props;
 
         if (!children) return null;
         const basePath = this.getBasePath();
 
         return React.cloneElement(children, {
+            ...props,
             save: this.save,
             resource,
             basePath,
             record: {},
-            translate,
             redirect:
                 typeof children.props.redirect === 'undefined'
                     ? this.defaultRedirectRoute()
@@ -68,7 +67,6 @@ Custom.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     location: PropTypes.object.isRequired,
     resource: PropTypes.string.isRequired,
-    translate: PropTypes.func.isRequired,
     onAction: PropTypes.func,
     handleSave: PropTypes.func,
     hasList: PropTypes.bool,
@@ -94,6 +92,6 @@ function mapStateToProps(state) {
     };
 }
 
-const enhance = compose(connect(mapStateToProps, { crudCustom }), translate);
+const enhance = compose(connect(mapStateToProps, { crudCustom }));
 
 export default enhance(Custom);

@@ -1,24 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { propTypes as formPropTypes } from 'redux-form';
-import compose from 'recompose/compose';
 
-import {
-    formSanitizer,
-    reduxFormSanitizer,
-    resourceSanitizer,
-    translateSanitizer,
-} from './sanitizers';
+const defaultFormSanitizer = () => {};
 
-const formPropsSanitizer = compose(
-    reduxFormSanitizer,
-    resourceSanitizer,
-    formSanitizer,
-    translateSanitizer
-);
-
-const Form = (props = {}) => <form {...formPropsSanitizer(props)} />;
+const Form = ({
+    children,
+    propsSanitizer = defaultFormSanitizer,
+    ...props
+}) => <form {...propsSanitizer(props)}>{children}</form>;
 Form.propTypes = {
     ...formPropTypes,
+    propsSanitizer: PropTypes.func,
 };
 
 export default Form;

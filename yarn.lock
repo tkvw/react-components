@@ -4100,6 +4100,10 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "http://localhost:4873/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+flow-bin@^0.50.0:
+  version "0.50.0"
+  resolved "http://localhost:4873/flow-bin/-/flow-bin-0.50.0.tgz#d4cdb2430dee1a3599f0eb6fe551146e3027256a"
+
 flush-write-stream@^1.0.0:
   version "1.0.2"
   resolved "http://localhost:4873/flush-write-stream/-/flush-write-stream-1.0.2.tgz#c81b90d8746766f1a609a46809946c45dd8ae417"
@@ -4585,6 +4589,10 @@ hoist-non-react-statics@1.x.x, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
+hoist-non-react-statics@2.3.1:
+  version "2.3.1"
+  resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
+
 hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.0"
   resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
@@ -4640,6 +4648,12 @@ html-minifier@^3.2.3, html-minifier@^3.5.8:
     param-case "2.1.x"
     relateurl "0.2.x"
     uglify-js "3.3.x"
+
+html-parse-stringify2@2.0.1:
+  version "2.0.1"
+  resolved "http://localhost:4873/html-parse-stringify2/-/html-parse-stringify2-2.0.1.tgz#dc5670b7292ca158b7bc916c9a6735ac8872834a"
+  dependencies:
+    void-elements "^2.0.1"
 
 html-tag-names@^1.1.1:
   version "1.1.2"
@@ -4708,6 +4722,18 @@ https-browserify@^1.0.0:
 hyphenate-style-name@^1.0.1, hyphenate-style-name@^1.0.2:
   version "1.0.2"
   resolved "http://localhost:4873/hyphenate-style-name/-/hyphenate-style-name-1.0.2.tgz#31160a36930adaf1fc04c6074f7eb41465d4ec4b"
+
+i18next-browser-languagedetector@^2.1.0:
+  version "2.1.0"
+  resolved "http://localhost:4873/i18next-browser-languagedetector/-/i18next-browser-languagedetector-2.1.0.tgz#1b0e17b09507f84e7a1fa761539a07544f92a0df"
+
+i18next-xhr-backend@^1.5.1:
+  version "1.5.1"
+  resolved "http://localhost:4873/i18next-xhr-backend/-/i18next-xhr-backend-1.5.1.tgz#50282610780c6a696d880dfa7f4ac1d01e8c3ad5"
+
+i18next@^10.5.0:
+  version "10.5.0"
+  resolved "http://localhost:4873/i18next/-/i18next-10.5.0.tgz#a2a90e67774fa85b8ff9cd0063e697e482440de7"
 
 iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -5434,6 +5460,13 @@ js-base64@^2.1.9:
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
   resolved "http://localhost:4873/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
+
+js-worker-search@^1.2.0:
+  version "1.2.1"
+  resolved "http://localhost:4873/js-worker-search/-/js-worker-search-1.2.1.tgz#c3a8b826ef90d1ed40ed4d202c992e182e370a6f"
+  dependencies:
+    flow-bin "^0.50.0"
+    uuid "^2.0.1"
 
 js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.1:
   version "3.10.0"
@@ -6241,6 +6274,10 @@ modify-values@^1.0.0:
 moment@^2.20.1, moment@^2.6.0:
   version "2.20.1"
   resolved "http://localhost:4873/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
+
+moment@^2.21.0:
+  version "2.21.0"
+  resolved "http://localhost:4873/moment/-/moment-2.21.0.tgz#2a114b51d2a6ec9e6d83cf803f838a878d8a023a"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -7313,9 +7350,9 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw8, ra-core@^2.0.0-beta-tkvw8:
-  version "2.0.0-beta-tkvw8"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw8.tgz#14e831545aa025038427edc144ca0920d956bb8f"
+ra-core@2.0.0-beta-tkvw12, ra-core@^2.0.0-beta-tkvw12:
+  version "2.0.0-beta-tkvw12"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw12.tgz#c9b70539e1baff4d1ac4b69d021b6d5b8cceba92"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -7329,7 +7366,7 @@ ra-core@2.0.0-beta-tkvw8, ra-core@^2.0.0-beta-tkvw8:
     node-polyglot "2.2.2"
     prop-types "~15.5.7"
     query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw8"
+    ra-language-english "^2.0.0-beta-tkvw12"
     react-redux "~5.0.4"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
@@ -7341,13 +7378,13 @@ ra-core@2.0.0-beta-tkvw8, ra-core@^2.0.0-beta-tkvw8:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw8:
-  version "2.0.0-beta-tkvw8"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw8.tgz#18ab3d179c033025cdda48aacc5613dece1a1830"
+ra-language-english@^2.0.0-beta-tkvw12:
+  version "2.0.0-beta-tkvw12"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw12.tgz#64ee3006debb8120d52ca29919597c47efad4529"
 
-ra-ui-materialui@2.0.0-beta-tkvw8:
-  version "2.0.0-beta-tkvw8"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw8.tgz#20b693d483f9db3acb412ec0408ee9589cda0550"
+ra-ui-materialui@2.0.0-beta-tkvw12:
+  version "2.0.0-beta-tkvw12"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw12.tgz#45a7418fd547f513a0f4709eb6f3c1fdbbf165c5"
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -7359,7 +7396,7 @@ ra-ui-materialui@2.0.0-beta-tkvw8:
     material-ui "^1.0.0-beta.32"
     material-ui-icons "^1.0.0-beta.17"
     prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw8"
+    ra-core "^2.0.0-beta-tkvw12"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.4"
@@ -7543,6 +7580,14 @@ react-html-attributes@^1.3.0:
   resolved "http://localhost:4873/react-html-attributes/-/react-html-attributes-1.4.1.tgz#97b5ec710da68833598c8be6f89ac436216840a5"
   dependencies:
     html-element-attributes "^1.0.0"
+
+react-i18next@^7.4.0:
+  version "7.4.0"
+  resolved "http://localhost:4873/react-i18next/-/react-i18next-7.4.0.tgz#07a336e49fc8f2599d08136d73134e3dc4830b49"
+  dependencies:
+    hoist-non-react-statics "2.3.1"
+    html-parse-stringify2 "2.0.1"
+    prop-types "^15.6.0"
 
 react-icon-base@2.1.0:
   version "2.1.0"
@@ -7914,7 +7959,15 @@ redux-saga@~0.16.0:
   version "0.16.0"
   resolved "http://localhost:4873/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
 
-redux@^3.7.2, redux@~3.7.2:
+redux-search@^2.4.0:
+  version "2.4.0"
+  resolved "http://localhost:4873/redux-search/-/redux-search-2.4.0.tgz#da21448b2d0c6508324cf4f93f66f6c6170df00d"
+  dependencies:
+    babel-runtime "^6.11.6"
+    js-worker-search "^1.2.0"
+    redux "^3.0.4"
+
+redux@^3.0.4, redux@^3.7.2, redux@~3.7.2:
   version "3.7.2"
   resolved "http://localhost:4873/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
@@ -9187,6 +9240,10 @@ vm-browserify@0.0.4:
   resolved "http://localhost:4873/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+void-elements@^2.0.1:
+  version "2.0.1"
+  resolved "http://localhost:4873/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

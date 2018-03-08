@@ -1,0 +1,11 @@
+{
+  "post":{
+    "edit":{
+      "title":"Post title {{title}}"
+    },
+    "action":{
+      "save_and_show":"Save and show",
+      "save_and_add":"Save and add"
+    }
+  }
+}

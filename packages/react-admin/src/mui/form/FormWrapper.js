@@ -2,15 +2,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from './Form';
 
-const defaultRenderer = (Component, props) => <Component {...props} />;
+const DefaultWrapper = ({ children, className, render, ...props }) => (
+    <div className={className}>{render(props)}</div>
+);
 
-const FormWrapper = ({ render, ...props }) => render(Form, props);
-
+const FormWrapper = ({
+    children,
+    wrapper: Wrapper = DefaultWrapper,
+    formPropsSanitizer,
+    ...props
+}) => (
+    <Wrapper
+        {...props}
+        render={props => (
+            <Form {...props} propsSanitizer={formPropsSanitizer}>
+                {React.cloneElement(children, props)}
+            </Form>
+        )}
+    />
+);
 FormWrapper.propTypes = {
-    render: PropTypes.func,
+    children: PropTypes.node,
+    formPropsSanitizer: PropTypes.func,
+    wrapper: PropTypes.func,
+    className: PropTypes.string,
 };
-FormWrapper.defaultProps = {
-    render: defaultRenderer,
-};
-
 export default FormWrapper;

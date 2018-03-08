@@ -13,7 +13,7 @@ class SimpleFormLayoutFactory extends React.Component {
         submitOnEnter: PropTypes.bool,
     };
     static defaultProps = {
-        render: SimpleFormLayout,
+        layout: SimpleFormLayout,
         submitOnEnter: true,
         toolbar: <Toolbar />,
     };

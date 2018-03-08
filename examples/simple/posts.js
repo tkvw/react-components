@@ -5,7 +5,7 @@ import {
     CheckboxGroupInput,
     ChipField,
     Create,
-    CropperPreview,
+    ImageFileInputCropperPreview,
     DateField,
     DateInput,
     DisabledInput,
@@ -14,7 +14,7 @@ import {
     Filter,
     FormTab,
     ImageFileInput,
-    ImagePreview,
+    ImageFileInputImagePreview,
     LongTextInput,
     NumberField,
     NumberInput,
@@ -39,7 +39,7 @@ import {
     minLength,
     number,
     required,
-    translate,
+    I18n,
     Datagrid,
     List,
     SaveButton,
@@ -57,9 +57,12 @@ import { withStyles } from 'material-ui/styles';
 import BookIcon from 'material-ui-icons/Book';
 export const PostIcon = BookIcon;
 
-const QuickFilter = translate(({ label, translate }) => (
-    <Chip style={{ marginBottom: 8 }} label={translate(label)} />
-));
+const QuickFilter = ({ label }) => (
+    <I18n
+        ns="resources"
+        render={t => <Chip style={{ marginBottom: 8 }} label={t(label)} />}
+    />
+);
 
 const PostFilter = props => (
     <Filter {...props}>
@@ -159,11 +162,16 @@ export const PostList = withStyles(styles)(({ classes, ...props }) => (
     </List>
 ));
 
-const PostTitle = translate(({ record, translate }) => (
-    <span>
-        {record ? translate('post.edit.title', { title: record.title }) : ''}
-    </span>
-));
+const PostTitle = ({ record }) => (
+    <I18n
+        ns="resources"
+        render={t => (
+            <span>
+                {record ? t('post.edit.title', { title: record.title }) : ''}
+            </span>
+        )}
+    />
+);
 
 const PostCreateToolbar = props => (
     <Toolbar {...props}>
@@ -173,7 +181,7 @@ const PostCreateToolbar = props => (
             submitOnEnter={true}
         />
         <SaveButton
-            label="post.action.save_and_add"
+            label="resources:post.action.save_and_add"
             redirect={false}
             submitOnEnter={false}
             variant="flat"
@@ -202,7 +210,7 @@ export const PostEdit = props => (
                     source="pictures"
                     fullWidth
                 >
-                    <CropperPreview
+                    <ImageFileInputCropperPreview
                         cropperOptions={{
                             aspectRatio: 1,
                         }}
@@ -212,7 +220,7 @@ export const PostEdit = props => (
                                 : null
                         }
                     />
-                    <ImagePreview
+                    <ImageFileInputImagePreview
                         source={(file, accept) =>
                             file && accept(file, 'image/*')
                         }
@@ -268,9 +276,17 @@ export const PostEdit = props => (
 
 const getDefaultDate = () => new Date();
 
+const PageWrapper = ({ render, className, ...props }) => (
+    <div className={className}>
+        <div>Wrapper</div>
+        {render(props)}
+    </div>
+);
+
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm
+            wrapper={PageWrapper}
             toolbar={<PostCreateToolbar />}
             defaultValue={{ average_note: 0 }}
             validate={values => {

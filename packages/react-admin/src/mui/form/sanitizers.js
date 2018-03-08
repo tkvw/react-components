@@ -1,6 +1,7 @@
-export const resourceSanitizer = ({ basePath, resource, ...rest }) => rest;
+export const resourceSanitizer = ({ basePath, resource, record, ...rest }) =>
+    rest;
 
-export const translateSanitizer = ({ locale, translate, ...rest }) => rest;
+export const translateSanitizer = ({ locale, translate, t, ...rest }) => rest;
 
 export const formSanitizer = ({
     clearSubmitErrors,

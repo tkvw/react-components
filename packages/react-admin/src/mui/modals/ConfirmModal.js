@@ -12,7 +12,7 @@ class ConfirmModal extends React.Component {
         return (
             <Modal
                 type={type}
-                render={({ options, translate, open }) => {
+                render={({ options, open }) => {
                     return (
                         <Responsive
                             small={

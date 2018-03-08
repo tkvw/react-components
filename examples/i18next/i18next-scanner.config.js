@@ -5,7 +5,7 @@ module.exports = {
     options: {
         debug: true,
         func: {
-            list: ['i18next.t', 'i18n.t'],
+            list: ['i18next.t', 'i18n.t', 't'],
             extensions: ['.js', '.jsx'],
         },
         trans: {
@@ -17,19 +17,19 @@ module.exports = {
                 return sha1(value);
             },
         },
-        lngs: ['en', 'de'],
-        ns: ['locale', 'resource'],
+        lngs: ['en', 'de', 'nl', 'nl-NL'],
+        ns: ['translations', 'resource', 'app'],
         defaultLng: 'en',
-        defaultNs: 'resource',
+        defaultNs: 'translations',
         defaultValue: '__STRING_NOT_TRANSLATED__',
         resource: {
-            loadPath: 'i18n/{{lng}}/{{ns}}.json',
-            savePath: 'i18n/{{lng}}/{{ns}}.json',
+            loadPath: 'src/locales/{{lng}}/{{ns}}.json',
+            savePath: 'src/locales/{{lng}}/{{ns}}.json',
             jsonIndent: 2,
             lineEnding: '\n',
         },
-        nsSeparator: false, // namespace separator
-        keySeparator: false, // key separator
+        nsSeparator: ':', // namespace separator
+        keySeparator: '.', // key separator
         interpolation: {
             prefix: '{{',
             suffix: '}}',

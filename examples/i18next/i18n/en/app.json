@@ -1,0 +1,6 @@
+{
+  "title": "Title defaultvalue",
+  "user": {
+    "title": "User {{user}} title"
+  }
+}

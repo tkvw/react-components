@@ -11,15 +11,13 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import withContext from 'recompose/withContext';
 import { modalsMiddleware } from 'redux-promising-modals';
+import { getI18n } from 'react-i18next';
 
-import {
-    USER_LOGOUT,
-    TranslationProvider,
-    defaultI18nProvider,
-    CoreAdminRouter,
-} from 'ra-core';
+import { USER_LOGOUT, CoreAdminRouter } from 'ra-core';
 
 import { Login, Logout, NotFound, Loading } from 'ra-ui-materialui';
+
+import { TranslationProvider, initI18n } from './i18n';
 
 import { crudSaga } from './sideEffect/saga';
 
@@ -42,52 +40,54 @@ const Admin = ({
     menu,
     catchAll,
     dataProvider,
-    i18nProvider = defaultI18nProvider,
     theme,
     title = 'React Admin',
     wrapper: WrapperComponent = Wrapper,
+    i18next,
     loginPage,
     logoutButton,
     initialState,
-    locale = 'en',
 }) => {
+    initI18n(i18next);
+
     appLayout = withProps({ customModals })(appLayout);
 
-    const messages = i18nProvider(locale);
-    const appReducer = createAppReducer(customReducers, locale, messages);
+    const appReducer = createAppReducer(customReducers, i18next.locale, {});
 
     const resettableAppReducer = (state, action) =>
         appReducer(action.type !== USER_LOGOUT ? state : undefined, action);
     const saga = function* rootSaga() {
         yield all(
-            [
-                crudSaga(dataProvider, authProvider, i18nProvider),
-                ...customSagas,
-            ].map(fork)
+            [crudSaga(dataProvider, authProvider), ...customSagas].map(fork)
         );
     };
     const sagaMiddleware = createSagaMiddleware();
     const routerHistory = history || createHistory();
+
+    const composeEnhancers =
+        typeof window === 'object' &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+            ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+                  // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+              })
+            : compose;
+
     const store = createStore(
         resettableAppReducer,
         initialState,
-        compose(
+        composeEnhancers(
             applyMiddleware(
                 ...customMiddleware(
                     modalsMiddleware,
                     sagaMiddleware,
                     routerMiddleware(routerHistory)
                 )
-            ),
-            typeof window !== 'undefined' && window.devToolsExtension
-                ? window.devToolsExtension()
-                : f => f
+            )
         )
     );
     sagaMiddleware.run(saga);
 
     const logout = authProvider ? createElement(logoutButton || Logout) : null;
-
     return (
         <Provider store={store}>
             <TranslationProvider>
@@ -155,8 +155,12 @@ Admin.propTypes = {
     i18nProvider: PropTypes.func,
     theme: PropTypes.object,
     title: PropTypes.node,
-    locale: PropTypes.string,
     initialState: PropTypes.object,
+    i18next: PropTypes.shape({
+        locale: PropTypes.string.isRequired,
+        debug: PropTypes.bool,
+        messages: PropTypes.object.isRequired,
+    }),
 };
 
 Admin.defaultProps = {
@@ -166,6 +170,10 @@ Admin.defaultProps = {
     loginPage: Login,
     logoutButton: Logout,
     menu: NestedMenu,
+    i18next: {
+        debug: false,
+        locale: 'en',
+    },
 };
 
 export default withContext(

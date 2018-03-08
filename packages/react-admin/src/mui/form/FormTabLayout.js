@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const FormTabLayout = factory => <span>{factory.fields()}</span>;
-
+const FormTabLayout = ({ fields: Fields }) => <Fields />;
+FormTabLayout.propTypes = {
+    fields: PropTypes.func,
+};
 export default FormTabLayout;

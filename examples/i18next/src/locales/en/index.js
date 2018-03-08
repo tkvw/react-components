@@ -1,4 +1,3 @@
-import 'moment/locale/de';
-import messages from './messages';
-
-export default messages;
+export { default as app } from './app';
+export { default as resource } from './resource';
+export { default as translations } from './translations';

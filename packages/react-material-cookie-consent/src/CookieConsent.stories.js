@@ -1,189 +1,33 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import ImageTransformation from './ImageTransformation';
-import Image from '@tkvw/react-image';
+import { action } from '@storybook/addon-actions';
 
-const toKb = length => Math.round(length / 1024 * 100) / 100;
-const ShowResult = ({ description, blob }) => (
-    <div>
-        <div>
-            <Image src={blob} />
-        </div>
-        <div>
-            {description} Kb: {toKb(blob.size)}
-        </div>
-    </div>
-);
-const size = {
-    maxWidth: 200,
-    maxHeight: 200,
-};
+import CookieConsent from './CookieConsent';
+import LocalStorageConsent from './LocalStorageConsent';
 
-storiesOf('ImageTransformation', module)
-    .add('without props', () => (
-        <ImageTransformation
-            src="http://localhost:9001/photo.jpeg"
-            options={{
-                maxWidth: 500,
-            }}
-            render={({ blob, loading }) =>
-                loading ? <div>Loading</div> : <Image src={blob} />
-            }
+storiesOf('CookieConsent', module).add('without props', () => (
+    <LocalStorageConsent>
+        <CookieConsent
+            cookieNotice="This site uses cookies and the default settings is to allow all cookies. You can change these settings any time you want by clicking the settings button or the privacy button in the bottom of the site."
+            cookieNoticeAutohideTimeout={10000}
+            defaultLevel="tracking"
+            levels={[
+                {
+                    id: 'required',
+                    title: 'Required',
+                    permissions: ['Store identification information'],
+                },
+                {
+                    id: 'functional',
+                    title: 'Functional',
+                    permissions: [],
+                },
+                {
+                    id: 'tracking',
+                    title: 'Tracking',
+                    permissions: ['Monitor how you travel through the website'],
+                },
+            ]}
         />
-    ))
-    .add('with props', () => (
-        <div>
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    maxWidth: 1920,
-                    conversion: ['image/jpeg', 0.7],
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="No conversion"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    ...size,
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="No conversion"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    ...size,
-                    conversion: ['image/jpeg', 1],
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="image/jpeg"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    ...size,
-                    conversion: ['image/jpeg', 0.9],
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="image/jpeg 0.7"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    ...size,
-                    conversion: ['image/jpeg', 0.5],
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="'image/jpeg', 0.5"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-            <ImageTransformation
-                src="http://localhost:9001/photo.jpeg"
-                options={{
-                    ...size,
-                    conversion: ['image/jpeg', 0.1],
-                }}
-                render={({ blob, loading }) => {
-                    return (
-                        <div>
-                            {loading ? (
-                                <div>Loading</div>
-                            ) : (
-                                <ShowResult
-                                    description="'image/jpeg', 0.1"
-                                    blob={blob}
-                                />
-                            )}
-                        </div>
-                    );
-                }}
-            />
-        </div>
-    ))
-    .add('combine them', () => (
-        <ImageTransformation
-            src="http://localhost:9001/photo.jpeg"
-            options={{
-                maxWidth: 600,
-            }}
-            render={({ blob: resized, loading }) => (
-                <ImageTransformation
-                    src={resized}
-                    options={{
-                        maxWidth: 128,
-                        maxHeight: 128,
-                    }}
-                    render={({ blob: preview, previewLoading }) => {
-                        return loading || previewLoading ? (
-                            <div>Loading</div>
-                        ) : (
-                            <div>
-                                <Image src={resized} />
-                                <Image src={preview} />
-                            </div>
-                        );
-                    }}
-                />
-            )}
-        />
-    ));
+    </LocalStorageConsent>
+));

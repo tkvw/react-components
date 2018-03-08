@@ -2,7 +2,7 @@ export default () => {
     let reduxStore;
     let queue;
 
-    Object.assign(
+    return Object.assign(
         store => {
             reduxStore = store;
 
@@ -12,11 +12,12 @@ export default () => {
             return next => action => next(action);
         },
         {
-            withStore: callback => {
+            withStore: () =>
                 reduxStore
-                    ? callback(reduxStore)
-                    : queue ? queue.push(callback) : [callback];
-            },
+                    ? Promise.resolve(reduxStore)
+                    : new Promise(resolve => {
+                          queue = queue ? queue.push(resolve) : [resolve];
+                      }),
         }
     );
 };

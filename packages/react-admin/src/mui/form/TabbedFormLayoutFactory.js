@@ -13,9 +13,10 @@ class TabbedFormLayoutFactory extends React.Component {
         toolbar: PropTypes.element,
         invalid: PropTypes.bool,
         submitOnEnter: PropTypes.bool,
+        layout: PropTypes.func,
     };
     static defaultProps = {
-        render: TabbedFormLayout,
+        layout: TabbedFormLayout,
         submitOnEnter: true,
         toolbar: <Toolbar />,
         value: 0,

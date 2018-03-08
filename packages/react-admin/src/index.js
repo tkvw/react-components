@@ -6,6 +6,15 @@ export { default as Admin } from './Admin';
 export { default as Resource } from './Resource';
 export { default as Page } from './Page';
 export {
+    I18n,
+    getI18n,
+    initI18n,
+    transformRaMessages,
+    translate,
+    TranslationProvider,
+    Trans,
+} from './i18n';
+export {
     Content,
     ConfirmModal,
     Custom,
@@ -20,6 +29,8 @@ export {
     MenuItemLink,
     Modal,
     NestedMenu,
+    FormTab,
+    FormTabLayout,
     TabbedForm,
     SimpleForm,
     WithResourceData,

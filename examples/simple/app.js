@@ -3,6 +3,7 @@ import '@babel/polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Route } from 'react-router';
+import { SubmissionError } from 'redux-form';
 
 import {
     Admin,
@@ -34,16 +35,35 @@ import InfoIcon from 'material-ui-icons/Info';
 import CustomRouteNoLayout from './customRouteNoLayout';
 import CustomRouteLayout from './customRouteLayout';
 
+import englishMessages from './i18n/en';
 import data from './data';
 import authProvider from './authProvider';
-import i18nProvider from './i18nProvider';
 
 const dataProvider = jsonRestDataProvider(data, true);
 const uploadCapableDataProvider = addUploadFeature(dataProvider);
+const simulateValidationError = (type, resource, params) => {
+    if (('CREATE' === type || 'UPDATE' === type) && 'posts' === resource) {
+        if (params.data.title === 'Test validation') {
+            return Promise.reject(
+                new SubmissionError({
+                    title: 'Server validation error response',
+                })
+            );
+        } else if (params.data.title === 'Test generic validation') {
+            return Promise.reject(
+                new SubmissionError({
+                    _error: 'Server generic error',
+                })
+            );
+        }
+    }
+    return uploadCapableDataProvider(type, resource, params);
+};
+
 const delayedDataProvider = (type, resource, params) =>
     new Promise(resolve =>
         setTimeout(
-            () => resolve(uploadCapableDataProvider(type, resource, params)),
+            () => resolve(simulateValidationError(type, resource, params)),
             1000
         )
     );
@@ -52,9 +72,15 @@ render(
     <Admin
         authProvider={authProvider}
         dataProvider={delayedDataProvider}
-        i18nProvider={i18nProvider}
         title="Example Admin"
-        locale="en"
+        i18next={{
+            locale: 'en',
+            whitelist: ['en', 'de', 'nl'],
+            messages: {
+                en: () => englishMessages,
+                de: () => import('./i18n/de'),
+            },
+        }}
         menu={props => (
             <NestedMenu
                 {...props}
@@ -87,48 +113,51 @@ render(
             <Route exact path="/custom2" component={CustomRouteLayout} />,
         ]}
     >
-        {permissions => [
-            <Resource
-                name="posts"
-                list={PostList}
-                create={PostCreate}
-                edit={PostEdit}
-                show={PostShow}
-                hideInMenu={!permissions}
-                icon={PostIcon}
-            />,
-            <Resource
-                name="comments"
-                menuParent="posts"
-                list={CommentList}
-                create={CommentCreate}
-                edit={CommentEdit}
-                show={CommentShow}
-                hideInMenu={!permissions}
-                icon={CommentIcon}
-            />,
-            <Page
-                name="info"
-                icon={UserIcon}
-                component={({ resource, ...props }) => (
-                    <Content resource={resource} {...props}>
-                        <div>{resource}</div>
-                    </Content>
-                )}
-            />,
-            permissions ? (
+        {permissions => {
+            console.log('permissions: ', permissions);
+            return [
                 <Resource
-                    name="users"
-                    list={UserList}
-                    create={UserCreate}
-                    edit={UserEdit}
+                    name="posts"
+                    list={PostList}
+                    create={PostCreate}
+                    edit={PostEdit}
+                    show={PostShow}
                     hideInMenu={!permissions}
+                    icon={PostIcon}
+                />,
+                <Resource
+                    name="comments"
+                    menuParent="posts"
+                    list={CommentList}
+                    create={CommentCreate}
+                    edit={CommentEdit}
+                    show={CommentShow}
+                    hideInMenu={!permissions}
+                    icon={CommentIcon}
+                />,
+                <Page
+                    name="info"
                     icon={UserIcon}
-                    show={UserShow}
-                />
-            ) : null,
-            <Resource name="tags" />,
-        ]}
+                    component={({ resource, ...props }) => (
+                        <Content resource={resource} {...props}>
+                            <div>{resource}</div>
+                        </Content>
+                    )}
+                />,
+                permissions ? (
+                    <Resource
+                        name="users"
+                        list={UserList}
+                        create={UserCreate}
+                        edit={UserEdit}
+                        hideInMenu={!permissions}
+                        icon={UserIcon}
+                        show={UserShow}
+                    />
+                ) : null,
+                <Resource name="tags" />,
+            ];
+        }}
     </Admin>,
     document.getElementById('root')
 );

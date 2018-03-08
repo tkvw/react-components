@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 class BaseFactory extends React.Component {
     static propTypes = {
         factories: PropTypes.object,
-        render: PropTypes.func.isRequired,
+        layout: PropTypes.func.isRequired,
         children: PropTypes.node.isRequired,
         transform: PropTypes.func,
         childIdentifier: PropTypes.func.isRequired,
@@ -72,7 +72,12 @@ class BaseFactory extends React.Component {
     };
 
     createDefaultLayout = props =>
-        this.props.defaultLayout(this.factories, props);
+        this.props.defaultLayout
+            ? React.createElement(this.props.defaultLayout, {
+                  ...props,
+                  ...this.factories,
+              })
+            : null;
 
     render() {
         const {
@@ -81,11 +86,11 @@ class BaseFactory extends React.Component {
             children,
             childFactoryProp,
             childrenFactoryProp,
-            render,
+            layout: Layout,
             ...props
         } = this.props;
 
-        return render(this.factories, props);
+        return <Layout {...props} {...this.factories} />;
     }
 }
 export default BaseFactory;

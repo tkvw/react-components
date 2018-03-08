@@ -7,9 +7,10 @@ import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
 import { getDefaultValues, translate } from 'ra-core';
-import FormWrapper from './FormWrapper';
+import Form from './Form';
 import SimpleFormLayoutFactory from './SimpleFormLayoutFactory';
 import promisingForm from './promisingForm';
+import FormWrapper from './FormWrapper';
 
 const styles = theme => ({
     form: {
@@ -24,31 +25,24 @@ const styles = theme => ({
 
 export class SimpleForm extends Component {
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
-        this.props.handleSubmit(values => this.props.save(values, redirect));
+        this.props.handleSubmit((values, ...rest) =>
+            this.props.save(values, redirect, ...rest)
+        );
 
     render() {
-        const {
-            classes = {},
-            className,
-            toolbar,
-            renderWrapper,
-            renderLayout,
-            ...rest
-        } = this.props;
+        const { children, classes = {}, className, ...rest } = this.props;
 
         return (
             <FormWrapper
                 className={classnames('simple-form', className)}
-                render={renderWrapper}
                 {...rest}
             >
                 <SimpleFormLayoutFactory
-                    toolbar={toolbar}
-                    render={renderLayout}
                     className={classes.form}
                     handleSubmitWithRedirect={this.handleSubmitWithRedirect}
-                    {...rest}
-                />
+                >
+                    {children}
+                </SimpleFormLayoutFactory>
             </FormWrapper>
         );
     }
@@ -65,8 +59,8 @@ SimpleForm.propTypes = {
     record: PropTypes.object,
     resource: PropTypes.string,
     redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    renderWrapper: PropTypes.func,
-    renderLayout: PropTypes.func,
+    wrapper: PropTypes.func,
+    layout: PropTypes.func,
     save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
     submitOnEnter: PropTypes.bool,
     toolbar: PropTypes.element,
@@ -75,10 +69,10 @@ SimpleForm.propTypes = {
 };
 
 const enhance = compose(
-    translate,
     connect((state, props) => ({
         initialValues: getDefaultValues(state, props),
     })),
+    translate, // Must be before reduxForm so that it can be used in validation
     reduxForm({
         form: 'record-form',
         enableReinitialize: true,

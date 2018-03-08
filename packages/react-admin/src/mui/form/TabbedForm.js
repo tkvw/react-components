@@ -13,6 +13,7 @@ import { withStyles } from 'material-ui/styles';
 
 import TabbedFormLayoutFactory from './TabbedFormLayoutFactory';
 import FormWrapper from './FormWrapper';
+import Form from './Form';
 import { getDefaultValues, translate } from 'ra-core';
 import promisingForm from './promisingForm';
 
@@ -41,33 +42,26 @@ export class TabbedForm extends Component {
     };
 
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
-        this.props.handleSubmit(values => this.props.save(values, redirect));
+        this.props.handleSubmit((values, ...rest) =>
+            this.props.save(values, redirect, ...rest)
+        );
 
     render() {
-        const {
-            className,
-            renderWrapper,
-            renderLayout,
-            tabsWithErrors,
-            toolbar,
-            ...rest
-        } = this.props;
+        const { children, className, tabsWithErrors, ...rest } = this.props;
 
         return (
             <FormWrapper
                 className={classnames('tabbed-form', className)}
-                render={renderWrapper}
                 {...rest}
             >
                 <TabbedFormLayoutFactory
                     value={this.state.value}
-                    toolbar={toolbar}
                     tabsWithErrors={tabsWithErrors}
                     handleSubmitWithRedirect={this.handleSubmitWithRedirect}
                     handleChange={this.handleChange}
-                    render={renderLayout}
-                    {...rest}
-                />
+                >
+                    {children}
+                </TabbedFormLayoutFactory>
             </FormWrapper>
         );
     }
@@ -83,7 +77,7 @@ TabbedForm.propTypes = {
     invalid: PropTypes.bool,
     record: PropTypes.object,
     renderLayout: PropTypes.func,
-    renderWrapper: PropTypes.func,
+    wrapper: PropTypes.func,
     redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     resource: PropTypes.string,
     save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
@@ -138,6 +132,7 @@ const enhance = compose(
             initialValues: getDefaultValues(state, { ...props, children }),
         };
     }),
+    translate, // Must be before reduxForm so that it can be used in validation
     reduxForm({
         form: 'record-form',
         enableReinitialize: true,

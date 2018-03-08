@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class LocalStorageCookieConsent extends React.Component {
+class LocalStorageConsent extends React.Component {
     static propTypes = {
         storageKey: PropTypes.string,
     };
@@ -20,14 +20,16 @@ class LocalStorageCookieConsent extends React.Component {
         this.setState({
             level,
         });
+
+        localStorage.setItem(this.props.storageKey, level);
     };
     render() {
-        const { storageKey, ...props } = this.props;
-        return React.cloneElement(React.Children.only(this.children), {
+        const { children, storageKey, ...props } = this.props;
+        return React.cloneElement(React.Children.only(children), {
             onChange: this.handleChange,
             ...this.state,
             ...props,
         });
     }
 }
-export default LocalStorageCookieConsent;
+export default LocalStorageConsent;

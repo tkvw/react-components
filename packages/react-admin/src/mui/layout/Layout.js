@@ -55,13 +55,17 @@ const additionalStyles = theme => ({
     },
 });
 
+const DefaultContentLayout = ({ children, className }) => (
+    <div className={className}>{children}</div>
+);
+
 const Layout = ({
     children,
     classes,
     className,
     customRoutes,
     customModals,
-    contentLayout = 'div',
+    contentLayout = DefaultContentLayout,
     dashboard,
     logout,
     menu,
@@ -98,6 +102,8 @@ const Layout = ({
                     contentLayout,
                     {
                         className: classes.content,
+                        title,
+                        ...props,
                     },
                     children
                 )}

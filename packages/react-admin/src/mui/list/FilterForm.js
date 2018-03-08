@@ -11,7 +11,7 @@ import classnames from 'classnames';
 import debounce from 'lodash.debounce';
 
 import lodashSet from 'lodash.set';
-import { translate } from '@tkvw/react-admin';
+import { translate } from 'ra-core';
 
 const styles = ({ palette: { primary1Color } }) => ({
     card: {
