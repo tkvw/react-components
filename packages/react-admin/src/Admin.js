@@ -11,15 +11,14 @@ import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import withContext from 'recompose/withContext';
 import { modalsMiddleware } from 'redux-promising-modals';
-import { getI18n } from 'react-i18next';
 
 import { USER_LOGOUT, CoreAdminRouter } from 'ra-core';
 
 import { Login, Logout, NotFound, Loading } from 'ra-ui-materialui';
 
 import { TranslationProvider, initI18n } from './i18n';
-
-import { crudSaga } from './sideEffect/saga';
+import formMiddleware from './middlewares/form';
+import { crudSaga } from './sideEffect/index';
 
 import { Layout as DefaultLayout, NestedMenu } from './mui';
 import createAppReducer from './reducer';
@@ -78,6 +77,7 @@ const Admin = ({
         composeEnhancers(
             applyMiddleware(
                 ...customMiddleware(
+                    formMiddleware,
                     modalsMiddleware,
                     sagaMiddleware,
                     routerMiddleware(routerHistory)

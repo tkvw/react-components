@@ -46,8 +46,8 @@ const CommentFilter = props => (
     </Filter>
 );
 
-const CommentPagination = translate(
-    ({ page, perPage, total, setPage, translate }) => {
+const CommentPagination = translate()(
+    ({ page, perPage, total, setPage, t }) => {
         const nbPages = Math.ceil(total / perPage) || 1;
         return (
             nbPages > 1 && (
@@ -59,7 +59,7 @@ const CommentPagination = translate(
                             onClick={() => setPage(page - 1)}
                         >
                             <ChevronLeft />&nbsp;
-                            {translate('ra.navigation.prev')}
+                            {t('ra.navigation.prev')}
                         </Button>
                     )}
                     {page !== nbPages && (
@@ -68,7 +68,7 @@ const CommentPagination = translate(
                             key="next"
                             onClick={() => setPage(page + 1)}
                         >
-                            {translate('ra.navigation.next')}&nbsp;
+                            {t('ra.navigation.next')}&nbsp;
                             <ChevronRight />
                         </Button>
                     )}
@@ -95,7 +95,7 @@ const listStyles = theme => ({
 });
 
 const CommentGrid = withStyles(listStyles)(
-    translate(({ classes, ids, data, basePath, translate }) => (
+    translate()(({ classes, ids, data, basePath, t }) => (
         <Grid container style={{ padding: '1em' }}>
             {ids.map(id => (
                 <Grid item key={id} sm={12} md={6} lg={4}>
@@ -123,7 +123,7 @@ const CommentGrid = withStyles(listStyles)(
                             <TextField record={data[id]} source="body" />
                         </CardContent>
                         <CardContent className={classes.cardLink}>
-                            {translate('comment.list.about')}&nbsp;
+                            {t('comment.list.about')}&nbsp;
                             <ReferenceField
                                 resource="comments"
                                 record={data[id]}

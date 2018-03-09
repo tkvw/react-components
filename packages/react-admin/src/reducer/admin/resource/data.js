@@ -1,12 +1,11 @@
-import { UPDATE, getFetchedAt } from 'ra-core';
-import { FETCH_END } from '../../../actions/fetchActions';
+import { FETCH_END, UPDATE, getFetchedAt } from 'ra-core';
 import { BULK_ACTION } from '../../../dataFetchActions';
 import { addRecordsFactory } from 'ra-core/lib/reducer/admin/resource/data';
 
 const addRecords = addRecordsFactory(getFetchedAt);
 
 export default (previousState, { meta, payload, type }) => {
-    if (!meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
+    if (!meta || !meta.fetchResponse || meta.fetchStatus !== FETCH_END) {
         return previousState;
     }
     switch (type) {

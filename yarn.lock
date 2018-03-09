@@ -7350,9 +7350,9 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw12, ra-core@^2.0.0-beta-tkvw12:
-  version "2.0.0-beta-tkvw12"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw12.tgz#c9b70539e1baff4d1ac4b69d021b6d5b8cceba92"
+ra-core@2.0.0-beta-tkvw18, ra-core@^2.0.0-beta-tkvw18:
+  version "2.0.0-beta-tkvw18"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw18.tgz#038d923ff6e3354b261d9d8f38aa4859c3a1917d"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -7366,7 +7366,7 @@ ra-core@2.0.0-beta-tkvw12, ra-core@^2.0.0-beta-tkvw12:
     node-polyglot "2.2.2"
     prop-types "~15.5.7"
     query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw12"
+    ra-language-english "^2.0.0-beta-tkvw18"
     react-redux "~5.0.4"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
@@ -7378,13 +7378,13 @@ ra-core@2.0.0-beta-tkvw12, ra-core@^2.0.0-beta-tkvw12:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw12:
-  version "2.0.0-beta-tkvw12"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw12.tgz#64ee3006debb8120d52ca29919597c47efad4529"
+ra-language-english@^2.0.0-beta-tkvw18:
+  version "2.0.0-beta-tkvw18"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw18.tgz#2b8ef476f7871f4fdbbe6f5b8580f17fa5b0c177"
 
-ra-ui-materialui@2.0.0-beta-tkvw12:
-  version "2.0.0-beta-tkvw12"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw12.tgz#45a7418fd547f513a0f4709eb6f3c1fdbbf165c5"
+ra-ui-materialui@2.0.0-beta-tkvw18:
+  version "2.0.0-beta-tkvw18"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw18.tgz#4aa270c0b9210a5b811fb77bd72a98a72efbb69d"
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -7396,7 +7396,7 @@ ra-ui-materialui@2.0.0-beta-tkvw12:
     material-ui "^1.0.0-beta.32"
     material-ui-icons "^1.0.0-beta.17"
     prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw12"
+    ra-core "^2.0.0-beta-tkvw18"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.4"

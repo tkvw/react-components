@@ -63,9 +63,9 @@ export const UserList = ({ permissions, ...props }) => (
     </List>
 );
 
-const UserTitle = translate(({ record, translate }) => (
+const UserTitle = translate()(({ record, t }) => (
     <span>
-        {record ? translate('user.edit.title', { title: record.name }) : ''}
+        {record ? t('user.edit.title', { title: record.name }) : ''}
     </span>
 ));
 

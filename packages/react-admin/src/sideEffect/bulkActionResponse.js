@@ -1,5 +1,5 @@
 import { all, put, takeEvery } from 'redux-saga/effects';
-import { CRUD_BULK_ACTION_SUCCESS } from '../../actions';
+import { CRUD_BULK_ACTION_SUCCESS } from '../actions/index';
 import { showNotification, refreshView } from 'ra-core';
 
 /**

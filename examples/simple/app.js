@@ -155,7 +155,6 @@ render(
                         show={UserShow}
                     />
                 ) : null,
-                <Resource name="tags" />,
             ];
         }}
     </Admin>,

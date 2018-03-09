@@ -7,7 +7,7 @@ const promisingForm = mapProps(({ handleSubmit, ...props }) => ({
         handleSubmit(
             (values, dispatch, props) =>
                 new Promise((resolve, reject) => {
-                    dispatch(submitForm(resolve, reject));
+                    dispatch(submitForm(resolve, reject, values));
                     callback(values, dispatch, props);
                 })
         ),
