@@ -113,50 +113,43 @@ render(
             <Route exact path="/custom2" component={CustomRouteLayout} />,
         ]}
     >
-        {permissions => {
-            console.log('permissions: ', permissions);
-            return [
-                <Resource
-                    name="posts"
-                    list={PostList}
-                    create={PostCreate}
-                    edit={PostEdit}
-                    show={PostShow}
-                    hideInMenu={!permissions}
-                    icon={PostIcon}
-                />,
-                <Resource
-                    name="comments"
-                    menuParent="posts"
-                    list={CommentList}
-                    create={CommentCreate}
-                    edit={CommentEdit}
-                    show={CommentShow}
-                    hideInMenu={!permissions}
-                    icon={CommentIcon}
-                />,
-                <Page
-                    name="info"
-                    icon={UserIcon}
-                    component={({ resource, ...props }) => (
-                        <Content resource={resource} {...props}>
-                            <div>{resource}</div>
-                        </Content>
-                    )}
-                />,
-                permissions ? (
-                    <Resource
-                        name="users"
-                        list={UserList}
-                        create={UserCreate}
-                        edit={UserEdit}
-                        hideInMenu={!permissions}
-                        icon={UserIcon}
-                        show={UserShow}
-                    />
-                ) : null,
-            ];
-        }}
+        <Resource
+            name="posts"
+            list={PostList}
+            create={PostCreate}
+            edit={PostEdit}
+            show={PostShow}
+            hideInMenu={permissions => !permissions}
+            icon={PostIcon}
+        />
+        <Resource
+            name="comments"
+            menuParent="posts"
+            list={CommentList}
+            create={CommentCreate}
+            edit={CommentEdit}
+            show={CommentShow}
+            hideInMenu={permissions => !permissions}
+            icon={CommentIcon}
+        />
+        <Page
+            name="info"
+            icon={UserIcon}
+            component={({ resource, ...props }) => (
+                <Content resource={resource} {...props}>
+                    <div>{resource}</div>
+                </Content>
+            )}
+        />
+        <Resource
+            name="users"
+            list={UserList}
+            create={UserCreate}
+            edit={UserEdit}
+            hideInMenu={permissions => !permissions}
+            icon={UserIcon}
+            show={UserShow}
+        />
     </Admin>,
     document.getElementById('root')
 );

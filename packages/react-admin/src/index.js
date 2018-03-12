@@ -1,10 +1,11 @@
 export * from './dataFetchActions';
 export * from './actions';
+export * from './mui/modals';
 export * from 'ra-core';
 export * from 'ra-ui-materialui';
 export { default as Admin } from './Admin';
-export { default as Resource } from './Resource';
-export { default as Page } from './Page';
+export { default as Resource, resource } from './Resource';
+export { default as Page, page } from './Page';
 export {
     I18n,
     getI18n,
@@ -16,7 +17,6 @@ export {
 } from './i18n';
 export {
     Content,
-    ConfirmModal,
     Custom,
     Filter,
     ImageFileInput,
@@ -27,7 +27,6 @@ export {
     List,
     MenuItem,
     MenuItemLink,
-    Modal,
     NestedMenu,
     FormTab,
     FormTabLayout,
@@ -35,6 +34,4 @@ export {
     SimpleForm,
     WithResourceData,
     WithResourcesData,
-    YesNoModal,
-    YesNoCancelModal,
 } from './mui';

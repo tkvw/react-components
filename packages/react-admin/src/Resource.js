@@ -10,7 +10,6 @@ const componentPropType = PropTypes.oneOfType([
 ]);
 
 const Resource = ({
-    context,
     name,
     hideInMenu,
     menuLabel,
@@ -19,25 +18,25 @@ const Resource = ({
     menuSequence,
     menuParent,
     ...props
-}) => (
+}) => [
     <RegisterMenuItem
-        context={context}
+        key="menuItem"
+        {...props}
         name={name}
         hide={hideInMenu || !props.list}
         label={menuLabel || `resources.${name}.menu`}
-        icon={menuIcon || icon || `resources.${name}.icon`}
+        icon={menuIcon || icon}
         link={`/${name}`}
         sequence={menuSequence}
         parent={menuParent}
-    >
-        <RaResource
-            name={name}
-            icon={menuIcon || icon}
-            context={context}
-            {...props}
-        />
-    </RegisterMenuItem>
-);
+    />,
+    <RaResource
+        key="resource"
+        name={name}
+        icon={menuIcon || icon}
+        {...props}
+    />,
+];
 
 Resource.propTypes = {
     context: PropTypes.oneOf(['registration', 'route']),
@@ -53,6 +52,10 @@ Resource.propTypes = {
     menuIcon: componentPropType,
     menuSequence: PropTypes.number,
     menuParent: PropTypes.string,
-    hideInMenu: PropTypes.bool,
+    hideInMenu: PropTypes.oneOfType(PropTypes.func, PropTypes.bool),
 };
 export default Resource;
+export const resource = resourceProps => {
+    const ResourceHoc = props => <Resource {...resourceProps} {...props} />;
+    return ResourceHoc;
+};

@@ -1,54 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { WithPermissions } from 'ra-core';
 import { RegisterMenuItem } from './mui';
 
-/*
- * This should be a seperate component, because RegisterMenuItem expects a single child
- */
-const Render = ({ context, component, resource, ...props }) =>
-    context === 'registration' ? null : (
-        <WithPermissions
-            authParams={{ resource }}
-            render={({ authParams, ...props }) =>
-                React.createElement(component, {
-                    ...props,
-                    resource,
-                })
-            }
-            {...props}
-        />
-    );
-Render.propTypes = {
-    context: PropTypes.string,
-    component: PropTypes.func,
-    resource: PropTypes.string,
-};
-
 const Page = ({
+    context,
+    component,
+    hideInMenu,
+    icon,
     name,
     path,
-    icon,
-    hideInMenu,
     menuLabel,
     menuIcon,
     menuSequence,
     menuParent,
     ...props
-}) => (
+}) => [
     <RegisterMenuItem
+        key="menuItem"
         {...props}
-        hide={hideInMenu}
+        context={context}
         name={name}
+        hide={hideInMenu}
         label={menuLabel || `resources.${name}.menu`}
         icon={menuIcon || icon}
         link={path || `/${name}`}
         sequence={menuSequence}
         parent={menuParent}
-    >
-        <Render resource={name} {...props} />
-    </RegisterMenuItem>
-);
+    />,
+    context === 'route'
+        ? React.createElement(component, {
+              ...props,
+              context,
+          })
+        : null,
+];
 
 Page.propTypes = {
     context: PropTypes.string,
@@ -59,7 +44,14 @@ Page.propTypes = {
     menuIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     menuSequence: PropTypes.number,
     menuParent: PropTypes.string,
-    hideInMenu: PropTypes.bool,
+    hideInMenu: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
     path: PropTypes.string,
 };
 export default Page;
+
+export const page = pageProps => Component => {
+    const PageHoc = props => (
+        <Page {...pageProps} {...props} component={Component} />
+    );
+    return PageHoc;
+};

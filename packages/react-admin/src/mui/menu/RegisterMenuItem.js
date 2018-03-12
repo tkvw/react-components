@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import branch from 'recompose/branch';
+import withProps from 'recompose/withProps';
 
 import { addMenuItem, removeMenuItem } from '../../actions/menuActions';
+import { withPermissions } from '../../auth';
 
 class RegisterMenuItem extends React.Component {
     static propTypes = {
@@ -16,7 +20,6 @@ class RegisterMenuItem extends React.Component {
         addMenuItem: PropTypes.func,
         removeMenuItem: PropTypes.func,
         translate: PropTypes.func,
-        children: PropTypes.node,
     };
 
     componentWillMount() {
@@ -40,9 +43,20 @@ class RegisterMenuItem extends React.Component {
     }
 
     render() {
-        const { children } = this.props;
-        return React.Children.only(children);
+        return null;
     }
 }
-
-export default connect(null, { addMenuItem, removeMenuItem })(RegisterMenuItem);
+const enhance = compose(
+    branch(
+        ({ hide }) => typeof hide === 'function',
+        compose(
+            withProps(({ name }) => ({
+                authParams: { resource: name },
+            })),
+            withPermissions,
+            withProps(({ permissions, hide }) => ({ hide: hide(permissions) }))
+        )
+    ),
+    connect(null, { addMenuItem, removeMenuItem })
+);
+export default enhance(RegisterMenuItem);

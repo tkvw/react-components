@@ -23,8 +23,6 @@ import { crudSaga } from './sideEffect/index';
 import { Layout as DefaultLayout, NestedMenu } from './mui';
 import createAppReducer from './reducer';
 
-const Wrapper = ({ children }) => React.Children.only(children);
-
 const Admin = ({
     appLayout,
     authProvider,
@@ -32,7 +30,6 @@ const Admin = ({
     customReducers = {},
     customSagas = [],
     customRoutes = [],
-    customModals = [],
     customMiddleware = (...args) => args,
     dashboard,
     history,
@@ -41,15 +38,12 @@ const Admin = ({
     dataProvider,
     theme,
     title = 'React Admin',
-    wrapper: WrapperComponent = Wrapper,
     i18next,
     loginPage,
     logoutButton,
     initialState,
 }) => {
     initI18n(i18next);
-
-    appLayout = withProps({ customModals })(appLayout);
 
     const appReducer = createAppReducer(customReducers, i18next.locale, {});
 
@@ -92,39 +86,37 @@ const Admin = ({
         <Provider store={store}>
             <TranslationProvider>
                 <ConnectedRouter history={routerHistory}>
-                    <WrapperComponent>
-                        <Switch>
-                            <Route
-                                exact
-                                path="/login"
-                                render={props =>
-                                    createElement(loginPage, {
-                                        ...props,
-                                        title,
-                                    })
-                                }
-                            />
-                            <Route
-                                path="/"
-                                render={props => (
-                                    <CoreAdminRouter
-                                        appLayout={appLayout}
-                                        catchAll={catchAll}
-                                        customRoutes={customRoutes}
-                                        dashboard={dashboard}
-                                        loginPage={loginPage}
-                                        logout={logout}
-                                        menu={menu}
-                                        theme={theme}
-                                        title={title}
-                                        {...props}
-                                    >
-                                        {children}
-                                    </CoreAdminRouter>
-                                )}
-                            />
-                        </Switch>
-                    </WrapperComponent>
+                    <Switch>
+                        <Route
+                            exact
+                            path="/login"
+                            render={props =>
+                                createElement(loginPage, {
+                                    ...props,
+                                    title,
+                                })
+                            }
+                        />
+                        <Route
+                            path="/"
+                            render={props => (
+                                <CoreAdminRouter
+                                    appLayout={appLayout}
+                                    catchAll={catchAll}
+                                    customRoutes={customRoutes}
+                                    dashboard={dashboard}
+                                    loginPage={loginPage}
+                                    logout={logout}
+                                    menu={menu}
+                                    theme={theme}
+                                    title={title}
+                                    {...props}
+                                >
+                                    {children}
+                                </CoreAdminRouter>
+                            )}
+                        />
+                    </Switch>
                 </ConnectedRouter>
             </TranslationProvider>
         </Provider>
@@ -145,7 +137,6 @@ Admin.propTypes = {
     customSagas: PropTypes.array,
     customReducers: PropTypes.object,
     customRoutes: PropTypes.array,
-    customModals: PropTypes.array,
     dashboard: componentPropType,
     history: PropTypes.object,
     loginPage: componentPropType,

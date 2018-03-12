@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import Hidden from 'material-ui/Hidden';
 import compose from 'recompose/compose';
-import { YesNoModal } from '../modals';
 
 import {
     AppBar,
@@ -64,7 +63,6 @@ const Layout = ({
     classes,
     className,
     customRoutes,
-    customModals,
     contentLayout = DefaultContentLayout,
     dashboard,
     logout,
@@ -109,12 +107,6 @@ const Layout = ({
                 )}
             </main>
             <Notification />
-            <YesNoModal />
-            {customModals.map((modal, index) =>
-                React.createElement(modal, {
-                    key: modal.type || `custom-modal-${index}`,
-                })
-            )}
         </div>
     </div>
 );
@@ -130,7 +122,6 @@ Layout.propTypes = {
     className: PropTypes.string,
     contentLayout: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     customRoutes: PropTypes.array,
-    customModals: PropTypes.array,
     dashboard: componentPropType,
     logout: PropTypes.oneOfType([
         PropTypes.node,

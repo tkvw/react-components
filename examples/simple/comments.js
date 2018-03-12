@@ -193,7 +193,7 @@ export const CommentEdit = props => (
             >
                 <AutocompleteInput optionText="title" />
             </ReferenceInput>
-            <TextInput source="author.name" validate={minLength(10)} />
+            <TextInput source="author.name" validate={[required,minLength(10)]} />
             <DateInput source="created_at" />
             <LongTextInput source="body" validate={minLength(10)} />
         </SimpleForm>

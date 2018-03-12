@@ -7350,9 +7350,9 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw18, ra-core@^2.0.0-beta-tkvw18:
-  version "2.0.0-beta-tkvw18"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw18.tgz#038d923ff6e3354b261d9d8f38aa4859c3a1917d"
+ra-core@2.0.0-beta-tkvw24, ra-core@^2.0.0-beta-tkvw24:
+  version "2.0.0-beta-tkvw24"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw24.tgz#097bf82bfdb37a221bc9e4bd393917f35c6294fc"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -7366,7 +7366,7 @@ ra-core@2.0.0-beta-tkvw18, ra-core@^2.0.0-beta-tkvw18:
     node-polyglot "2.2.2"
     prop-types "~15.5.7"
     query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw18"
+    ra-language-english "^2.0.0-beta-tkvw24"
     react-redux "~5.0.4"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
@@ -7378,13 +7378,13 @@ ra-core@2.0.0-beta-tkvw18, ra-core@^2.0.0-beta-tkvw18:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw18:
-  version "2.0.0-beta-tkvw18"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw18.tgz#2b8ef476f7871f4fdbbe6f5b8580f17fa5b0c177"
+ra-language-english@^2.0.0-beta-tkvw24:
+  version "2.0.0-beta-tkvw24"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw24.tgz#813ed2040ea8a70cfe87a629f87ee98ceb084a80"
 
-ra-ui-materialui@2.0.0-beta-tkvw18:
-  version "2.0.0-beta-tkvw18"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw18.tgz#4aa270c0b9210a5b811fb77bd72a98a72efbb69d"
+ra-ui-materialui@2.0.0-beta-tkvw24:
+  version "2.0.0-beta-tkvw24"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw24.tgz#58647c6fa6ba991464507a8ad04fe47834d6518d"
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -7396,7 +7396,7 @@ ra-ui-materialui@2.0.0-beta-tkvw18:
     material-ui "^1.0.0-beta.32"
     material-ui-icons "^1.0.0-beta.17"
     prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw18"
+    ra-core "^2.0.0-beta-tkvw24"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.4"
@@ -7487,7 +7487,7 @@ react-addons-create-fragment@^15.5.3:
     loose-envify "^1.3.1"
     object-assign "^4.1.0"
 
-react-autosuggest@^9.3.2:
+react-autosuggest@^9.3.2, react-autosuggest@^9.3.4:
   version "9.3.4"
   resolved "http://localhost:4873/react-autosuggest/-/react-autosuggest-9.3.4.tgz#e47ff800081b2f7c678165bfb7cc84b07f462336"
   dependencies:
