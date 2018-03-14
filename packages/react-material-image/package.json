@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-material-image",
-  "version": "1.2.0-beta23",
+  "version": "1.2.0-beta24",
   "description": "",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
