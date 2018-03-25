@@ -9,32 +9,48 @@ const santizeParams = ({
     unregisterSearchable,
     id,
     term,
+    contexts,
     description,
     ...params
 }) => params;
 class Searchable extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
+        contexts: PropTypes.arrayOf(PropTypes.string).isRequired,
         term: PropTypes.string.isRequired,
         description: PropTypes.string,
     };
     componentWillMount() {
-        this._registerSearchable();
+        this._registerSearchable(this.props);
     }
 
-    _registerSearchable = ({ id, term, description, ...rest } = this.props) => {
-        registerSearchable(id, term, description, santizeParams(rest));
+    _registerSearchable = ({
+        id,
+        term,
+        contexts,
+        description,
+        registerSearchable,
+        ...rest
+    }) => {
+        registerSearchable(
+            id,
+            term,
+            contexts,
+            description,
+            santizeParams(rest)
+        );
     };
     _unregisterSearchable = ({ id, unregisterSearchable } = this.props) => {
         unregisterSearchable(id);
     };
 
     componentWillReceiveProps(nextProps) {
-        const { id, term, description } = this.props;
+        const { id, contexts, term, description } = this.props;
 
         if (
             nextProps.id !== id ||
             nextProps.term !== term ||
+            nextProps.contexts !== contexts ||
             nextProps.description !== description
         ) {
             this._registerSearchable(nextProps);

@@ -46,7 +46,7 @@ const CommentFilter = props => (
     </Filter>
 );
 
-const CommentPagination = translate()(
+const CommentPagination = translate(
     ({ page, perPage, total, setPage, t }) => {
         const nbPages = Math.ceil(total / perPage) || 1;
         return (
@@ -95,7 +95,7 @@ const listStyles = theme => ({
 });
 
 const CommentGrid = withStyles(listStyles)(
-    translate()(({ classes, ids, data, basePath, t }) => (
+    translate(({ classes, ids, data, basePath, t }) => (
         <Grid container style={{ padding: '1em' }}>
             {ids.map(id => (
                 <Grid item key={id} sm={12} md={6} lg={4}>

@@ -9,7 +9,7 @@ import MenuItemLink from './MenuItemLink';
 
 export const NestedMenuItemShape = PropTypes.shape({
     icon: PropTypes.func,
-    label: PropTypes.string,
+    label: PropTypes.arrayOf(PropTypes.string),
     name: PropTypes.string,
 });
 

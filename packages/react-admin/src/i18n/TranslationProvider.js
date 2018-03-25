@@ -10,6 +10,11 @@ TranslationProvider.propTypes = {
     children: PropTypes.element,
 };
 
+const namespaces = {
+    'common.': 'common:',
+    'resources.': 'resources:',
+    'ra.': 'ra:',
+};
 const withI18nContext = withContext(
     {
         translate: PropTypes.func.isRequired,
@@ -22,15 +27,25 @@ const withI18nContext = withContext(
         });
 
         const i18n = getI18n();
-        const translateWrapper = (message, options) => {
-            if (message.startsWith('resources.'))
-                message = message.replace('resources.', 'resources:');
+        const namespaceLabel = label =>
+            Object.keys(namespaces).reduce(
+                (acc, item) =>
+                    acc.startsWith(item)
+                        ? acc.replace(item, namespaces[item])
+                        : acc,
+                label
+            );
+
+        const translate = (message, options) => {
+            message = Array.isArray(message)
+                ? message.map(namespaceLabel)
+                : namespaceLabel(message);
 
             return t(message, options && transformOptions(options));
         };
         return {
             locale: i18n.languages[0],
-            translate: translateWrapper,
+            translate,
         };
     }
 );

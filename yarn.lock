@@ -5824,21 +5824,13 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "http://localhost:4873/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
-lodash.debounce@^4.0.8, lodash.debounce@~4.0.8:
+lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "http://localhost:4873/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-
-lodash.defaultsdeep@~4.6.0:
-  version "4.6.0"
-  resolved "http://localhost:4873/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.0.tgz#bec1024f85b1bd96cbea405b23c14ad6443a6f81"
 
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "http://localhost:4873/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
-
-lodash.get@~4.4.2:
-  version "4.4.2"
-  resolved "http://localhost:4873/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
@@ -5847,10 +5839,6 @@ lodash.isarguments@^3.0.0:
 lodash.isarray@^3.0.0:
   version "3.0.4"
   resolved "http://localhost:4873/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
-
-lodash.isequal@^4.5.0, lodash.isequal@~4.5.0:
-  version "4.5.0"
-  resolved "http://localhost:4873/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
@@ -5875,14 +5863,6 @@ lodash.merge@^4.6.0:
 lodash.pick@^4.4.0:
   version "4.4.0"
   resolved "http://localhost:4873/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
-
-lodash.pickby@~4.6.0:
-  version "4.6.0"
-  resolved "http://localhost:4873/lodash.pickby/-/lodash.pickby-4.6.0.tgz#7dea21d8c18d7703a27c704c15d3b84a67e33aff"
-
-lodash.set@~4.3.2:
-  version "4.3.2"
-  resolved "http://localhost:4873/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
 
 lodash.some@^4.6.0:
   version "4.6.0"
@@ -5909,7 +5889,7 @@ lodash.unescape@4.0.1:
   version "4.0.1"
   resolved "http://localhost:4873/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
 
-lodash.uniq@^4.5.0, lodash.uniq@~4.5.0:
+lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "http://localhost:4873/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
@@ -5917,7 +5897,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "http://localhost:4873/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.1, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
+lodash@^4.0.1, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.0, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@~4.17.5:
   version "4.17.5"
   resolved "http://localhost:4873/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 
@@ -7350,60 +7330,52 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw24, ra-core@^2.0.0-beta-tkvw24:
-  version "2.0.0-beta-tkvw24"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw24.tgz#097bf82bfdb37a221bc9e4bd393917f35c6294fc"
+ra-core@2.0.0-beta-tkvw53, ra-core@^2.0.0-beta-tkvw53:
+  version "2.0.0-beta-tkvw53"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw53.tgz#f09dcfc0a50da4c038d4c318a76519ccb1a218a3"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
     inflection "~1.12.0"
-    lodash.debounce "~4.0.8"
-    lodash.defaultsdeep "~4.6.0"
-    lodash.get "~4.4.2"
-    lodash.pickby "~4.6.0"
-    lodash.set "~4.3.2"
-    lodash.uniq "~4.5.0"
+    lodash "~4.17.5"
     node-polyglot "2.2.2"
     prop-types "~15.5.7"
     query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw24"
+    ra-language-english "^2.0.0-beta-tkvw53"
     react-redux "~5.0.4"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
     react-router-redux "~5.0.0-alpha.6"
     recompose "~0.25.0"
     redux "~3.7.2"
-    redux-form "~7.0.3"
+    redux-form "~7.1.2"
     redux-saga "~0.16.0"
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw24:
-  version "2.0.0-beta-tkvw24"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw24.tgz#813ed2040ea8a70cfe87a629f87ee98ceb084a80"
+ra-language-english@^2.0.0-beta-tkvw53:
+  version "2.0.0-beta-tkvw53"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw53.tgz#732b43565a136eb6ed5c671c5b4e87f04a88cf4d"
 
-ra-ui-materialui@2.0.0-beta-tkvw24:
-  version "2.0.0-beta-tkvw24"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw24.tgz#58647c6fa6ba991464507a8ad04fe47834d6518d"
+ra-ui-materialui@2.0.0-beta-tkvw53:
+  version "2.0.0-beta-tkvw53"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw53.tgz#784e260b86add51176530bd4822c48c3fe2921d9"
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
     inflection "~1.12.0"
-    lodash.debounce "~4.0.8"
-    lodash.get "~4.4.2"
-    lodash.isequal "~4.5.0"
-    lodash.set "~4.3.2"
+    lodash "~4.17.5"
     material-ui "^1.0.0-beta.32"
     material-ui-icons "^1.0.0-beta.17"
     prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw24"
+    ra-core "^2.0.0-beta-tkvw53"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.4"
     react-router-dom "~4.2.2"
     recompose "~0.25.0"
     redux "~3.7.2"
-    redux-form "~7.0.3"
+    redux-form "~7.1.2"
 
 radium@^0.19.0:
   version "0.19.6"
@@ -7945,6 +7917,19 @@ redux-form@~7.0.3:
     deep-equal "^1.0.1"
     es6-error "^4.0.0"
     hoist-non-react-statics "^2.2.1"
+    invariant "^2.2.2"
+    is-promise "^2.1.0"
+    lodash "^4.17.3"
+    lodash-es "^4.17.3"
+    prop-types "^15.5.9"
+
+redux-form@~7.1.2:
+  version "7.1.2"
+  resolved "http://localhost:4873/redux-form/-/redux-form-7.1.2.tgz#6b0f25c57fd8130a05ce00f6435fe1b051f402af"
+  dependencies:
+    deep-equal "^1.0.1"
+    es6-error "^4.0.0"
+    hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     is-promise "^2.1.0"
     lodash "^4.17.3"

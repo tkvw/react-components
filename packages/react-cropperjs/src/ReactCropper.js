@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 import Cropper from 'cropperjs';
 import Image from '@tkvw/react-image';
 import classnames from 'classnames';

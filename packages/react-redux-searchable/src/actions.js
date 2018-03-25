@@ -1,9 +1,16 @@
 export const REGISTER_SEARCHABLE = '@@searchable/REGISTER';
 
-export const registerSearchable = (id, term, description = '', params) => ({
+export const registerSearchable = (
+    id,
+    term /* Translaed value */,
+    contexts, /* Allowed searchable contexts */
+    description = '',
+    params
+) => ({
     type: REGISTER_SEARCHABLE,
     payload: {
         id,
+        contexts,
         term,
         description,
         params,

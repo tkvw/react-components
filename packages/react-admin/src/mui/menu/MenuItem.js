@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import compose from 'recompose/compose';
 import { translate } from 'ra-core';
 import { ListItem, ListItemText } from 'material-ui/List';
-import Tooltip from 'material-ui/Tooltip';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
@@ -60,14 +59,9 @@ const MenuItem = ({
             className={classnames(classes.root, className)}
             {...props}
         >
-            <Tooltip
-                title={variant === 'mini' ? tooltip || primary : ''}
-                placement="right"
-            >
-                <span className={classes.icon}>
-                    {icon && React.createElement(icon)}
-                </span>
-            </Tooltip>
+            <span className={classes.icon}>
+                {icon && React.createElement(icon)}
+            </span>
             <ListItemText primary={primary} secondary={secondary} />
             {endAdornment}
         </ListItem>

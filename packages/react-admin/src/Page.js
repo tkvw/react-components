@@ -14,26 +14,33 @@ const Page = ({
     menuSequence,
     menuParent,
     ...props
-}) => [
-    <RegisterMenuItem
-        key="menuItem"
-        {...props}
-        context={context}
-        name={name}
-        hide={hideInMenu}
-        label={menuLabel || `resources.${name}.menu`}
-        icon={menuIcon || icon}
-        link={path || `/${name}`}
-        sequence={menuSequence}
-        parent={menuParent}
-    />,
-    context === 'route'
-        ? React.createElement(component, {
-              ...props,
-              context,
-          })
-        : null,
-];
+}) =>
+    [
+        <RegisterMenuItem
+            key="menuItem"
+            {...props}
+            context={context}
+            name={name}
+            hide={hideInMenu}
+            label={[
+                menuLabel || `resources.${name}.menu`,
+                `resources.${name}.title_plural`,
+                `resources.${name}.title`,
+            ]}
+            icon={menuIcon || icon}
+            link={path || `/${name}`}
+            sequence={menuSequence}
+            parent={menuParent}
+        />,
+        context === 'route'
+            ? React.createElement(component, {
+                  key: 'pageComponent',
+                  resource: name,
+                  ...props,
+                  context,
+              })
+            : null,
+    ].map(item => item);
 
 Page.propTypes = {
     context: PropTypes.string,

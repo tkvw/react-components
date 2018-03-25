@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import isEqual from 'lodash.isequal';
+import isEqual from 'lodash/isEqual';
 import { withStyles } from 'material-ui/styles';
 import { FilterButton } from 'ra-ui-materialui';
 import FilterForm from './FilterForm';

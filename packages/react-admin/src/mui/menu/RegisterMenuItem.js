@@ -10,7 +10,7 @@ import { withPermissions } from '../../auth';
 
 class RegisterMenuItem extends React.Component {
     static propTypes = {
-        label: PropTypes.string,
+        label: PropTypes.arrayOf(PropTypes.string),
         name: PropTypes.string,
         icon: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
         link: PropTypes.string,

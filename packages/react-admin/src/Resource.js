@@ -24,7 +24,11 @@ const Resource = ({
         {...props}
         name={name}
         hide={hideInMenu || !props.list}
-        label={menuLabel || `resources.${name}.menu`}
+        label={[
+            menuLabel || `resources.${name}.menu`,
+            `resources.${name}.title_plural`,
+            `resources.${name}.title`,
+        ]}
         icon={menuIcon || icon}
         link={`/${name}`}
         sequence={menuSequence}
@@ -52,7 +56,7 @@ Resource.propTypes = {
     menuIcon: componentPropType,
     menuSequence: PropTypes.number,
     menuParent: PropTypes.string,
-    hideInMenu: PropTypes.oneOfType(PropTypes.func, PropTypes.bool),
+    hideInMenu: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
 };
 export default Resource;
 export const resource = resourceProps => {
