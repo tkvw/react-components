@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-image",
-  "version": "1.2.0-beta46",
+  "version": "1.2.0-beta47",
   "description": "Render blob as image",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
