@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/sparse-updates",
-  "version": "1.2.0-beta53",
+  "version": "1.2.0-beta54",
   "description": "",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
