@@ -3,7 +3,7 @@
   "packages": [
     "packages/*"
   ],
-  "version": "1.2.0-beta79",
+  "version": "1.2.0-beta80",
   "npmClient": "yarn",
   "useWorkspaces": true
 }
