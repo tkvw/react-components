@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import classnames from 'classnames';
+import compose from 'recompose/compose';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from 'material-ui/styles';
-import { FilterButton } from 'ra-ui-materialui';
+
+import FilterButton from './FilterButton';
 import FilterForm from './FilterForm';
+import { withResourceData } from '../../data';
+
 import { removeEmpty } from 'ra-core';
 
 const styles = {
@@ -34,26 +38,19 @@ export class Filter extends Component {
     renderButton() {
         const {
             classes = {},
+            className,
             context,
             debounce,
-            resource,
             children,
-            showFilter,
-            hideFilter,
-            displayedFilters,
-            filterValues,
+            setFilters,
             ...rest
         } = this.props;
 
         return (
             <FilterButton
-                className={classes.button}
-                resource={resource}
-                filters={React.Children.toArray(children)}
-                showFilter={showFilter}
-                displayedFilters={displayedFilters}
-                filterValues={filterValues}
                 {...rest}
+                className={classnames(classes.button, className)}
+                filters={React.Children.toArray(children)}
             />
         );
     }
@@ -61,26 +58,19 @@ export class Filter extends Component {
     renderForm() {
         const {
             classes = {},
+            className,
             context,
-            resource,
             children,
-            hideFilter,
-            displayedFilters,
-            showFilter,
             filterValues,
-            setFilters,
             ...rest
         } = this.props;
         return (
             <FilterForm
-                className={classes.form}
-                resource={resource}
+                {...rest}
+                className={classnames(classes.form, className)}
                 filters={React.Children.toArray(children)}
-                hideFilter={hideFilter}
-                displayedFilters={displayedFilters}
                 initialValues={filterValues}
                 setFilters={this.setFilters}
-                {...rest}
             />
         );
     }
@@ -95,18 +85,23 @@ export class Filter extends Component {
 Filter.propTypes = {
     children: PropTypes.node,
     classes: PropTypes.object,
+    className: PropTypes.string,
     context: PropTypes.oneOf(['form', 'button']),
     debounce: PropTypes.number,
-    displayedFilters: PropTypes.object,
     filterValues: PropTypes.object,
-    hideFilter: PropTypes.func,
     setFilters: PropTypes.func,
-    showFilter: PropTypes.func,
-    resource: PropTypes.string.isRequired,
 };
 
 Filter.defaultProps = {
     debounce: 500,
 };
 
-export default withStyles(styles)(Filter);
+const enhance = compose(
+    withStyles(styles),
+    withResourceData({
+        includeProps: ['filterValues', 'setFilters'],
+    })
+);
+
+export default enhance(Filter);
+

@@ -4593,7 +4593,7 @@ hoist-non-react-statics@2.3.1:
   version "2.3.1"
   resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
 
-hoist-non-react-statics@^2.2.1, hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.0, hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.0"
   resolved "http://localhost:4873/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
 
@@ -6064,6 +6064,10 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+memoize-one@^3.1.1:
+  version "3.1.1"
+  resolved "http://localhost:4873/memoize-one/-/memoize-one-3.1.1.tgz#ef609811e3bc28970eac2884eece64d167830d17"
+
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
   resolved "http://localhost:4873/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -7330,9 +7334,9 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw53, ra-core@^2.0.0-beta-tkvw53:
-  version "2.0.0-beta-tkvw53"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw53.tgz#f09dcfc0a50da4c038d4c318a76519ccb1a218a3"
+ra-core@2.0.0-beta-tkvw71, ra-core@^2.0.0-beta-tkvw71:
+  version "2.0.0-beta-tkvw71"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw71.tgz#5c4cfd6b08040e765dd28ed7424e7edba81c2f63"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
@@ -7341,7 +7345,7 @@ ra-core@2.0.0-beta-tkvw53, ra-core@^2.0.0-beta-tkvw53:
     node-polyglot "2.2.2"
     prop-types "~15.5.7"
     query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw53"
+    ra-language-english "^2.0.0-beta-tkvw71"
     react-redux "~5.0.4"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
@@ -7353,13 +7357,13 @@ ra-core@2.0.0-beta-tkvw53, ra-core@^2.0.0-beta-tkvw53:
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw53:
-  version "2.0.0-beta-tkvw53"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw53.tgz#732b43565a136eb6ed5c671c5b4e87f04a88cf4d"
+ra-language-english@^2.0.0-beta-tkvw71:
+  version "2.0.0-beta-tkvw71"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw71.tgz#3b6aad577029a33da3ca21f6ec97ae97070ff86a"
 
-ra-ui-materialui@2.0.0-beta-tkvw53:
-  version "2.0.0-beta-tkvw53"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw53.tgz#784e260b86add51176530bd4822c48c3fe2921d9"
+ra-ui-materialui@2.0.0-beta-tkvw71:
+  version "2.0.0-beta-tkvw71"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw71.tgz#4bd8698a49231267ec93e7c57f3d717194d061fe"
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -7368,7 +7372,7 @@ ra-ui-materialui@2.0.0-beta-tkvw53:
     material-ui "^1.0.0-beta.32"
     material-ui-icons "^1.0.0-beta.17"
     prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw53"
+    ra-core "^2.0.0-beta-tkvw71"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
     react-redux "~5.0.4"
@@ -7474,6 +7478,13 @@ react-autowhatever@^10.1.0:
     prop-types "^15.5.8"
     react-themeable "^1.1.0"
     section-iterator "^2.0.0"
+
+react-broadcast@^0.6.2:
+  version "0.6.2"
+  resolved "http://localhost:4873/react-broadcast/-/react-broadcast-0.6.2.tgz#9555c73b80ca5b2673830872e54f6bb3092cf8a9"
+  dependencies:
+    invariant "^2.2.1"
+    prop-types "^15.6.0"
 
 react-color@^2.11.4:
   version "2.13.8"
@@ -7909,19 +7920,6 @@ reduce-function-call@^1.0.1:
   resolved "http://localhost:4873/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
-
-redux-form@~7.0.3:
-  version "7.0.4"
-  resolved "http://localhost:4873/redux-form/-/redux-form-7.0.4.tgz#2297b6bed40fda8bb58132e261ba0976fb4e530c"
-  dependencies:
-    deep-equal "^1.0.1"
-    es6-error "^4.0.0"
-    hoist-non-react-statics "^2.2.1"
-    invariant "^2.2.2"
-    is-promise "^2.1.0"
-    lodash "^4.17.3"
-    lodash-es "^4.17.3"
-    prop-types "^15.5.9"
 
 redux-form@~7.1.2:
   version "7.1.2"

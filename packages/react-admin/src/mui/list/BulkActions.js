@@ -11,6 +11,7 @@ import compose from 'recompose/compose';
 import classnames from 'classnames';
 import { translate } from 'ra-core';
 
+import { withResourceData } from '../../data';
 import { Button, BulkDeleteAction } from 'ra-ui-materialui';
 import { Manager, Target, Popper } from 'react-popper';
 
@@ -182,6 +183,12 @@ BulkActions.defaultProps = {
     selectedIds: [],
 };
 
-const EnhancedButton = compose(withStyles(styles), translate)(BulkActions);
+const EnhancedButton = compose(
+    withStyles(styles),
+    translate,
+    withResourceData({
+        includeProps: ['basePath', 'filterValues', 'resource', 'selectedIds'],
+    })
+)(BulkActions);
 
 export default EnhancedButton;

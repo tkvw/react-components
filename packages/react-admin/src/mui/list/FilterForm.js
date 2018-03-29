@@ -7,6 +7,7 @@ import ActionHide from 'material-ui-icons/HighlightOff';
 import compose from 'recompose/compose';
 import withProps from 'recompose/withProps';
 import { withStyles } from 'material-ui/styles';
+import { withResourceData } from '../../data';
 import classnames from 'classnames';
 import debounce from 'lodash/debounce';
 import lodashSet from 'lodash/set';
@@ -30,48 +31,16 @@ const styles = ({ palette: { primary1Color } }) => ({
 const emptyRecord = {};
 
 const sanitizeRestProps = ({
-    anyTouched,
-    asyncValidate,
-    asyncValidating,
-    cancelOnChangeDebounce,
-    clearSubmit,
-    dirty,
-    debounce,
-    handleSubmit,
-    initialized,
-    initialValues,
-    invalid,
-    pristine,
-    submitting,
-    submitFailed,
-    submitSucceeded,
-    valid,
-    hideFilter,
-    displayedFilters,
-    setFilter,
     setFilters,
-    array,
-    form,
-    locale,
+    resource,
     filters,
-    filterValues,
-    pure,
-    clearSubmitErrors,
-    clearAsyncError,
-    triggerSubmit,
-    blur,
-    change,
-    destroy,
-    dispatch,
-    initialize,
-    reset,
-    touch,
-    untouch,
-    validate,
-    save,
+    debounce,
+    displayedFilters,
+    handleSubmit,
+    hideFilter,
+    initialValues,
     translate,
-    autofill,
-    submit,
+    cancelOnChangeDebounce,
     ...props
 }) => props;
 
@@ -100,11 +69,10 @@ export class FilterForm extends Component {
             resource,
             translate,
             handleSubmit,
-            ...rest
         } = this.props;
         return (
             <form onSubmit={handleSubmit}>
-                <div className={className} {...sanitizeRestProps(rest)}>
+                <div className={className}>
                     <CardContent className={classes.card}>
                         {this.getShownFilters()
                             .reverse()
@@ -159,6 +127,7 @@ FilterForm.propTypes = {
     setFilters: PropTypes.func,
     resource: PropTypes.string.isRequired,
     filters: PropTypes.arrayOf(PropTypes.node).isRequired,
+    debounce: PropTypes.number,
     displayedFilters: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func,
     hideFilter: PropTypes.func.isRequired,
@@ -220,11 +189,15 @@ const combineWithProps = props => ({
 });
 
 const enhance = compose(
+    withResourceData({
+        includeProps: ['resource', 'hideFilter', 'displayedFilters'],
+    }),
     translate,
     withStyles(styles),
     withProps(combineWithProps),
     reduxForm({
         enableReinitialize: true,
+        destroyOnUnmount: false,
         onSubmit: (values, dispatch, props) =>
             props.valid && props.setFilters(values),
     })

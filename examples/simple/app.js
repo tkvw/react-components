@@ -150,6 +150,7 @@ render(
             icon={UserIcon}
             show={UserShow}
         />
+        <Resource name="tags" />
     </Admin>,
     document.getElementById('root')
 );

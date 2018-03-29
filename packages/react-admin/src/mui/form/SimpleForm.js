@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import withProps from 'recompose/withProps';
+import { withStyles } from 'material-ui/styles';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
-import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
-
-import { getDefaultValues, translate } from 'ra-core';
-import Form from './Form';
-import SimpleFormLayoutFactory from './SimpleFormLayoutFactory';
-import promisingForm from './promisingForm';
-import FormWrapper from './FormWrapper';
+import { getDefaultValues } from 'ra-core';
+import { withResourceData, FormDataProducer } from '../../data';
+import FormToolbar from './FormToolbar';
 
 const styles = theme => ({
     form: {
@@ -24,61 +22,83 @@ const styles = theme => ({
 });
 
 export class SimpleForm extends Component {
+    static propTypes = {
+        children: PropTypes.node,
+        classes: PropTypes.object,
+        className: PropTypes.string,
+        defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+        form: PropTypes.string,
+        handleSubmit: PropTypes.func, // passed by redux-form
+        invalid: PropTypes.bool,
+        pristine: PropTypes.bool,
+        save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
+        resource: PropTypes.string,
+        redirect: PropTypes.string,
+        submitOnEnter: PropTypes.bool,
+        toolbar: PropTypes.element,
+        translate: PropTypes.func,
+        version: PropTypes.number,
+    };
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
         this.props.handleSubmit((values, ...rest) =>
-            this.props.save(values, redirect, ...rest)
+            this.props.save(values, redirect, this.props.form, ...rest)
         );
 
     render() {
-        const { children, classes = {}, className, ...rest } = this.props;
-
+        const {
+            children,
+            classes,
+            className,
+            record,
+            resource,
+            translate,
+            save,
+            submitOnEnter,
+            toolbar = <FormToolbar submitOnEnter={submitOnEnter} />,
+            version,
+            ...rest
+        } = this.props;
         return (
-            <FormWrapper
-                className={classnames('simple-form', className)}
-                {...rest}
+            <FormDataProducer
+                value={{
+                    handleSubmitWithRedirect: this.handleSubmitWithRedirect,
+                    ...rest,
+                }}
             >
-                <SimpleFormLayoutFactory
-                    className={classes.form}
-                    handleSubmitWithRedirect={this.handleSubmitWithRedirect}
+                <form
+                    className={classnames('simple-form', className)}
+                    key={version}
                 >
-                    {children}
-                </SimpleFormLayoutFactory>
-            </FormWrapper>
+                    <div className={classes.form}>{children}</div>
+                    {toolbar}
+                </form>
+            </FormDataProducer>
         );
     }
 }
 
-SimpleForm.propTypes = {
-    basePath: PropTypes.string,
-    children: PropTypes.node,
-    classes: PropTypes.object,
-    className: PropTypes.string,
-    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    handleSubmit: PropTypes.func, // passed by redux-form
-    invalid: PropTypes.bool,
-    record: PropTypes.object,
-    resource: PropTypes.string,
-    redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    wrapper: PropTypes.func,
-    layout: PropTypes.func,
-    save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
-    submitOnEnter: PropTypes.bool,
-    toolbar: PropTypes.element,
-    validate: PropTypes.func,
-    version: PropTypes.number,
-};
-
 const enhance = compose(
+    withStyles(styles),
+    withResourceData({
+        include: [
+            'record',
+            'resource',
+            'save',
+            'redirect',
+            'translate',
+            'version',
+        ],
+    }),
+    withProps(({ resource }) => ({ form: `${resource}-form` })),
     connect((state, props) => ({
         initialValues: getDefaultValues(state, props),
     })),
-    translate, // Must be before reduxForm so that it can be used in validation
     reduxForm({
-        form: 'record-form',
+        onSubmit: (values, dispatch, { form, redirect, save }) => {
+            return save(values, redirect, form, dispatch);
+        },
+        destroyOnUnmount: false,
         enableReinitialize: true,
-    }),
-    promisingForm,
-    withStyles(styles)
+    })
 );
-
 export default enhance(SimpleForm);

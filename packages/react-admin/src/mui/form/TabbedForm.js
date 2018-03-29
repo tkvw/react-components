@@ -1,21 +1,23 @@
-import React, { Children, Component } from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
+import compose from 'recompose/compose';
+import withProps from 'recompose/withProps';
+import { connect } from 'react-redux';
+
 import classnames from 'classnames';
+import { getDefaultValues } from 'ra-core';
+import { withStyles } from 'material-ui/styles';
+import Tabs, { Tab } from 'material-ui/Tabs';
+import Divider from 'material-ui/Divider';
 import {
     getFormAsyncErrors,
     getFormSubmitErrors,
     getFormSyncErrors,
     reduxForm,
 } from 'redux-form';
-import { connect } from 'react-redux';
-import compose from 'recompose/compose';
-import { withStyles } from 'material-ui/styles';
 
-import TabbedFormLayoutFactory from './TabbedFormLayoutFactory';
-import FormWrapper from './FormWrapper';
-import Form from './Form';
-import { getDefaultValues, translate } from 'ra-core';
-import promisingForm from './promisingForm';
+import FormToolbar from './FormToolbar';
+import { FormDataProducer, withResourceData } from '../../data';
 
 const styles = theme => ({
     form: {
@@ -26,73 +28,103 @@ const styles = theme => ({
             padding: '0 1em 5em 1em',
         },
     },
-    errorTabButton: { color: theme.palette.error[500] },
 });
 
-export class TabbedForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: 0,
-        };
-    }
-
+class TabbedForm extends React.Component {
+    state = {
+        value: 0,
+    };
     handleChange = (event, value) => {
         this.setState({ value });
     };
-
-    handleSubmitWithRedirect = (redirect = this.props.redirect) =>
-        this.props.handleSubmit((values, ...rest) =>
-            this.props.save(values, redirect, ...rest)
-        );
-
     render() {
-        const { children, className, tabsWithErrors, ...rest } = this.props;
-
+        const {
+            children,
+            classes,
+            className,
+            submitOnEnter,
+            tabsWithErrors,
+            toolbar = <FormToolbar submitOnEnter={submitOnEnter} />,
+            translate,
+            version,
+            ...props
+        } = this.props;
         return (
-            <FormWrapper
-                className={classnames('tabbed-form', className)}
-                {...rest}
+            <FormDataProducer
+                value={{
+                    handleSubmitWithRedirect: this.handleSubmitWithRedirect,
+                    ...props,
+                }}
             >
-                <TabbedFormLayoutFactory
-                    value={this.state.value}
-                    tabsWithErrors={tabsWithErrors}
-                    handleSubmitWithRedirect={this.handleSubmitWithRedirect}
-                    handleChange={this.handleChange}
+                <form
+                    className={classnames('simple-form', className)}
+                    key={version}
                 >
-                    {children}
-                </TabbedFormLayoutFactory>
-            </FormWrapper>
+                    <div className={classnames(classes.form, className)}>
+                        <Tabs
+                            scrollable
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            indicatorColor="primary"
+                        >
+                            {Children.map(
+                                children,
+                                (tab, index) =>
+                                    tab ? (
+                                        <Tab
+                                            key={tab.props.label}
+                                            label={translate(tab.props.label, {
+                                                _: tab.props.label,
+                                            })}
+                                            value={index}
+                                            icon={tab.props.icon}
+                                            className={classnames(
+                                                'form-tab',
+                                                tabsWithErrors.includes(
+                                                    tab.props.label
+                                                ) && this.state.value !== index
+                                                    ? classes.errorTabButton
+                                                    : null
+                                            )}
+                                        />
+                                    ) : null
+                            )}
+                        </Tabs>
+                        <Divider />
+                        <div className={classes.form}>
+                            {Children.map(
+                                children,
+                                (tab, index) =>
+                                    this.state.value === index && tab
+                            )}
+                            {toolbar}
+                        </div>
+                    </div>
+                </form>
+            </FormDataProducer>
         );
     }
 }
 
 TabbedForm.propTypes = {
-    basePath: PropTypes.string,
     children: PropTypes.node,
-    className: PropTypes.string,
     classes: PropTypes.object,
-    defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    handleSubmit: PropTypes.func, // passed by redux-form
-    invalid: PropTypes.bool,
-    record: PropTypes.object,
-    renderLayout: PropTypes.func,
-    wrapper: PropTypes.func,
-    redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
-    resource: PropTypes.string,
-    save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
+    className: PropTypes.string,
+    render: PropTypes.func,
     submitOnEnter: PropTypes.bool,
     tabsWithErrors: PropTypes.arrayOf(PropTypes.string),
     toolbar: PropTypes.element,
     translate: PropTypes.func,
-    validate: PropTypes.func,
     version: PropTypes.number,
 };
 
-const collectErrors = state => {
-    const syncErrors = getFormSyncErrors('record-form')(state);
-    const asyncErrors = getFormAsyncErrors('record-form')(state);
-    const submitErrors = getFormSubmitErrors('record-form')(state);
+const collectErrors = (
+    state,
+    { selectSyncErrors, selectAsyncErrors, selectSubmitErrors }
+) => {
+    const syncErrors = selectSyncErrors(state);
+    const asyncErrors = selectAsyncErrors(state);
+    const submitErrors = selectSubmitErrors(state);
 
     return {
         ...syncErrors,
@@ -106,7 +138,7 @@ export const findTabsWithErrors = (
     props,
     collectErrorsImpl = collectErrors
 ) => {
-    const errors = collectErrorsImpl(state);
+    const errors = collectErrorsImpl(state, props);
 
     return Children.toArray(props.children).reduce((acc, child) => {
         const inputs = Children.toArray(child.props.children);
@@ -120,7 +152,23 @@ export const findTabsWithErrors = (
 };
 
 const enhance = compose(
-    translate,
+    withStyles(styles),
+    withResourceData({
+        includeProps: [
+            'record',
+            'resource',
+            'save',
+            'redirect',
+            'translate',
+            'version',
+        ],
+    }),
+    withProps(({ resource }) => ({ form: `${resource}-form` })),
+    withProps(props => ({
+        selectSyncErrors: getFormSyncErrors(props.form),
+        selectAsyncErrors: getFormAsyncErrors(props.form),
+        selectSubmitErrors: getFormSubmitErrors(props.form),
+    })),
     connect((state, props) => {
         const children = Children.toArray(props.children).reduce(
             (acc, child) => [...acc, ...Children.toArray(child.props.children)],
@@ -132,13 +180,13 @@ const enhance = compose(
             initialValues: getDefaultValues(state, { ...props, children }),
         };
     }),
-    translate, // Must be before reduxForm so that it can be used in validation
     reduxForm({
-        form: 'record-form',
+        onSubmit: (values, dispatch, { form, redirect, save }) => {
+            return save(values, redirect, form, dispatch);
+        },
+        destroyOnUnmount: false,
         enableReinitialize: true,
-    }),
-    promisingForm,
-    withStyles(styles)
+    })
 );
 
 export default enhance(TabbedForm);
