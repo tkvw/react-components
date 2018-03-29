@@ -1,6 +1,6 @@
 {
   "name": "i18next-async-backend",
-  "version": "1.2.0-beta83",
+  "version": "1.2.0-beta84",
   "description": "",
   "main": "index.js",
   "scripts": {
