@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/redux-middleware-store-proxy",
-  "version": "1.2.0-beta78",
+  "version": "1.2.0-beta79",
   "description": "",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
