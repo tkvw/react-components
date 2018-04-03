@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/redux-override-reducer",
-  "version": "1.2.0-beta92",
+  "version": "1.2.0-beta93",
   "description": "",
   "main": "build/index.js",
   "jsnext:main": "src/index.js",
