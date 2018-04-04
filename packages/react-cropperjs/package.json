@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-cropperjs",
-  "version": "1.2.1-beta03",
+  "version": "1.2.1-beta04",
   "description": "Cropperjs wrapper",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -14,7 +14,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@tkvw/react-image": "^1.2.1-beta03",
+    "@tkvw/react-image": "^1.2.1-beta04",
     "classnames": "^2.2.5",
     "cropperjs": "^1.2.2",
     "lodash": "~4.17.5",
