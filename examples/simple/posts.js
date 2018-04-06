@@ -6,12 +6,15 @@ import {
     ChipField,
     Create,
     ImageFileInputCropperPreview,
+    DatagridActions,
     DateField,
     DateInput,
     DisabledInput,
     Edit,
     EditButton,
     Filter,
+    FormField,
+    FormInput,
     FormTab,
     ImageFileInput,
     ImageFileInputImagePreview,
@@ -31,7 +34,8 @@ import {
     SimpleList,
     SingleFieldList,
     Tab,
-    TabbedShowLayout,
+    Tabs,
+    ShowTab,
     TextField,
     TextInput,
     Toolbar,
@@ -92,6 +96,9 @@ const PostFilter = props => (
 );
 
 const styles = {
+    fill: {
+        width: '100%',
+    },
     title: {
         maxWidth: '20em',
         overflow: 'hidden',
@@ -120,45 +127,45 @@ export const PostList = withStyles(styles)(({ classes, ...props }) => (
         filters={<PostFilter />}
         sort={{ field: 'published_at', order: 'DESC' }}
     >
-        <Responsive
-            small={
-                <SimpleList
-                    primaryText={record => record.title}
-                    secondaryText={record => `${record.views} views`}
-                    tertiaryText={record =>
-                        new Date(record.published_at).toLocaleDateString()
-                    }
-                />
-            }
-            medium={
-                <Datagrid>
-                    <TextField source="id" />
-                    <TextField source="title" cellClassName={classes.title} />
-                    <DateField
-                        source="published_at"
-                        cellClassName={classes.publishedAt}
+        {listProps => (
+            <Responsive
+                {...listProps}
+                small={
+                    <SimpleList
+                        primaryText={record => record.title}
+                        secondaryText={record => `${record.views} views`}
+                        tertiaryText={record =>
+                            new Date(record.published_at).toLocaleDateString()
+                        }
                     />
-                    <BooleanField
-                        source="commentable"
-                        label="resources.posts.fields.commentable_short"
-                    />
-                    <NumberField source="views" />
-                    <ReferenceArrayField
-                        label="Tags"
-                        reference="tags"
-                        source="tags"
-                    >
-                        <SingleFieldList>
-                            <ChipField source="name" />
-                        </SingleFieldList>
-                    </ReferenceArrayField>
-                    <PostListActionToolbar>
-                        <EditButton />
-                        <ShowButton />
-                    </PostListActionToolbar>
-                </Datagrid>
-            }
-        />
+                }
+                medium={
+                    <Datagrid>
+                        <TextField source="id" />
+                        <TextField
+                            source="title"
+                            headerClassName={classes.fill}
+                        />
+                        <DateField
+                            source="published_at"
+                            cellClassName={classes.publishedAt}
+                        />
+                        <BooleanField source="commentable" />
+                        <NumberField source="views" />
+                        <ReferenceArrayField
+                            label="Tags"
+                            reference="tags"
+                            source="tags"
+                        >
+                            <SingleFieldList>
+                                <ChipField source="name" />
+                            </SingleFieldList>
+                        </ReferenceArrayField>
+                        <DatagridActions {...listProps} />
+                    </Datagrid>
+                }
+            />
+        )}
     </List>
 ));
 
@@ -190,11 +197,21 @@ const PostCreateToolbar = props => (
 );
 
 export const PostEdit = props => (
-    <Edit title={<PostTitle />} {...props}>
+    <Edit
+        title={({ record, translate }) =>
+            record &&
+            translate('post.edit.title', {
+                value: record.number,
+                _: 'Edit {{value}}',
+            })
+        }
+        {...props}
+        undoable={false}
+    >
         <TabbedForm defaultValue={{ average_note: 0 }}>
-            <FormTab label="post.form.summary">
+            <Tab label="post.form.summary">
                 <DisabledInput source="id" />
-                <TextInput source="title" validate={required} />
+                <TextInput source="title" fullWidth validate={required()} />
                 <CheckboxGroupInput
                     source="notifications"
                     choices={[
@@ -203,7 +220,7 @@ export const PostEdit = props => (
                         { id: 42, name: 'Sean Phonee' },
                     ]}
                 />
-                <LongTextInput source="teaser" validate={required} />
+                <LongTextInput source="teaser" validate={required()} />
                 <ImageFileInput
                     multiple
                     maxItems={3}
@@ -226,17 +243,25 @@ export const PostEdit = props => (
                         }
                     />
                 </ImageFileInput>
-            </FormTab>
-            <FormTab label="post.form.body">
-                <RichTextInput
-                    source="body"
-                    label=""
-                    validate={required}
-                    addLabel={false}
-                />
-            </FormTab>
-            <FormTab label="post.form.miscellaneous">
-                <ReferenceArrayInput reference="tags" source="tags">
+            </Tab>
+            <Tab label="post.form.body">
+                {bodyProps => {
+                    return (
+                        <FormInput
+                            fullWidth
+                            source="body"
+                            label=""
+                            {...bodyProps}
+                            validate={required}
+                            addLabel={false}
+                        >
+                            <RichTextInput />
+                        </FormInput>
+                    );
+                }}
+            </Tab>
+            <Tab label="post.form.miscellaneous">
+                <ReferenceArrayInput reference="tags" source="tags" fullWidth>
                     <SelectArrayInput>
                         <ChipField source="name" />
                     </SelectArrayInput>
@@ -255,12 +280,12 @@ export const PostEdit = props => (
                 />
                 <BooleanInput source="commentable" defaultValue />
                 <DisabledInput source="views" />
-            </FormTab>
-            <FormTab label="post.form.comments">
+            </Tab>
+            <Tab label="post.form.comments">
                 <ReferenceManyField
+                    addLabel={false}
                     reference="comments"
                     target="post_id"
-                    addLabel={false}
                 >
                     <Datagrid>
                         <DateField source="created_at" />
@@ -269,7 +294,7 @@ export const PostEdit = props => (
                         <EditButton />
                     </Datagrid>
                 </ReferenceManyField>
-            </FormTab>
+            </Tab>
         </TabbedForm>
     </Edit>
 );
@@ -286,10 +311,9 @@ const PageWrapper = ({ render, className, ...props }) => (
 export const PostCreate = props => (
     <Create {...props}>
         <SimpleForm
-            wrapper={PageWrapper}
             toolbar={<PostCreateToolbar />}
             defaultValue={{ average_note: 0 }}
-            validate={values => {
+            validate={(values = {}) => {
                 const errors = {};
                 ['title', 'teaser'].forEach(field => {
                     if (!values[field]) {
@@ -300,14 +324,15 @@ export const PostCreate = props => (
                 if (values.average_note < 0 || values.average_note > 5) {
                     errors.average_note = ['Should be between 0 and 5'];
                 }
-
                 return errors;
             }}
         >
             <TextInput source="title" />
             <TextInput source="password" type="password" />
             <LongTextInput source="teaser" />
-            <RichTextInput source="body" />
+            <FormInput source="body">
+                <RichTextInput />
+            </FormInput>
             <DateInput source="published_at" defaultValue={getDefaultDate} />
             <NumberInput source="average_note" />
             <BooleanInput source="commentable" defaultValue />
@@ -317,39 +342,49 @@ export const PostCreate = props => (
 
 export const PostShow = props => (
     <Show title={<PostTitle />} {...props}>
-        <TabbedShowLayout>
-            <Tab label="post.form.summary">
-                <TextField source="id" />
-                <TextField source="title" />
-                <TextField source="teaser" />
-            </Tab>
-            <Tab label="post.form.body">
-                <RichTextField
-                    source="body"
-                    stripTags={false}
-                    label=""
-                    addLabel={false}
-                />
-            </Tab>
-            <Tab label="post.form.miscellaneous">
-                <ReferenceArrayField reference="tags" source="tags">
-                    <SingleFieldList>
-                        <ChipField source="name" />
-                    </SingleFieldList>
-                </ReferenceArrayField>
-                <DateField source="published_at" />
-                <SelectField
-                    source="category"
-                    choices={[
-                        { name: 'Tech', id: 'tech' },
-                        { name: 'Lifestyle', id: 'lifestyle' },
-                    ]}
-                />
-                <NumberField source="average_note" />
-                <BooleanField source="commentable" />
-                <TextField source="views" />
-            </Tab>
-            <Tab label="post.form.comments">
+        <Tabs>
+            <ShowTab label="post.form.summary">
+                <FormField>
+                    <TextField source="id" />
+                    <TextField source="title" />
+                    <TextField source="teaser" />
+                </FormField>
+            </ShowTab>
+            <ShowTab label="post.form.body">
+                <FormField>
+                    <RichTextField
+                        source="body"
+                        stripTags={false}
+                        label=""
+                        addLabel={false}
+                    />
+                </FormField>
+            </ShowTab>
+            <ShowTab label="post.form.miscellaneous">
+                <FormField>
+                    <ReferenceArrayField
+                        reference="tags"
+                        source="tags"
+                        addLabel
+                    >
+                        <SingleFieldList>
+                            <ChipField source="name" />
+                        </SingleFieldList>
+                    </ReferenceArrayField>
+                    <DateField source="published_at" />
+                    <SelectField
+                        source="category"
+                        choices={[
+                            { name: 'Tech', id: 'tech' },
+                            { name: 'Lifestyle', id: 'lifestyle' },
+                        ]}
+                    />
+                    <NumberField source="average_note" />
+                    <BooleanField source="commentable" />
+                    <TextField source="views" />
+                </FormField>
+            </ShowTab>
+            <ShowTab label="post.form.comments">
                 <ReferenceManyField
                     addLabel={false}
                     reference="comments"
@@ -363,7 +398,7 @@ export const PostShow = props => (
                         <EditButton />
                     </Datagrid>
                 </ReferenceManyField>
-            </Tab>
-        </TabbedShowLayout>
+            </ShowTab>
+        </Tabs>
     </Show>
 );

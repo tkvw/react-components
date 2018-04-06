@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import pure from 'recompose/pure';
 import Card from 'material-ui/Card';
 import { withStyles } from 'material-ui/styles';
-
-import { ListDataProducer } from '../../data';
+import { Pagination as DefaultPagination } from 'ra-ui-materialui';
+import { ListController } from 'ra-core';
 
 import DefaultActions from './ListActions';
 import DefaultBulkActions from './BulkActions';
-import Filters from './Filter';
 import ListContent from './ListContent';
-import DefaultPagination from './Pagination';
+
 import { Header } from '../layout';
+
+const sanitizePaginationProps = ({ page, perPage, setPage, total }) => ({
+    page,
+    perPage,
+    setPage,
+    total,
+});
 
 const styles = {
     root: {},
@@ -22,43 +29,60 @@ const styles = {
     pagination: {},
 };
 
-const List = ({
-    bulkActions = <DefaultBulkActions />,
-    children,
-    className,
-    classes = {},
-    filters,
-    actions = (
-        <DefaultActions
-            bulkActions={bulkActions}
-            className={classes.actions}
-            filters={filters}
-        />
-    ),
-    pagination = <DefaultPagination className={classes.pagination} />,
-    ...props
-}) => (
-    <ListDataProducer {...props}>
+const ListView = pure(
+    ({
+        bulkActions = <DefaultBulkActions />,
+        children,
+        className,
+        classes = {},
+        filters,
+        actions = (
+            <DefaultActions
+                bulkActions={bulkActions}
+                className={classes.actions}
+                filters={filters}
+            />
+        ),
+        pagination = <DefaultPagination />,
+        ...props
+    }) => (
         <div className={classnames('list-page', classes.root, className)}>
             <Card>
-                <Header className={classes.header}>{actions}</Header>
+                <Header {...props} className={classes.header}>
+                    {React.cloneElement(actions, props)}
+                </Header>
                 {filters &&
                     React.cloneElement(filters, {
                         className: classes.filters,
                         context: 'form',
+                        ...props,
                     })}
-                <ListContent className={classes.content}>
-                    {children}
+                <ListContent {...props} className={classes.content}>
+                    {typeof children === 'function'
+                        ? children(props)
+                        : React.cloneElement(children, {
+                              ...props,
+                              hasBulkActions: !!bulkActions,
+                          })}
                 </ListContent>
-                {pagination}
+                {React.cloneElement(pagination, {
+                    ...sanitizePaginationProps(props),
+                    className: classes.pagination,
+                })}
             </Card>
         </div>
-    </ListDataProducer>
+    )
+);
+
+const List = props => (
+    <ListController {...props}>
+        {listProps => <ListView {...props} {...listProps} />}
+    </ListController>
 );
 List.propTypes = {
     actions: PropTypes.element,
     bulkActions: PropTypes.element,
-    children: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     className: PropTypes.string,
     classes: PropTypes.object,
     filters: PropTypes.element,

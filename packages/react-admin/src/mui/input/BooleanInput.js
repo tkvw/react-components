@@ -1,10 +1,4 @@
-import React from 'react';
-import { BooleanInput as RaBooleanInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { BooleanInput } from 'ra-ui-materialui';
 
-const BooleanInput = props => (
-    <ResourceInput {...props}>
-        <RaBooleanInput />
-    </ResourceInput>
-);
-export default BooleanInput;
+export default formInputHoc(BooleanInput);

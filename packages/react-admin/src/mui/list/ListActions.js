@@ -2,49 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CardActions, CreateButton, RefreshButton } from 'ra-ui-materialui';
 
-import { withResourceData } from '../../data';
+import { sanitizeResourceProps } from '../propsSanitizers';
 
 const ListActions = ({
     bulkActions,
+    children,
     filters,
     hideCreate,
-    children,
-    className,
-    resource,
-    displayedFilters,
-    filterValues,
-    hasCreate,
-    basePath,
-    selectedIds,
-    onUnselectItems,
-    showFilter,
     ...props
-}) => (
-    <CardActions {...props}>
-        {bulkActions}
-        {filters &&
-            React.cloneElement(filters, {
-                context: 'button',
-            })}
-        {hasCreate && !hideCreate && <CreateButton basePath={basePath} />}
-        <RefreshButton />
-        {children}
-    </CardActions>
-);
+}) => {
+    return (
+        <CardActions {...sanitizeResourceProps(props)}>
+            {bulkActions && React.cloneElement(bulkActions, props)}
+            {filters &&
+                React.cloneElement(filters, {
+                    context: 'button',
+                    ...props,
+                })}
+            {props.hasCreate && !hideCreate && <CreateButton {...props} />}
+            <RefreshButton />
+            {children}
+        </CardActions>
+    );
+};
 
 ListActions.propTypes = {
     bulkActions: PropTypes.node,
-    basePath: PropTypes.string,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    displayedFilters: PropTypes.object,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     filters: PropTypes.element,
-    filterValues: PropTypes.object,
     hasCreate: PropTypes.bool,
-    resource: PropTypes.string,
-    onUnselectItems: PropTypes.func.isRequired,
-    selectedIds: PropTypes.arrayOf(PropTypes.any),
-    showFilter: PropTypes.func,
     hideCreate: PropTypes.bool,
 };
 
@@ -53,15 +39,4 @@ ListActions.defaultProps = {
     hideCreate: false,
 };
 
-export default withResourceData({
-    includeProps: [
-        'resource',
-        'displayedFilters',
-        'filterValues',
-        'hasCreate',
-        'basePath',
-        'selectedIds',
-        'onUnselectItems',
-        'showFilter',
-    ],
-})(ListActions);
+export default ListActions;

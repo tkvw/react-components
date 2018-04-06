@@ -1,10 +1,4 @@
-import React from 'react';
-import { CheckboxGroupInput as RaCheckboxGroupInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { CheckboxGroupInput } from 'ra-ui-materialui';
 
-const CheckboxGroupInput = props => (
-    <ResourceInput {...props}>
-        <RaCheckboxGroupInput />
-    </ResourceInput>
-);
-export default CheckboxGroupInput;
+export default formInputHoc(CheckboxGroupInput);

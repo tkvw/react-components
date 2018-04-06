@@ -1,10 +1,4 @@
-import React from 'react';
-import { DisabledInput as RaDisabledInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { DisabledInput } from 'ra-ui-materialui';
 
-const DisabledInput = props => (
-    <ResourceInput {...props}>
-        <RaDisabledInput />
-    </ResourceInput>
-);
-export default DisabledInput;
+export default formInputHoc(DisabledInput);

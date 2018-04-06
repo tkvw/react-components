@@ -1,45 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'material-ui/Card';
+import pure from 'recompose/pure';
+import { CreateController } from 'ra-core';
 import classnames from 'classnames';
-//import { parse } from 'query-string';
-//import { fp } from '../../utils';
 import CreateActions from './CreateActions';
 import { Header } from '../layout';
-import { CreateDataProducer } from '../../data';
-import sanitizeResourceProps from '../../data/sanitizeResourceProps';
 
-//const params = fp.memoizeOne(queryString => {
-//    return parse(queryString);
-//});
-
-const Create = ({
-    actions = <CreateActions />,
-    children,
-    className,
-    ...rest
-}) => (
-    <CreateDataProducer {...rest}>
-        <Card
-            className={classnames('create-page', className)}
-            {...sanitizeResourceProps(rest)}
-        >
-            <Header>{actions}</Header>
-            {children}
+const CreateView = pure(
+    ({ actions = <CreateActions />, children, className, ...rest }) => (
+        <Card className={classnames('edit-page', className)}>
+            <Header {...rest} >{React.cloneElement(actions, rest)}</Header>
+            {typeof children === 'function'
+                ? children(rest)
+                : React.cloneElement(children, rest)}
         </Card>
-    </CreateDataProducer>
+    )
+);
+
+const Create = props => (
+    <CreateController {...props}>
+        {({ isLoading, ...createProps }) => (
+            <CreateView {...createProps} {...props} />
+        )}
+    </CreateController>
 );
 Create.propTypes = {
     actions: PropTypes.element,
-    basePath: PropTypes.string,
-    children: PropTypes.node,
-    className: PropTypes.string,
-    hasList: PropTypes.bool,
-    resource: PropTypes.string,
-};
-Create.propTypes = {
-    actions: PropTypes.element,
-    children: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     className: PropTypes.string,
 };
 export default Create;

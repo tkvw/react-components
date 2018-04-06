@@ -2,17 +2,19 @@
 import React from 'react';
 import {
     Create,
+    DatagridActions,
     DisabledInput,
     Edit,
     EditButton,
     Filter,
     FormTab,
+    FormInput,
     Responsive,
     Show,
     ShowButton,
     SimpleList,
     Tab,
-    TabbedShowLayout,
+    Tabs,
     TextField,
     TextInput,
     Toolbar,
@@ -41,31 +43,33 @@ export const UserList = ({ permissions, ...props }) => (
         filters={<UserFilter permissions={permissions} />}
         sort={{ field: 'name', order: 'ASC' }}
     >
-        <Responsive
-            small={
-                <SimpleList
-                    primaryText={record => record.name}
-                    secondaryText={record =>
-                        permissions === 'admin' ? record.role : null
-                    }
-                />
-            }
-            medium={
-                <Datagrid>
-                    <TextField source="id" />
-                    <TextField source="name" />
-                    {permissions === 'admin' && <TextField source="role" />}
-                    <EditButton />
-                    <ShowButton />
-                </Datagrid>
-            }
-        />
+        {listProps => (
+            <Responsive
+                {...listProps}
+                small={
+                    <SimpleList
+                        primaryText={record => record.name}
+                        secondaryText={record =>
+                            permissions === 'admin' ? record.role : null
+                        }
+                    />
+                }
+                medium={
+                    <Datagrid>
+                        <TextField source="id" />
+                        <TextField source="name" />
+                        {permissions === 'admin' && <TextField source="role" />}
+                        <DatagridActions {...listProps} />
+                    </Datagrid>
+                }
+            />
+        )}
     </List>
 );
 
-const UserTitle = translate(({ record, t }) => (
+const UserTitle = translate(({ record, translate }) => (
     <span>
-        {record ? t('user.edit.title', { title: record.name }) : ''}
+        {record ? translate('user.edit.title', { title: record.name }) : ''}
     </span>
 ));
 
@@ -104,14 +108,14 @@ export const UserCreate = ({ permissions, ...props }) => (
 export const UserEdit = ({ permissions, ...props }) => (
     <Edit title={<UserTitle />} {...props}>
         <TabbedForm defaultValue={{ role: 'user' }}>
-            <FormTab label="user.form.summary">
+            <Tab label="user.form.summary">
                 {permissions === 'admin' && <DisabledInput source="id" />}
                 <TextInput source="name" validate={required} />
-            </FormTab>
+            </Tab>
             {permissions === 'admin' && (
-                <FormTab label="user.form.security">
+                <Tab label="user.form.security">
                     <TextInput source="role" validate={required} />
-                </FormTab>
+                </Tab>
             )}
         </TabbedForm>
     </Edit>
@@ -119,16 +123,22 @@ export const UserEdit = ({ permissions, ...props }) => (
 
 export const UserShow = ({ permissions, ...props }) => (
     <Show title={<UserTitle />} {...props}>
-        <TabbedShowLayout>
+        <Tabs>
             <Tab label="user.form.summary">
-                <TextField source="id" />
-                <TextField source="name" />
+                <FormInput source="id">
+                    <TextField />
+                </FormInput>
+                <FormInput source="name">
+                    <TextField />
+                </FormInput>
             </Tab>
             {permissions === 'admin' && (
                 <Tab label="user.form.security">
-                    <TextField source="role" />
+                    <FormInput source="role">
+                        <TextField />
+                    </FormInput>
                 </Tab>
             )}
-        </TabbedShowLayout>
+        </Tabs>
     </Show>
 );

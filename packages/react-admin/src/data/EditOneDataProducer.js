@@ -1,24 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ResourceDataProducer from './ResourceDataProducer';
+import { ResourceProvider } from '../context/ResourceContext';
 
-import { EditController, translate } from 'ra-core';
+import { EditOneController } from '../controller';
 
-const EditDataProducer = ({ children, ...props }) => (
-    <EditController {...props}>
+const EditOneDataProducer = ({ children, ...props }) => (
+    <EditOneController {...props}>
         {controllerProps => (
-            <ResourceDataProducer
+            <ResourceProvider
                 value={{
                     ...controllerProps,
                     ...props,
                 }}
             >
                 {children}
-            </ResourceDataProducer>
+            </ResourceProvider>
         )}
-    </EditController>
+    </EditOneController>
 );
-EditDataProducer.propTypes = {
+EditOneDataProducer.propTypes = {
     children: PropTypes.node,
 };
-export default translate(EditDataProducer);
+export default EditOneDataProducer;

@@ -13,15 +13,15 @@
     "remove_filter": "Remove this filter",
     "back": "Go Back",
     "bulk_actions": "{{smart_count}} selected",
-    "undo":"Undo"
+    "undo": "Undo"
   },
   "boolean": {
     "true": "Yes",
     "false": "No"
   },
   "page": {
-    "list": "{{name}} list",
     "edit": "{{name}} #{{id}}",
+    "list": "{{name}} list",
     "show": "{{name}} #{{id}}",
     "create": "Create {{name}}",
     "dashboard": "Dashboard",
@@ -59,8 +59,8 @@
     "bulk_delete_content_plural": "Are you sure you want to delete these {{smart_count}} items?"
   },
   "navigation": {
-    "no_results": "No results found",
     "no_more_results": "The page number {{page}} is out of boundaries. Try the previous page.",
+    "no_results": "No results found",
     "page_out_of_boundaries": "Page number {{page}} out of boundaries",
     "page_out_from_end": "Cannot go after last page",
     "page_out_from_begin": "Cannot go before page 1",
@@ -76,13 +76,13 @@
     "logout": "Logout"
   },
   "notification": {
-    "cancelled":"Update cancelled",
+    "cancelled": "Update cancelled",
     "updated": "Element updated",
     "updated_plural": "{{smart_count}} elements updated",
     "created": "Element created",
     "deleted": "Element deleted",
-    "deleted_plural": "{{smart_count}} elements deleted",
     "bad_item": "Incorrect element",
+    "deleted_plural": "{{smart_count}} elements deleted",
     "item_doesnt_exist": "Element does not exist",
     "http_error": "Server communication error",
     "unAuthorized": "You are not authorized for this resource, please login first",
@@ -90,8 +90,8 @@
   },
   "validation": {
     "required": "Required",
-    "minLength": "Must be {{min}} characters at least",
     "maxLength": "Must be {{max}} characters or less",
+    "minLength": "Must be {{min}} characters at least",
     "minValue": "Must be at least {{min}}",
     "maxValue": "Must be {{max}} or less",
     "number": "Must be a number",

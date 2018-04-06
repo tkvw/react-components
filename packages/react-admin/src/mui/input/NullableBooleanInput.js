@@ -1,10 +1,4 @@
-import React from 'react';
-import { NullableBooleanInput as RaNullableBooleanInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { NullableBooleanInput } from 'ra-ui-materialui';
 
-const NullableBooleanInput = props => (
-    <ResourceInput {...props}>
-        <RaNullableBooleanInput />
-    </ResourceInput>
-);
-export default NullableBooleanInput;
+export default formInputHoc(NullableBooleanInput);

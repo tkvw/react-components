@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
 import { getDefaultValues } from 'ra-core';
-import { withResourceData, FormDataProducer } from '../../data';
-import FormToolbar from './FormToolbar';
+import Toolbar from './Toolbar';
+import { WithDefaultProps } from '../layout';
 
 const styles = theme => ({
     form: {
@@ -33,12 +33,13 @@ export class SimpleForm extends Component {
         pristine: PropTypes.bool,
         save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
         resource: PropTypes.string,
-        redirect: PropTypes.string,
+        redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
         submitOnEnter: PropTypes.bool,
         toolbar: PropTypes.element,
         translate: PropTypes.func,
         version: PropTypes.number,
     };
+
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
         this.props.handleSubmit((values, ...rest) =>
             this.props.save(values, redirect, this.props.form, ...rest)
@@ -49,47 +50,31 @@ export class SimpleForm extends Component {
             children,
             classes,
             className,
-            record,
-            resource,
-            translate,
-            save,
-            submitOnEnter,
-            toolbar = <FormToolbar submitOnEnter={submitOnEnter} />,
+            toolbar = <Toolbar />,
             version,
-            ...rest
+            ...props
         } = this.props;
         return (
-            <FormDataProducer
-                value={{
-                    handleSubmitWithRedirect: this.handleSubmitWithRedirect,
-                    ...rest,
-                }}
+            <form
+                className={classnames('simple-form', className)}
+                key={version}
             >
-                <form
-                    className={classnames('simple-form', className)}
-                    key={version}
-                >
-                    <div className={classes.form}>{children}</div>
-                    {toolbar}
-                </form>
-            </FormDataProducer>
+                <div className={classes.form}>
+                    <WithDefaultProps {...props} version={version}>{children}</WithDefaultProps>
+                </div>
+                {toolbar &&
+                    React.cloneElement(toolbar, {
+                        handleSubmitWithRedirect: this.handleSubmitWithRedirect,
+                        ...props,
+                    })}
+            </form>
         );
     }
 }
 
 const enhance = compose(
     withStyles(styles),
-    withResourceData({
-        include: [
-            'record',
-            'resource',
-            'save',
-            'redirect',
-            'translate',
-            'version',
-        ],
-    }),
-    withProps(({ resource }) => ({ form: `${resource}-form` })),
+    withProps(({ form, resource }) => ({ form: form || `${resource}-form` })),
     connect((state, props) => ({
         initialValues: getDefaultValues(state, props),
     })),

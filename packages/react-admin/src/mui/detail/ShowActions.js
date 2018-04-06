@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 
 import {
     CardActions,
-    ListButton,
-    EditButton,
     DeleteButton,
+    EditButton,
+    ListButton,
     RefreshButton,
 } from 'ra-ui-materialui';
-
-import { withResourceData } from '../../data';
 
 /**
  * Action Toolbar for the Show view
@@ -47,9 +45,8 @@ const ShowActions = ({
     hasEdit,
     record,
     resource,
-    ...rest
 }) => (
-    <CardActions className={className} {...rest}>
+    <CardActions className={className}>
         {hasEdit && <EditButton basePath={basePath} record={record} />}
         {hasList && <ListButton basePath={basePath} />}
         {hasEdit && (
@@ -74,6 +71,4 @@ ShowActions.propTypes = {
     resource: PropTypes.string,
 };
 
-export default withResourceData({
-    includeProps: ['basePath', 'hasList', 'hasEdit', 'record', 'resource'],
-})(ShowActions);
+export default ShowActions;

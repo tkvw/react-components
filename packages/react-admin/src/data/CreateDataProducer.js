@@ -1,19 +1,19 @@
 import React from 'react';
-import ResourceDataProducer from './ResourceDataProducer';
+import { ResourceProvider } from '../context/ResourceContext';
 
 import { CreateController } from 'ra-core';
 
 const CreateDataProducer = ({ children, ...props }) => (
     <CreateController {...props}>
         {controllerProps => (
-            <ResourceDataProducer
+            <ResourceProvider
                 value={{
                     ...controllerProps,
                     ...props,
                 }}
             >
                 {children}
-            </ResourceDataProducer>
+            </ResourceProvider>
         )}
     </CreateController>
 );

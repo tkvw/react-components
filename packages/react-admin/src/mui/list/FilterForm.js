@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { reduxForm, Field, submit } from 'redux-form';
+import { Field, reduxForm, submit } from 'redux-form';
 import { CardContent } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import ActionHide from 'material-ui-icons/HighlightOff';
 import compose from 'recompose/compose';
 import withProps from 'recompose/withProps';
 import { withStyles } from 'material-ui/styles';
-import { withResourceData } from '../../data';
 import classnames from 'classnames';
 import debounce from 'lodash/debounce';
 import lodashSet from 'lodash/set';
@@ -30,20 +29,6 @@ const styles = ({ palette: { primary1Color } }) => ({
 
 const emptyRecord = {};
 
-const sanitizeRestProps = ({
-    setFilters,
-    resource,
-    filters,
-    debounce,
-    displayedFilters,
-    handleSubmit,
-    hideFilter,
-    initialValues,
-    translate,
-    cancelOnChangeDebounce,
-    ...props
-}) => props;
-
 export class FilterForm extends Component {
     getShownFilters() {
         const { filters, displayedFilters, initialValues } = this.props;
@@ -63,62 +48,50 @@ export class FilterForm extends Component {
     }
 
     render() {
-        const {
-            classes = {},
-            className,
-            resource,
-            translate,
-            handleSubmit,
-        } = this.props;
+        const { classes = {}, className, resource, translate } = this.props;
         return (
-            <form onSubmit={handleSubmit}>
-                <div className={className}>
-                    <CardContent className={classes.card}>
-                        {this.getShownFilters()
-                            .reverse()
-                            .map(filterElement => (
-                                <div
-                                    key={filterElement.props.source}
-                                    data-source={filterElement.props.source}
-                                    className={classnames(
-                                        'filter-field',
-                                        classes.body
-                                    )}
-                                >
-                                    {filterElement.props.alwaysOn ? (
-                                        <div className={classes.spacer}>
-                                            &nbsp;
-                                        </div>
-                                    ) : (
-                                        <IconButton
-                                            className="hide-filter"
-                                            onClick={this.handleHide}
-                                            data-key={
-                                                filterElement.props.source
-                                            }
-                                            tooltip={translate(
-                                                'ra.action.remove_filter'
-                                            )}
-                                        >
-                                            <ActionHide />
-                                        </IconButton>
-                                    )}
-                                    <div>
-                                        <Field
-                                            allowEmpty
-                                            {...filterElement.props}
-                                            name={filterElement.props.source}
-                                            component={filterElement.type}
-                                            resource={resource}
-                                            record={emptyRecord}
-                                        />
-                                    </div>
+            <div className={className}>
+                <CardContent className={classes.card}>
+                    {this.getShownFilters()
+                        .reverse()
+                        .map(filterElement => (
+                            <div
+                                key={filterElement.props.source}
+                                data-source={filterElement.props.source}
+                                className={classnames(
+                                    'filter-field',
+                                    classes.body
+                                )}
+                            >
+                                {filterElement.props.alwaysOn ? (
+                                    <div className={classes.spacer}>&nbsp;</div>
+                                ) : (
+                                    <IconButton
+                                        className="hide-filter"
+                                        onClick={this.handleHide}
+                                        data-key={filterElement.props.source}
+                                        tooltip={translate(
+                                            'ra.action.remove_filter'
+                                        )}
+                                    >
+                                        <ActionHide />
+                                    </IconButton>
+                                )}
+                                <div>
+                                    <Field
+                                        allowEmpty
+                                        {...filterElement.props}
+                                        name={filterElement.props.source}
+                                        component={filterElement.type}
+                                        resource={resource}
+                                        record={emptyRecord}
+                                    />
                                 </div>
-                            ))}
-                    </CardContent>
-                    <div className={classes.clearFix} />
-                </div>
-            </form>
+                            </div>
+                        ))}
+                </CardContent>
+                <div className={classes.clearFix} />
+            </div>
         );
     }
 }
@@ -189,9 +162,6 @@ const combineWithProps = props => ({
 });
 
 const enhance = compose(
-    withResourceData({
-        includeProps: ['resource', 'hideFilter', 'displayedFilters'],
-    }),
     translate,
     withStyles(styles),
     withProps(combineWithProps),

@@ -1,6 +1,6 @@
 import { createContext } from 'react-broadcast';
 
 const defaultValue = {};
-const { Broadcast, Subscriber } = createContext(defaultValue);
+const { Provider, Consumer } = createContext(defaultValue);
 
-export { Broadcast as FormDataProducer, Subscriber as FormDataConsumer };
+export { Provider as FormProvider, Consumer as FormConsumer };

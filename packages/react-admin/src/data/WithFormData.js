@@ -4,9 +4,9 @@ import memoizeOne from 'memoize-one';
 import shallowEqual from 'recompose/shallowEqual';
 import pick from 'lodash/pick';
 
-import ResourceDataConsumer from './ResourceDataConsumer';
+import { FormConsumer } from '../context/FormContext';
 
-class WithResourceData extends React.Component {
+class WithFormData extends React.Component {
     static propTypes = {
         includeProps: PropTypes.arrayOf(PropTypes.string),
         render: PropTypes.func,
@@ -40,17 +40,21 @@ class WithResourceData extends React.Component {
     render() {
         const { render } = this.props;
         return (
-            <ResourceDataConsumer>
+            <FormConsumer>
                 {resourceData => render(this.state.reducer(resourceData))}
-            </ResourceDataConsumer>
+            </FormConsumer>
         );
     }
 }
-export default WithResourceData;
+export default WithFormData;
 
-export const withResourceData = ({ includeProps = [] }) => Component => (
-    <WithResourceData
-        includeProps={includeProps}
-        render={data => <Component {...data} />}
-    />
-);
+export const withFormData = ({ includeProps = [] }) => Component => {
+    const WithFormDataHoc = props => (
+        <WithFormData
+            includeProps={includeProps}
+            {...props}
+            render={data => <Component {...data} {...props} />}
+        />
+    );
+    return WithFormDataHoc;
+};

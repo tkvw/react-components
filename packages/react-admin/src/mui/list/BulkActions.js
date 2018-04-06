@@ -1,4 +1,4 @@
-import React, { cloneElement, Children, Component } from 'react';
+import React, { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import FilterNoneIcon from 'material-ui-icons/FilterNone';
 import { MenuItem, MenuList } from 'material-ui/Menu';
@@ -7,13 +7,11 @@ import Grow from 'material-ui/transitions/Grow';
 import Paper from 'material-ui/Paper';
 
 import { withStyles } from 'material-ui/styles';
-import compose from 'recompose/compose';
 import classnames from 'classnames';
-import { translate } from 'ra-core';
 
-import { withResourceData } from '../../data';
-import { Button, BulkDeleteAction } from 'ra-ui-materialui';
-import { Manager, Target, Popper } from 'react-popper';
+import { sanitizeResourceProps } from '../propsSanitizers';
+import { BulkDeleteAction, Button } from 'ra-ui-materialui';
+import { Manager, Popper, Target } from 'react-popper';
 
 const styles = theme => ({
     bulkActionsButton: {
@@ -31,16 +29,10 @@ const styles = theme => ({
     selected: {
         opacity: 1,
     },
+    popperClose: {
+        display: 'none',
+    },
 });
-
-const sanitizeRestProps = ({
-    basePath,
-    classes,
-    filterValues,
-    resource,
-    onUnselectItems,
-    ...rest
-}) => rest;
 
 class BulkActions extends Component {
     state = {
@@ -70,6 +62,7 @@ class BulkActions extends Component {
             classes,
             children,
             className,
+            data,
             filterValues,
             label,
             resource,
@@ -98,7 +91,7 @@ class BulkActions extends Component {
                             aria-owns={isOpen ? 'bulk-actions-menu' : null}
                             aria-haspopup="true"
                             onClick={this.handleClick}
-                            {...sanitizeRestProps(rest)}
+                            {...sanitizeResourceProps(rest)}
                         >
                             <FilterNoneIcon className={classes.icon} />
                             {translate(label, {
@@ -110,7 +103,9 @@ class BulkActions extends Component {
                     <Popper
                         placement="bottom-start"
                         eventsEnabled={isOpen}
-                        className={classnames({ [classes.popperClose]: !open })}
+                        className={classnames({
+                            [classes.popperClose]: !isOpen,
+                        })}
                     >
                         <ClickAwayListener onClickAway={this.handleClose}>
                             <Grow
@@ -134,7 +129,9 @@ class BulkActions extends Component {
                                                             index
                                                         )
                                                     }
-                                                    {...sanitizeRestProps(rest)}
+                                                    {...sanitizeResourceProps(
+                                                        rest
+                                                    )}
                                                 >
                                                     {translate(
                                                         child.props.label
@@ -154,6 +151,7 @@ class BulkActions extends Component {
                         this.state.activeAction === index &&
                         cloneElement(child, {
                             basePath,
+                            data,
                             filterValues,
                             onExit: this.handleExitAction,
                             resource,
@@ -183,12 +181,6 @@ BulkActions.defaultProps = {
     selectedIds: [],
 };
 
-const EnhancedButton = compose(
-    withStyles(styles),
-    translate,
-    withResourceData({
-        includeProps: ['basePath', 'filterValues', 'resource', 'selectedIds'],
-    })
-)(BulkActions);
+const EnhancedButton = withStyles(styles)(BulkActions);
 
 export default EnhancedButton;

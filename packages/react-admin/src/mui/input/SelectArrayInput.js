@@ -1,10 +1,4 @@
-import React from 'react';
-import { SelectArrayInput as RaSelectArrayInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { SelectArrayInput } from 'ra-ui-materialui';
 
-const SelectArrayInput = props => (
-    <ResourceInput {...props}>
-        <RaSelectArrayInput />
-    </ResourceInput>
-);
-export default SelectArrayInput;
+export default formInputHoc(SelectArrayInput);

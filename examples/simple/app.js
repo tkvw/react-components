@@ -74,8 +74,10 @@ render(
         dataProvider={delayedDataProvider}
         title="Example Admin"
         i18next={{
+            debug: false,
             locale: 'en',
-            whitelist: ['en', 'de', 'nl'],
+            fallbackLng: 'en',
+            ns: ['app', 'common', 'ra', 'resources', 'modals'],
             messages: {
                 en: () => englishMessages,
                 de: () => import('./i18n/de'),

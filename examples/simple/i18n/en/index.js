@@ -1,11 +1,10 @@
-import englishMessages from 'ra-language-english';
-import { transformRaMessages } from '@tkvw/react-admin';
 import app from './app';
 import resources from './resources';
+import ra from './ra';
 
 const messages = {
     app,
     resources,
-    ra: transformRaMessages(englishMessages),
+    ra,
 };
 export default messages;

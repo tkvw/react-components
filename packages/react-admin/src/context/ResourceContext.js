@@ -1,9 +1,6 @@
 import { createContext } from 'react-broadcast';
 
 const defaultValue = {};
-const { Broadcast, Subscriber } = createContext(defaultValue);
+const { Provider, Consumer } = createContext(defaultValue);
 
-export {
-    Broadcast as ResourceDataProducer,
-    Subscriber as ResourceDataConsumer,
-};
+export { Provider as ResourceProvider, Consumer as ResourceConsumer };

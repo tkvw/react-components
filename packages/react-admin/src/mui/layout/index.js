@@ -1,6 +1,11 @@
 export { default as Content } from './Content';
+export { default as WithDefaultProps } from './WithDefaultProps';
 export { default as Header } from './Header';
 export { default as Layout } from './Layout';
 export { default as ResourceTitle } from './ResourceTitle';
 export { default as ViewTitle } from './ViewTitle';
-export { default as labeledField } from './labeledField';
+export { default as ShowLayout } from './ShowLayout';
+export { default as Tabs } from './Tabs';
+export { default as Tab } from './Tab';
+export { default as ShowTab } from './ShowTab';
+export { default as EditTab } from './EditTab';

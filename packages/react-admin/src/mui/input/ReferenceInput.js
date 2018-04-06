@@ -1,10 +1,4 @@
-import React from 'react';
-import { ReferenceInput as RaReferenceInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { ReferenceInput } from 'ra-ui-materialui';
 
-const ReferenceInput = props => (
-    <ResourceInput {...props}>
-        <RaReferenceInput />
-    </ResourceInput>
-);
-export default ReferenceInput;
+export default formInputHoc(ReferenceInput);

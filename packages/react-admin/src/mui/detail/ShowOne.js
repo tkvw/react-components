@@ -1,27 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'material-ui/Card';
+import pure from 'recompose/pure';
 import classnames from 'classnames';
-import ShowActions from './ShowActions';
 import { Header } from '../layout';
-import { ShowDataProducer } from '../../data';
-import sanitizeResourceProps from '../../data/sanitizeResourceProps';
+import { ShowOneController } from '../../controller';
 
-const Show = ({ actions = <ShowActions />, children, className, ...rest }) => (
-    <ShowDataProducer {...rest}>
-        <Card
-            className={classnames('show-page', className)}
-            {...sanitizeResourceProps(rest)}
-        >
-            <Header>{actions}</Header>
-            {children}
-        </Card>
-    </ShowDataProducer>
+const ShowOneView = pure(({ actions, children, className, ...rest }) => (
+    <Card className={classnames('edit-page', className)}>
+        <Header {...rest}>
+            {actions && React.cloneElement(actions, rest)}
+        </Header>
+        {typeof children === 'function'
+            ? children(rest)
+            : React.cloneElement(children, rest)}
+    </Card>
+));
+
+const ShowOne = props => (
+    <ShowOneController {...props}>
+        {showOneProps => <ShowOneView {...showOneProps} {...props} />}
+    </ShowOneController>
 );
-Show.propTypes = {
+ShowOne.propTypes = {
     actions: PropTypes.element,
-    children: PropTypes.node,
+    children: PropTypes.func,
     className: PropTypes.string,
-    record: PropTypes.object,
 };
-export default Show;
+export default ShowOne;

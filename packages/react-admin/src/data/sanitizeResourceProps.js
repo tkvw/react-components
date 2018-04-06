@@ -9,5 +9,6 @@ export default ({
     record,
     resource,
     title,
+    undoable,
     ...rest
 }) => rest;

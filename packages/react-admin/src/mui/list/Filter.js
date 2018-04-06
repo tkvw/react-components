@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import compose from 'recompose/compose';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from 'material-ui/styles';
 
-import FilterButton from './FilterButton';
 import FilterForm from './FilterForm';
-import { withResourceData } from '../../data';
 
 import { removeEmpty } from 'ra-core';
+import { FilterButton } from 'ra-ui-materialui';
+import { sanitizeResourceProps } from '../propsSanitizers';
 
 const styles = {
     button: {},
@@ -41,16 +40,25 @@ export class Filter extends Component {
             className,
             context,
             debounce,
+            displayedFilters,
+            filterValues,
             children,
+            resource,
             setFilters,
+            showFilter,
+            filters,
             ...rest
         } = this.props;
 
         return (
             <FilterButton
-                {...rest}
+                {...sanitizeResourceProps(rest)}
                 className={classnames(classes.button, className)}
+                displayedFilters={displayedFilters}
                 filters={React.Children.toArray(children)}
+                filterValues={filterValues}
+                resource={resource}
+                showFilter={showFilter}
             />
         );
     }
@@ -96,12 +104,4 @@ Filter.defaultProps = {
     debounce: 500,
 };
 
-const enhance = compose(
-    withStyles(styles),
-    withResourceData({
-        includeProps: ['filterValues', 'setFilters'],
-    })
-);
-
-export default enhance(Filter);
-
+export default withStyles(styles)(Filter);

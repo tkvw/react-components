@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
-import MuiTabs, { Tab as MuiTab } from 'material-ui/Tabs';
+import MuiTabs from 'material-ui/Tabs';
 import Divider from 'material-ui/Divider';
 import { withStyles } from 'material-ui/styles';
-import compose from 'recompose/compose';
-import { translate } from '@tkvw/react-admin';
+import { WithDefaultProps } from '../layout';
 
 const styles = () => ({
     root: {
         flexGrow: 0,
         width: '100%',
     },
+    activeTab: { padding: '0 1em 1em 1em' },
 });
 
 class Tabs extends React.Component {
     static propTypes = {
         activeTab: PropTypes.number,
         basePath: PropTypes.string,
-        children: PropTypes.oneOfType([
-            PropTypes.func,
-            PropTypes.arrayOf(PropTypes.element),
-        ]),
+        children: PropTypes.node,
         classes: PropTypes.object,
         className: PropTypes.string,
         component: PropTypes.func,
@@ -31,8 +29,11 @@ class Tabs extends React.Component {
         redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
         resource: PropTypes.string,
         save: PropTypes.func,
-        translate: PropTypes.func,
+        headerTabProps: PropTypes.func,
         version: PropTypes.number,
+    };
+    static defaultProps = {
+        headerTabProps: a => undefined,
     };
     state = {
         activeTab: 0,
@@ -43,7 +44,6 @@ class Tabs extends React.Component {
             activeTab: this.props.activeTab || activeTab,
         }));
     }
-
     handleActiveTabChange = (event, activeTab) => {
         this.setState({
             activeTab,
@@ -55,44 +55,45 @@ class Tabs extends React.Component {
             children,
             classes,
             className,
-            translate,
+            headerTabProps,
             ...props
         } = this.props;
 
-        let activeTab = React.Children.toArray(children)[0] || null;
+        const noneEmptyChildren = React.Children.toArray(children).filter(
+            c => c
+        );
+
+        const activeTab =
+            noneEmptyChildren.find(
+                (element, index) => index === this.state.activeTab
+            ) || noneEmptyChildren[0];
+
         return (
             <div className={classnames(classes.root, className)}>
                 <MuiTabs
                     scrollable
                     value={this.state.activeTab}
                     onChange={this.handleActiveTabChange}
-                    {...props}
                 >
-                    {React.Children.map(children, (child, index) => {
-                        if (this.state.activeTab === index) activeTab = child;
-                        const label = child.props.label;
-                        return (
-                            <MuiTab
-                                key={index}
-                                {...props}
-                                label={
-                                    typeof label === 'string'
-                                        ? translate(label, {
-                                              _: label,
-                                          })
-                                        : label
-                                }
-                            />
-                        );
-                    })}
+                    {React.Children.map(noneEmptyChildren, (child, index) =>
+                        React.cloneElement(child, {
+                            context: 'header',
+                            ...headerTabProps(
+                                child,
+                                this.state.activeTab === index
+                            ),
+                        })
+                    )}
                 </MuiTabs>
                 <Divider />
-                {activeTab && activeTab.children}
+                <div className={classes.activeTab}>
+                    <WithDefaultProps {...props} context="content">
+                        {activeTab}
+                    </WithDefaultProps>
+                </div>
             </div>
         );
     }
 }
-const enhance = compose(withStyles(styles), translate);
 
-export default enhance(Tabs);
-export { MuiTab as Tab };
+export default withStyles(styles)(Tabs);

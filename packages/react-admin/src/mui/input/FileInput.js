@@ -1,10 +1,4 @@
-import React from 'react';
-import { FileInput as RaFileInput } from 'ra-ui-materialui';
-import ResourceInput from './FormItem';
+import formInputHoc from './formInputHoc';
+import { FileInput } from 'ra-ui-materialui';
 
-const FileInput = props => (
-    <ResourceInput {...props}>
-        <RaFileInput />
-    </ResourceInput>
-);
-export default FileInput;
+export default formInputHoc(FileInput);

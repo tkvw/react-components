@@ -1,34 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'material-ui/Card';
+import pure from 'recompose/pure';
 import classnames from 'classnames';
-import EditActions from './EditActions';
-import EditContent from './EditContent';
 import { Header } from '../layout';
-import { EditDataProducer } from '../../data';
-import sanitizeResourceProps from '../../data/sanitizeResourceProps';
+import { EditOneController } from '../../controller';
 
-const Edit = ({
-    actions = <EditActions />,
-    children,
-    className,
-    record,
-    ...rest
-}) => (
-    <EditDataProducer {...rest}>
-        <Card
-            className={classnames('edit-page', className)}
-            {...sanitizeResourceProps(rest)}
-        >
-            <Header>{actions}</Header>
-            <EditContent>{children}</EditContent>
-        </Card>
-    </EditDataProducer>
+const EditOneView = pure(({ actions, children, className, ...rest }) => (
+    <Card className={classnames('edit-page', className)}>
+        <Header {...rest}>
+            {actions && React.cloneElement(actions, rest)}
+        </Header>
+        {typeof children === 'function'
+            ? children(rest)
+            : React.cloneElement(children, rest)}
+    </Card>
+));
+
+const EditOne = props => (
+    <EditOneController {...props}>
+        {({ isLoading, ...editOneProps }) => (
+            <EditOneView {...editOneProps} {...props} />
+        )}
+    </EditOneController>
 );
-Edit.propTypes = {
+EditOne.propTypes = {
     actions: PropTypes.element,
-    children: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     className: PropTypes.string,
-    record: PropTypes.object,
 };
-export default Edit;
+export default EditOne;

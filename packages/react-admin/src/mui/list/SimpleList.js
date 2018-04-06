@@ -1,18 +1,23 @@
+import mapProps from 'recompose/mapProps';
 import { SimpleList } from 'ra-ui-materialui';
-import { withResourceData } from '../../data';
 
-export default withResourceData({
-    includeProps: [
-        'basePath',
-        'currentSort',
-        'data',
-        'ids',
-        'isLoading',
-        'onSelect',
-        'onToggleItem',
-        'resource',
-        'selectedIds',
-        'setSort',
-        'version',
-    ],
-})(SimpleList);
+export default mapProps(
+    ({
+        defaultTitle,
+        hideFilter,
+        perPage,
+        page,
+        setFilters,
+        onUnselectItems,
+        setPage,
+        showFilter,
+        translate,
+        hasList,
+        hasEdit,
+        hasCreate,
+        hasShow,
+        displayedFilters,
+        filterValues,
+        ...rest
+    }) => rest
+)(SimpleList);

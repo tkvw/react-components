@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ResourceDataProducer from './ResourceDataProducer';
+import { ResourceProvider } from '../context/ResourceContext';
 
 import { ShowController } from 'ra-core';
 
 const ShowDataProducer = ({ children, ...props }) => (
     <ShowController {...props}>
         {controllerProps => (
-            <ResourceDataProducer
+            <ResourceProvider
                 value={{
                     ...controllerProps,
                     ...props,
                 }}
             >
                 {children}
-            </ResourceDataProducer>
+            </ResourceProvider>
         )}
     </ShowController>
 );

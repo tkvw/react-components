@@ -2,26 +2,30 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'material-ui/Card';
 import classnames from 'classnames';
+import pure from 'recompose/pure';
 import ShowActions from './ShowActions';
 import { Header } from '../layout';
-import { ShowDataProducer } from '../../data';
-import sanitizeResourceProps from '../../data/sanitizeResourceProps';
+import { ShowController } from 'ra-core';
 
-const Show = ({ actions = <ShowActions />, children, className, ...rest }) => (
-    <ShowDataProducer {...rest}>
-        <Card
-            className={classnames('show-page', className)}
-            {...sanitizeResourceProps(rest)}
-        >
-            <Header>{actions}</Header>
-            {children}
+const ShowView = pure(
+    ({ actions = <ShowActions />, children, className, ...props }) => (
+        <Card className={classnames('show-page', className)}>
+            <Header {...props}>{React.cloneElement(actions, props)}</Header>
+            {typeof children === 'function'
+                ? children(props)
+                : React.cloneElement(children, props)}
         </Card>
-    </ShowDataProducer>
+    )
+);
+
+const Show = props => (
+    <ShowController {...props}>
+        {showProps => <ShowView {...showProps} {...props} />}
+    </ShowController>
 );
 Show.propTypes = {
     actions: PropTypes.element,
-    children: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     className: PropTypes.string,
-    record: PropTypes.object,
 };
 export default Show;

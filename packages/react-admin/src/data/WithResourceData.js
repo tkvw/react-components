@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import memoizeOne from 'memoize-one';
 import shallowEqual from 'recompose/shallowEqual';
 import pick from 'lodash/pick';
+import isEqual from 'lodash/isEqual';
 
-import ResourceDataConsumer from './ResourceDataConsumer';
-import { withFormData } from './withFormData';
+import { ResourceConsumer } from '../context/ResourceContext';
 
 class WithResourceData extends React.Component {
     static propTypes = {
+        children: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
         includeProps: PropTypes.arrayOf(PropTypes.string),
         render: PropTypes.func,
     };
@@ -18,7 +19,7 @@ class WithResourceData extends React.Component {
     }
     componentWillReceiveProps(nextProps) {
         const { includeProps } = this.props;
-        if (includeProps !== nextProps.includeProps) {
+        if (!isEqual(includeProps, nextProps.includeProps)) {
             this.setup(nextProps);
         }
     }
@@ -39,19 +40,36 @@ class WithResourceData extends React.Component {
     };
 
     render() {
-        const { render } = this.props;
+        const { children, includeProps, render } = this.props;
+        const { reducer } = this.state;
         return (
-            <ResourceDataConsumer>
-                {resourceData => render(this.state.reducer(resourceData))}
-            </ResourceDataConsumer>
+            <ResourceConsumer>
+                {resourceData =>
+                    typeof render === 'function' ||
+                    typeof children === 'function'
+                        ? (render || children)(reducer(resourceData))
+                        : React.cloneElement(children, reducer(resourceData))
+                }
+            </ResourceConsumer>
         );
     }
 }
 export default WithResourceData;
 
-export const withResourceData = ({ includeProps = [] }) => Component => (
-    <WithResourceData
-        includeProps={includeProps}
-        render={data => <Component {...data} />}
-    />
-);
+export const withResourceData = ({ includeProps = [] }) => Component => {
+    const WithResourceDataHoc = ({ children, ...props }) => (
+        <WithResourceData
+            includeProps={includeProps}
+            {...props}
+            render={data => (
+                <Component {...data} {...props}>
+                    {children}
+                </Component>
+            )}
+        />
+    );
+    WithResourceDataHoc.propTypes = {
+        children: PropTypes.node,
+    };
+    return WithResourceDataHoc;
+};

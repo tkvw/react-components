@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { CardActions, ListButton } from 'ra-ui-materialui';
-import { withResourceData } from '../../data';
 
 /**
  * Action Toolbar for the Create
@@ -29,18 +28,18 @@ import { withResourceData } from '../../data';
  *         </Create>
  *     );
  */
-const CreateActions = ({ basePath, className, hasList, ...rest }) => (
-    <CardActions className={className} {...rest}>
+const CreateActions = ({ basePath, children, className, hasList }) => (
+    <CardActions className={className}>
         {hasList && <ListButton basePath={basePath} />}
+        {children}
     </CardActions>
 );
 
 CreateActions.propTypes = {
+    children: PropTypes.node,
     basePath: PropTypes.string,
     className: PropTypes.string,
     hasList: PropTypes.bool,
 };
 
-export default withResourceData({
-    includeProps: ['basePath', 'hasList'],
-})(CreateActions);
+export default CreateActions;

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
 import withProps from 'recompose/withProps';
 import { connect } from 'react-redux';
+import memoizeOne from 'memoize-one';
 
 import classnames from 'classnames';
 import { getDefaultValues } from 'ra-core';
 import { withStyles } from 'material-ui/styles';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Divider from 'material-ui/Divider';
+import { WithDefaultProps, Tabs } from '../layout';
 import {
     getFormAsyncErrors,
     getFormSubmitErrors,
@@ -16,11 +16,10 @@ import {
     reduxForm,
 } from 'redux-form';
 
-import FormToolbar from './FormToolbar';
-import { FormDataProducer, withResourceData } from '../../data';
+import FormToolbar from './Toolbar';
 
 const styles = theme => ({
-    form: {
+    root: {
         [theme.breakpoints.up('sm')]: {
             padding: '0 1em 1em 1em',
         },
@@ -29,79 +28,47 @@ const styles = theme => ({
         },
     },
 });
-
 class TabbedForm extends React.Component {
-    state = {
-        value: 0,
-    };
-    handleChange = (event, value) => {
-        this.setState({ value });
-    };
+    handleSubmitWithRedirect = (redirect = this.props.redirect) =>
+        this.props.handleSubmit((values, ...rest) =>
+            this.props.save(values, redirect, this.props.form, ...rest)
+        );
+
     render() {
         const {
             children,
             classes,
             className,
-            submitOnEnter,
             tabsWithErrors,
-            toolbar = <FormToolbar submitOnEnter={submitOnEnter} />,
-            translate,
+            toolbar = <FormToolbar />,
             version,
             ...props
         } = this.props;
+
         return (
-            <FormDataProducer
-                value={{
+            <form
+                className={classnames('tabbed-form', className)}
+                key={version}
+            >
+                <Tabs
+                    {...props}
+                    headerTabProps={(child, selected) => ({
+                        className: classnames(
+                            'form-tab',
+                            tabsWithErrors.includes(child.props.label) &&
+                            !selected
+                                ? classes.errorTabButton
+                                : null
+                        ),
+                    })}
+                >
+                    {children}
+                </Tabs>
+                {React.cloneElement(toolbar, {
                     handleSubmitWithRedirect: this.handleSubmitWithRedirect,
                     ...props,
-                }}
-            >
-                <form
-                    className={classnames('simple-form', className)}
-                    key={version}
-                >
-                    <div className={classnames(classes.form, className)}>
-                        <Tabs
-                            scrollable
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                            indicatorColor="primary"
-                        >
-                            {Children.map(
-                                children,
-                                (tab, index) =>
-                                    tab ? (
-                                        <Tab
-                                            key={tab.props.label}
-                                            label={translate(tab.props.label, {
-                                                _: tab.props.label,
-                                            })}
-                                            value={index}
-                                            icon={tab.props.icon}
-                                            className={classnames(
-                                                'form-tab',
-                                                tabsWithErrors.includes(
-                                                    tab.props.label
-                                                ) && this.state.value !== index
-                                                    ? classes.errorTabButton
-                                                    : null
-                                            )}
-                                        />
-                                    ) : null
-                            )}
-                        </Tabs>
-                        <Divider />
-                        <div className={classes.form}>
-                            {Children.map(
-                                children,
-                                (tab, index) =>
-                                    this.state.value === index && tab
-                            )}
-                            {toolbar}
-                        </div>
-                    </div>
-                </form>
-            </FormDataProducer>
+                })}
+            </form>
         );
     }
 }
@@ -110,11 +77,14 @@ TabbedForm.propTypes = {
     children: PropTypes.node,
     classes: PropTypes.object,
     className: PropTypes.string,
+    form: PropTypes.string,
+    handleSubmit: PropTypes.func,
+    redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     render: PropTypes.func,
+    save: PropTypes.func,
     submitOnEnter: PropTypes.bool,
     tabsWithErrors: PropTypes.arrayOf(PropTypes.string),
     toolbar: PropTypes.element,
-    translate: PropTypes.func,
     version: PropTypes.number,
 };
 
@@ -133,6 +103,18 @@ const collectErrors = (
     };
 };
 
+const findNested = (children, matcher, acc = []) => {
+    React.Children.forEach(children, child => {
+        if (child && matcher(child)) acc.push(child);
+        else if (child && child.props && child.props.children)
+            findNested(child.props.children, matcher, acc);
+    });
+    return acc;
+};
+const findAllChildren = memoizeOne((children, matcher) =>
+    findNested(children, matcher)
+);
+
 export const findTabsWithErrors = (
     state,
     props,
@@ -140,11 +122,14 @@ export const findTabsWithErrors = (
 ) => {
     const errors = collectErrorsImpl(state, props);
 
-    return Children.toArray(props.children).reduce((acc, child) => {
-        const inputs = Children.toArray(child.props.children);
+    return Children.toArray(props.children).reduce((acc, tab) => {
+        const inputs = findAllChildren(
+            tab.props.children,
+            c => c && c.props && c.props.source
+        );
 
         if (inputs.some(input => errors[input.props.source])) {
-            return [...acc, child.props.label];
+            return [...acc, tab.props.label];
         }
 
         return acc;
@@ -153,31 +138,16 @@ export const findTabsWithErrors = (
 
 const enhance = compose(
     withStyles(styles),
-    withResourceData({
-        includeProps: [
-            'record',
-            'resource',
-            'save',
-            'redirect',
-            'translate',
-            'version',
-        ],
-    }),
-    withProps(({ resource }) => ({ form: `${resource}-form` })),
+    withProps(({ form, resource }) => ({ form: form || `${resource}-form` })),
     withProps(props => ({
         selectSyncErrors: getFormSyncErrors(props.form),
         selectAsyncErrors: getFormAsyncErrors(props.form),
         selectSubmitErrors: getFormSubmitErrors(props.form),
     })),
     connect((state, props) => {
-        const children = Children.toArray(props.children).reduce(
-            (acc, child) => [...acc, ...Children.toArray(child.props.children)],
-            []
-        );
-
         return {
             tabsWithErrors: findTabsWithErrors(state, props),
-            initialValues: getDefaultValues(state, { ...props, children }),
+            initialValues: getDefaultValues(state, props),
         };
     }),
     reduxForm({

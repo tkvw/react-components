@@ -1,36 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ResourceDataConsumer } from '../../data';
-
 import { translate } from 'ra-core';
-
-const renderTitle = (title, translate, rest) => {
-    if (typeof title === 'string')
-        return <span {...rest}>{translate(title, { ...rest, _: title })}</span>;
-    if (React.isValidElement(title))
+import { Title } from 'ra-ui-materialui';
+const ResourceTitle = ({
+    defaultTitle,
+    title,
+    translate,
+    record,
+    ...props
+}) => {
+    if (React.isValidElement(title)) {
         return React.cloneElement(title, {
+            ...props,
+            record,
             translate,
-            ...rest,
         });
+    } else {
+        if (typeof title === 'function')
+            title = title({
+                ...props,
+                record,
+                translate,
+            });
+        else if (typeof title === 'string')
+            title = translate(title, {
+                _: title,
+                record,
+            });
+        return <Title title={title || defaultTitle} />;
+    }
 };
-
-const ResourceTitle = ({ label, translate, ...rest }) => (
-    <ResourceDataConsumer>
-        {({ defaultTitle, title, ...props }) => {
-            return (
-                renderTitle(title, translate, props) ||
-                renderTitle(label, translate, props) || (
-                    <span {...rest}>{defaultTitle}</span>
-                )
-            );
-        }}
-    </ResourceDataConsumer>
-);
 
 ResourceTitle.propTypes = {
     className: PropTypes.string,
-    label: PropTypes.string,
-    translate: PropTypes.func.isRequired,
+    defaultTitle: PropTypes.string,
 };
 
 export default translate(ResourceTitle);

@@ -1,20 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ResourceDataProducer from './ResourceDataProducer';
+import { ResourceProvider } from '../context/ResourceContext';
 
 import { EditController, translate } from 'ra-core';
+
+const sanitizeProps = ({ undoable, ...rest }) => rest;
 
 const EditDataProducer = ({ children, ...props }) => (
     <EditController {...props}>
         {controllerProps => (
-            <ResourceDataProducer
+            <ResourceProvider
                 value={{
                     ...controllerProps,
-                    ...props,
+                    ...sanitizeProps(props),
                 }}
             >
                 {children}
-            </ResourceDataProducer>
+            </ResourceProvider>
         )}
     </EditController>
 );

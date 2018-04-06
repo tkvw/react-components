@@ -8,27 +8,28 @@ import {
     Edit,
     EditButton,
     Filter,
+    FormField,
     List,
     LongTextInput,
+    minLength,
     ReferenceField,
     ReferenceInput,
+    required,
     Responsive,
     SelectInput,
-    SimpleList,
-    SimpleForm,
-    TextField,
-    TextInput,
-    minLength,
-    translate,
     Show,
     ShowButton,
-    SimpleShowLayout,
-    required,
-} from '@tkvw/react-admin'; // eslint-disable-line import/no-unresolved
+    ShowLayout,
+    SimpleForm,
+    SimpleList,
+    TextField,
+    TextInput,
+    translate,
+} from '@tkvw/react-admin';
 
 import PersonIcon from 'material-ui-icons/Person';
 import Avatar from 'material-ui/Avatar';
-import Card, { CardActions, CardHeader, CardContent } from 'material-ui/Card';
+import Card, { CardActions, CardContent, CardHeader } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Toolbar from 'material-ui/Toolbar';
 import ChevronLeft from 'material-ui-icons/ChevronLeft';
@@ -36,6 +37,7 @@ import ChevronRight from 'material-ui-icons/ChevronRight';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 import ChatBubbleIcon from 'material-ui-icons/ChatBubble';
+
 export const CommentIcon = ChatBubbleIcon;
 
 const CommentFilter = props => (
@@ -47,7 +49,7 @@ const CommentFilter = props => (
 );
 
 const CommentPagination = translate(
-    ({ page, perPage, total, setPage, t }) => {
+    ({ page, perPage, total, setPage, translate }) => {
         const nbPages = Math.ceil(total / perPage) || 1;
         return (
             nbPages > 1 && (
@@ -59,7 +61,7 @@ const CommentPagination = translate(
                             onClick={() => setPage(page - 1)}
                         >
                             <ChevronLeft />&nbsp;
-                            {t('ra.navigation.prev')}
+                            {translate('ra.navigation.prev')}
                         </Button>
                     )}
                     {page !== nbPages && (
@@ -68,7 +70,7 @@ const CommentPagination = translate(
                             key="next"
                             onClick={() => setPage(page + 1)}
                         >
-                            {t('ra.navigation.next')}&nbsp;
+                            {translate('ra.navigation.next')}&nbsp;
                             <ChevronRight />
                         </Button>
                     )}
@@ -95,7 +97,7 @@ const listStyles = theme => ({
 });
 
 const CommentGrid = withStyles(listStyles)(
-    translate(({ classes, ids, data, basePath, t }) => (
+    ({ basePath, ids, data, classes, translate }) => (
         <Grid container style={{ padding: '1em' }}>
             {ids.map(id => (
                 <Grid item key={id} sm={12} md={6} lg={4}>
@@ -123,7 +125,7 @@ const CommentGrid = withStyles(listStyles)(
                             <TextField record={data[id]} source="body" />
                         </CardContent>
                         <CardContent className={classes.cardLink}>
-                            {t('comment.list.about')}&nbsp;
+                            {translate('comment.list.about')}&nbsp;
                             <ReferenceField
                                 resource="comments"
                                 record={data[id]}
@@ -150,7 +152,7 @@ const CommentGrid = withStyles(listStyles)(
                 </Grid>
             ))}
         </Grid>
-    ))
+    )
 );
 
 CommentGrid.defaultProps = {
@@ -164,7 +166,8 @@ const CommentMobileList = props => (
         secondaryText={record => record.body}
         secondaryTextLines={2}
         tertiaryText={record =>
-            new Date(record.created_at).toLocaleDateString()}
+            new Date(record.created_at).toLocaleDateString()
+        }
         leftAvatar={() => <PersonIcon />}
         {...props}
     />
@@ -193,7 +196,10 @@ export const CommentEdit = props => (
             >
                 <AutocompleteInput optionText="title" />
             </ReferenceInput>
-            <TextInput source="author.name" validate={[required,minLength(10)]} />
+            <TextInput
+                source="author.name"
+                validate={[required(), minLength(10)]}
+            />
             <DateInput source="created_at" />
             <LongTextInput source="body" validate={minLength(10)} />
         </SimpleForm>
@@ -208,7 +214,7 @@ export const CommentCreate = props => (
                 source="post_id"
                 reference="posts"
                 allowEmpty
-                validate={required}
+                validate={required()}
             >
                 <SelectInput optionText="title" />
             </ReferenceInput>
@@ -220,14 +226,16 @@ export const CommentCreate = props => (
 
 export const CommentShow = props => (
     <Show {...props}>
-        <SimpleShowLayout>
-            <TextField source="id" />
-            <ReferenceField source="post_id" reference="posts">
-                <TextField source="title" />
-            </ReferenceField>
-            <TextField source="author.name" />
-            <DateField source="created_at" />
-            <TextField source="body" />
-        </SimpleShowLayout>
+        <ShowLayout>
+            <FormField>
+                <TextField source="id" />
+                <ReferenceField source="post_id" reference="posts">
+                    <TextField source="title" />
+                </ReferenceField>
+                <TextField source="author.name" />
+                <DateField source="created_at" />
+                <TextField source="body" />
+            </FormField>
+        </ShowLayout>
     </Show>
 );

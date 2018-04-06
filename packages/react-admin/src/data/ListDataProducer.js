@@ -1,14 +1,14 @@
 import React from 'react';
-import ResourceDataProducer from './ResourceDataProducer';
+import { ResourceProvider } from '../context/ResourceContext';
 
 import { ListController } from 'ra-core';
 
 const ListDataProducer = ({ children, ...props }) => (
     <ListController {...props}>
         {controllerProps => (
-            <ResourceDataProducer value={{ ...controllerProps, ...props }}>
+            <ResourceProvider value={{ ...controllerProps, ...props }}>
                 {children}
-            </ResourceDataProducer>
+            </ResourceProvider>
         )}
     </ListController>
 );

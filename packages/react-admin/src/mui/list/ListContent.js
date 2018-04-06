@@ -2,9 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
-import compose from 'recompose/compose';
-
-import { withResourceData } from '../../data';
 import NoResults from './NoResults';
 
 const styles = {
@@ -21,14 +18,9 @@ const ListContent = ({
     isLoading,
     total,
     version,
-    ...props
 }) =>
     isLoading || total > 0 ? (
-        <div
-            key={version}
-            {...props}
-            className={classnames(classes.root, className)}
-        >
+        <div key={version} className={classnames(classes.root, className)}>
             {children}
         </div>
     ) : (
@@ -45,11 +37,4 @@ ListContent.propTypes = {
     version: PropTypes.number,
 };
 
-const enhance = compose(
-    withStyles(styles),
-    withResourceData({
-        includeProps: ['isLoading', 'total', 'version'],
-    })
-);
-
-export default enhance(ListContent);
+export default withStyles(styles)(ListContent);

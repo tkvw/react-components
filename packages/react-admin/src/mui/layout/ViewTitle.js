@@ -5,18 +5,21 @@ import Typography from 'material-ui/Typography';
 import classnames from 'classnames';
 import { Responsive, AppBarMobile } from 'ra-ui-materialui';
 
-const ViewTitle = ({ children, className, title, ...rest }) => (
+const ViewTitle = ({ children, className }) => (
     <Responsive
         xsmall={
             <AppBarMobile
                 className={classnames('title', className)}
                 title={children}
-                {...rest}
             />
         }
         medium={
-            <CardContent className={classnames('title', className)} {...rest}>
-                <Typography variant="headline">{children}</Typography>
+            <CardContent className={classnames('title', className)}>
+                {typeof children === 'string' ? (
+                    <Typography variant="headline">{children}</Typography>
+                ) : (
+                    children
+                )}
             </CardContent>
         }
     />

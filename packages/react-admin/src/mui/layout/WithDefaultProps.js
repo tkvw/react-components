@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class WithDefaultProps extends React.Component {
     static propTypes = {
-        children: PropTypes.node,
+        children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     };
     state = {
         children: [],
