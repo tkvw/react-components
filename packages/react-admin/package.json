@@ -1,6 +1,6 @@
 {
   "name": "@tkvw/react-admin",
-  "version": "1.2.1-beta51",
+  "version": "1.2.1-beta52",
   "description": "",
   "main": "build/index",
   "jsnext:main": "src/index",
@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",
-    "@tkvw/react-material-fileinput": "^1.2.1-beta51",
-    "@tkvw/redux-override-reducer": "^1.2.1-beta51",
+    "@tkvw/react-material-fileinput": "^1.2.1-beta52",
+    "@tkvw/redux-override-reducer": "^1.2.1-beta52",
     "i18next": "^10.5.0",
     "i18next-browser-languagedetector": "^2.1.0",
     "i18next-xhr-backend": "^1.5.1",
@@ -30,7 +30,7 @@
     "react-router": "~4.2.0",
     "react-router-dom": "~4.2.2",
     "react-router-redux": "~5.0.0-alpha.6",
-    "recompose": "^0.27.0",
+    "recompose": "~0.26.0",
     "redux": "~3.7.2",
     "redux-form": "^7.3.0",
     "redux-promising-modals": "^2.1.2",
