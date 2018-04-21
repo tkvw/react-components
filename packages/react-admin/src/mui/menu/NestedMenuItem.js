@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import inflection from 'inflection';
 import { translate } from 'ra-core';
-import ExpandLess from 'material-ui-icons/ExpandLess';
-import ExpandMore from 'material-ui-icons/ExpandMore';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import MenuItemLink from './MenuItemLink';
 

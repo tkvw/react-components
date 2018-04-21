@@ -6,6 +6,7 @@ import classnames from 'classnames';
 const sanitizeRestProps = ({
     cellClassName,
     className,
+    editing,
     field,
     formClassName,
     headerClassName,
@@ -17,6 +18,7 @@ const sanitizeRestProps = ({
 
 export const DatagridCell = ({
     className,
+    editing,
     field,
     record,
     basePath,
@@ -32,6 +34,7 @@ export const DatagridCell = ({
         {React.cloneElement(field, {
             record,
             basePath: field.props.basePath || basePath,
+            editing,
             resource,
         })}
     </TableCell>
@@ -39,6 +42,7 @@ export const DatagridCell = ({
 
 DatagridCell.propTypes = {
     className: PropTypes.string,
+    editing: PropTypes.bool,
     field: PropTypes.element,
     record: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     basePath: PropTypes.string,

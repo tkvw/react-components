@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, Component } from 'react';
 import PropTypes from 'prop-types';
-import FilterNoneIcon from 'material-ui-icons/FilterNone';
+import FilterNoneIcon from '@material-ui/icons/FilterNone';
 import { MenuItem, MenuList } from 'material-ui/Menu';
 import ClickAwayListener from 'material-ui/utils/ClickAwayListener';
 import Grow from 'material-ui/transitions/Grow';
@@ -8,8 +8,13 @@ import Paper from 'material-ui/Paper';
 
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
+import compose from 'recompose/compose';
 
-import { sanitizeResourceProps } from '../propsSanitizers';
+import { sanitizeResourceProps, sanitizeListProps } from '../propsSanitizers';
+
+const sanitizeProps = compose(sanitizeResourceProps, sanitizeListProps);
+
+import { translate } from 'ra-core';
 import { BulkDeleteAction, Button } from 'ra-ui-materialui';
 import { Manager, Popper, Target } from 'react-popper';
 
@@ -91,7 +96,7 @@ class BulkActions extends Component {
                             aria-owns={isOpen ? 'bulk-actions-menu' : null}
                             aria-haspopup="true"
                             onClick={this.handleClick}
-                            {...sanitizeResourceProps(rest)}
+                            {...sanitizeProps(rest)}
                         >
                             <FilterNoneIcon className={classes.icon} />
                             {translate(label, {
@@ -129,9 +134,7 @@ class BulkActions extends Component {
                                                             index
                                                         )
                                                     }
-                                                    {...sanitizeResourceProps(
-                                                        rest
-                                                    )}
+                                                    {...sanitizeProps(rest)}
                                                 >
                                                     {translate(
                                                         child.props.label
@@ -181,6 +184,7 @@ BulkActions.defaultProps = {
     selectedIds: [],
 };
 
-const EnhancedButton = withStyles(styles)(BulkActions);
+const enhance = compose(withStyles(styles), translate);
+const EnhancedButton = enhance(BulkActions);
 
 export default EnhancedButton;

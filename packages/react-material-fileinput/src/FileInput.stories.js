@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import FileInput from './FileInput';
 import FileFilter from './FileFilter';
 import { CropperPreview, ImagePreview } from './previews';
-import ImageIcon from 'material-ui-icons/Image';
+import ImageIcon from '@material-ui/icons/Image';
 
 class WithValue extends React.Component {
     state = {

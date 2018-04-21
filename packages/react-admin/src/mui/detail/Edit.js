@@ -6,16 +6,24 @@ import { EditController } from 'ra-core';
 import classnames from 'classnames';
 import EditActions from './EditActions';
 import { Header } from '../layout';
+import LoadingRecord from './LoadingRecord';
 
 const EditView = pure(
-    ({ actions = <EditActions />, children, className, ...rest }) => (
-        <Card className={classnames('edit-page', className)}>
-            <Header {...rest}>{React.cloneElement(actions, rest)}</Header>
-            {typeof children === 'function'
-                ? children(rest)
-                : React.cloneElement(children, rest)}
-        </Card>
-    )
+    ({ actions = <EditActions />, children, className, ...rest }) => {
+        const { record } = rest;
+        return (
+            <Card className={classnames('edit-page', className)}>
+                <Header {...rest}>{React.cloneElement(actions, rest)}</Header>
+                {!record ? (
+                    <LoadingRecord />
+                ) : typeof children === 'function' ? (
+                    children(rest)
+                ) : (
+                    React.cloneElement(children, rest)
+                )}
+            </Card>
+        );
+    }
 );
 
 const Edit = props => (

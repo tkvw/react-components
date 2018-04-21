@@ -6,12 +6,15 @@ import classnames from 'classnames';
 import ViewTitle from './ViewTitle';
 import ResourceTitle from './ResourceTitle';
 import { sanitizeResourceProps } from '../propsSanitizers';
-const styles = {
+const styles = theme => ({
     root: {
         display: 'flex',
         justifyContent: 'space-between',
+        [theme.breakpoints.down('xs')]: {
+            display: 'block',
+        },
     },
-};
+});
 
 export const Header = ({ children, classes, className, ...rest }) => {
     return (

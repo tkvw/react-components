@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-import CheckIcon from 'material-ui-icons/Check';
-import SettingsIcon from 'material-ui-icons/Settings';
+import CheckIcon from '@material-ui/icons/Check';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const styles = theme => ({
     root: {

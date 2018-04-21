@@ -93,6 +93,7 @@ export const crudUpdateSingle = (
     meta: {
         resource,
         fetch: UPDATE_SINGLE,
+        form,
         onSuccess: {
             notification: {
                 body: 'ra.notification.updated',
@@ -103,14 +104,12 @@ export const crudUpdateSingle = (
             },
             basePath,
             redirectTo,
-            form,
         },
         onFailure: {
             notification: {
                 body: 'ra.notification.http_error',
                 level: 'warning',
             },
-            form,
             refresh: true,
         },
     },
@@ -135,6 +134,7 @@ export const crudDeleteSingle = (
     type: CRUD_DELETE_SINGLE,
     payload: { previousData, path },
     meta: {
+        form,
         resource,
         fetch: DELETE_SINGLE,
         onSuccess: {
@@ -147,14 +147,12 @@ export const crudDeleteSingle = (
             },
             basePath,
             redirectTo,
-            form,
         },
         onFailure: {
             notification: {
                 body: 'ra.notification.http_error',
                 level: 'warning',
             },
-            form,
             refresh: true,
         },
     },

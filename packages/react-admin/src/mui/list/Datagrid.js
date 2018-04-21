@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Table, { TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Checkbox from 'material-ui/Checkbox';
+import compose from 'recompose/compose';
 import classnames from 'classnames';
 
 import DatagridHeaderCell from './DatagridHeaderCell';
 import DatagridBody from './DatagridBody';
-
+import { sanitizeResourceProps, sanitizeListProps } from '../propsSanitizers';
+const sanitizeProps = compose(sanitizeResourceProps, sanitizeListProps);
 const styles = {
     table: {
         tableLayout: 'auto',
@@ -108,7 +110,10 @@ class Datagrid extends Component {
         } = this.props;
 
         return (
-            <Table className={classnames(classes.table, className)} {...rest}>
+            <Table
+                className={classnames(classes.table, className)}
+                {...sanitizeProps(rest)}
+            >
                 <TableHead>
                     <TableRow className={classes.row}>
                         {hasBulkActions && (

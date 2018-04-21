@@ -10,7 +10,7 @@ import { Header } from '../layout';
 const CreateView = pure(
     ({ actions = <CreateActions />, children, className, ...rest }) => (
         <Card className={classnames('edit-page', className)}>
-            <Header {...rest} >{React.cloneElement(actions, rest)}</Header>
+            <Header {...rest}>{React.cloneElement(actions, rest)}</Header>
             {typeof children === 'function'
                 ? children(rest)
                 : React.cloneElement(children, rest)}

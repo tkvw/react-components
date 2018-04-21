@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import compose from 'recompose/compose';
 import isEqual from 'lodash/isEqual';
 import { withStyles } from 'material-ui/styles';
+import { sanitizeResourceProps, sanitizeListProps } from '../propsSanitizers';
+
+const sanitizeProps = compose(sanitizeResourceProps, sanitizeListProps);
 
 import FilterForm from './FilterForm';
 
 import { removeEmpty } from 'ra-core';
 import { FilterButton } from 'ra-ui-materialui';
-import { sanitizeResourceProps } from '../propsSanitizers';
 
 const styles = {
     button: {},
@@ -52,7 +55,7 @@ export class Filter extends Component {
 
         return (
             <FilterButton
-                {...sanitizeResourceProps(rest)}
+                {...sanitizeProps(rest)}
                 className={classnames(classes.button, className)}
                 displayedFilters={displayedFilters}
                 filters={React.Children.toArray(children)}

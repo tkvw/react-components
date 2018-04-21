@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'material-ui/Modal';
 import Button from 'material-ui/Button';
-import RemoveCircle from 'material-ui-icons/RemoveCircle';
+import RemoveCircle from '@material-ui/icons/RemoveCircle';
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 

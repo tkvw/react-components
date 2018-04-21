@@ -1,22 +1,21 @@
 import React, { createElement } from 'react';
 import 'cropperjs/dist/cropper.min.css';
 import PropTypes from 'prop-types';
-import withProps from 'recompose/withProps';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createHashHistory';
-import { Switch, Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from 'redux-saga/effects';
 import withContext from 'recompose/withContext';
 import { modalsMiddleware } from 'redux-promising-modals';
 
-import { USER_LOGOUT, CoreAdminRouter } from 'ra-core';
+import { CoreAdminRouter, USER_LOGOUT } from 'ra-core';
 
-import { Login, Logout, NotFound, Loading } from 'ra-ui-materialui';
+import { Loading, Login, Logout, NotFound } from 'ra-ui-materialui';
 
-import { TranslationProvider, initI18n } from './i18n';
+import { initI18n, TranslationProvider } from './i18n';
 import formMiddleware from './middlewares/form';
 import { crudSaga } from './sideEffect/index';
 

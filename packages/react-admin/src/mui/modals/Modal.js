@@ -12,7 +12,7 @@ class Modal extends React.Component {
         return render({
             ...rest,
             open: type === showType,
-            options: showProps,
+            options: type === showType ? showProps : undefined,
         });
     }
 }

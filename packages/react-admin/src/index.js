@@ -30,13 +30,23 @@ export {
 } from './mui/detail';
 export { DirtyBlocker, SimpleForm, TabbedForm, Toolbar } from './mui/form';
 export { FormField } from './mui/field';
-export { Header, Tab, Tabs, ShowLayout, ShowTab, EditTab } from './mui/layout';
+export {
+    Header,
+    RenderChildren,
+    Tab,
+    Tabs,
+    ShowLayout,
+    ShowTab,
+    EditTab,
+} from './mui/layout';
 export {
     BulkActions,
     Datagrid,
+    DatagridRow,
     DatagridActions,
     Filter,
     List,
+    ListView,
     ListContent,
     NoResults,
     ListActions,
@@ -76,3 +86,5 @@ export {
     NestedMenu,
     MenuItemLink,
 } from './mui/menu';
+
+export { propsSanitizers } from './mui';

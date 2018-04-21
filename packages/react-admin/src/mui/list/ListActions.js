@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CardActions, CreateButton, RefreshButton } from 'ra-ui-materialui';
+import compose from 'recompose/compose';
 
-import { sanitizeResourceProps } from '../propsSanitizers';
+import { sanitizeResourceProps, sanitizeListProps } from '../propsSanitizers';
+
+const sanitizeProps = compose(sanitizeResourceProps, sanitizeListProps);
 
 const ListActions = ({
     bulkActions,
@@ -12,7 +15,7 @@ const ListActions = ({
     ...props
 }) => {
     return (
-        <CardActions {...sanitizeResourceProps(props)}>
+        <CardActions {...sanitizeProps(props)}>
             {bulkActions && React.cloneElement(bulkActions, props)}
             {filters &&
                 React.cloneElement(filters, {

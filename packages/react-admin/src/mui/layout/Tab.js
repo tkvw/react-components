@@ -2,16 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { translate } from 'ra-core';
 import { Tab as MuiTab } from 'material-ui/Tabs';
+import RenderChildren from './RenderChildren';
 
 const Tab = ({ context, children, label, locale, translate, ...props }) =>
     context === 'content' ? (
-        typeof children === 'function' ? (
-            children(props)
-        ) : (
-            React.Children.map(children, child =>
-                React.cloneElement(child, props)
-            )
-        )
+        <RenderChildren {...props}>{children}</RenderChildren>
     ) : (
         <MuiTab key={label} label={translate(label, { _: label })} {...props} />
     );

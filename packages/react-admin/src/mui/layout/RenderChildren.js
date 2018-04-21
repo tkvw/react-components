@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class WithDefaultProps extends React.Component {
+class RenderChildren extends React.Component {
     static propTypes = {
         children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     };
@@ -14,21 +14,33 @@ class WithDefaultProps extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.updateChildren(nextProps);
     }
-    updateChildren = ({ children, ...props }) =>
-        this.setState({
-            children: (typeof children === 'function'
+    updateChildren = ({ children, ...props }) => {
+        let nextChildren =
+            typeof children === 'function'
                 ? children(props)
                 : React.Children.map(
                       children,
-                      child => child && React.cloneElement(child, props)
-                  )
-            ).filter(c => c),
+                      child =>
+                          child &&
+                          React.cloneElement(
+                              child,
+                              child.props
+                                  ? {
+                                        ...props,
+                                        ...child.props,
+                                    }
+                                  : props
+                          )
+                  );
+        if (Array.isArray(nextChildren))
+            nextChildren = nextChildren.filter(c => c);
+
+        this.setState({
+            children: nextChildren,
         });
+    };
     render() {
-        const { children, ...props } = this.props;
-        return React.Children.map(this.state.children, child =>
-            React.cloneElement(child, props)
-        );
+        return this.state.children;
     }
 }
-export default WithDefaultProps;
+export default RenderChildren;

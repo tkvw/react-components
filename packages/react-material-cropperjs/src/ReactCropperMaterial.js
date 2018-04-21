@@ -6,16 +6,16 @@ import Tooltip from 'material-ui/Tooltip';
 import classnames from 'classnames';
 import ToolbarButton from './ToolbarButton';
 
-import ZoomIn from 'material-ui-icons/ZoomIn';
-import ZoomOut from 'material-ui-icons/ZoomOut';
-import KeyboardArrowDown from 'material-ui-icons/KeyboardArrowDown';
-import KeyboardArrowUp from 'material-ui-icons/KeyboardArrowUp';
-import KeyboardArrowLeft from 'material-ui-icons/KeyboardArrowLeft';
-import KeyboardArrowRight from 'material-ui-icons/KeyboardArrowRight';
-import RotateLeft from 'material-ui-icons/RotateLeft';
-import RotateRight from 'material-ui-icons/RotateRight';
-import Refresh from 'material-ui-icons/Refresh';
-import Check from 'material-ui-icons/Check';
+import ZoomIn from '@material-ui/icons/ZoomIn';
+import ZoomOut from '@material-ui/icons/ZoomOut';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import RotateLeft from '@material-ui/icons/RotateLeft';
+import RotateRight from '@material-ui/icons/RotateRight';
+import Refresh from '@material-ui/icons/Refresh';
+import Check from '@material-ui/icons/Check';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({

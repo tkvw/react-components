@@ -49,29 +49,27 @@ export class EditOneController extends Component {
             startUndoable,
             dispatchCrudUpdateSingle,
         } = this.props;
-        if (undoable) {
-            startUndoable(
-                crudUpdateSingle(
-                    resource,
-                    data,
-                    record,
-                    redirect,
-                    form,
-                    path,
-                    this.getBasePath()
-                )
-            );
-        } else {
-            dispatchCrudUpdateSingle(
-                resource,
-                data,
-                record,
-                redirect,
-                form,
-                path,
-                this.getBasePath()
-            );
-        }
+        return undoable
+            ? startUndoable(
+                  crudUpdateSingle(
+                      resource,
+                      data,
+                      record,
+                      redirect,
+                      form,
+                      path,
+                      this.getBasePath()
+                  )
+              )
+            : dispatchCrudUpdateSingle(
+                  resource,
+                  data,
+                  record,
+                  redirect,
+                  form,
+                  path,
+                  this.getBasePath()
+              );
     };
 
     render() {

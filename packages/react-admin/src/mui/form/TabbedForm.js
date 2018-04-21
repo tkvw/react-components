@@ -1,14 +1,14 @@
 import React, { Children } from 'react';
 import PropTypes from 'prop-types';
 import compose from 'recompose/compose';
-import withProps from 'recompose/withProps';
+import mapProps from 'recompose/mapProps';
 import { connect } from 'react-redux';
 import memoizeOne from 'memoize-one';
 
 import classnames from 'classnames';
 import { getDefaultValues } from 'ra-core';
 import { withStyles } from 'material-ui/styles';
-import { WithDefaultProps, Tabs } from '../layout';
+import { Tabs } from '../layout';
 import {
     getFormAsyncErrors,
     getFormSubmitErrors,
@@ -17,7 +17,7 @@ import {
 } from 'redux-form';
 
 import FormToolbar from './Toolbar';
-
+import { FormProvider } from './FormContext';
 const styles = theme => ({
     root: {
         [theme.breakpoints.up('sm')]: {
@@ -36,9 +36,12 @@ class TabbedForm extends React.Component {
 
     render() {
         const {
+            basePath,
             children,
             classes,
             className,
+            record,
+            resource,
             tabsWithErrors,
             toolbar = <FormToolbar />,
             version,
@@ -46,41 +49,48 @@ class TabbedForm extends React.Component {
         } = this.props;
 
         return (
-            <form
-                className={classnames('tabbed-form', className)}
-                key={version}
-            >
-                <Tabs
-                    {...props}
-                    headerTabProps={(child, selected) => ({
-                        className: classnames(
-                            'form-tab',
-                            tabsWithErrors.includes(child.props.label) &&
-                            !selected
-                                ? classes.errorTabButton
-                                : null
-                        ),
-                    })}
+            <FormProvider value={props}>
+                <form
+                    className={classnames('tabbed-form', className)}
+                    key={version}
                 >
-                    {children}
-                </Tabs>
-                {React.cloneElement(toolbar, {
-                    handleSubmitWithRedirect: this.handleSubmitWithRedirect,
-                    ...props,
-                })}
-            </form>
+                    <Tabs
+                        basePath={basePath}
+                        headerTabProps={(child, selected) => ({
+                            className: classnames(
+                                'form-tab',
+                                tabsWithErrors.includes(child.props.label) &&
+                                !selected
+                                    ? classes.errorTabButton
+                                    : null
+                            ),
+                        })}
+                        record={record}
+                        resource={resource}
+                    >
+                        {children}
+                    </Tabs>
+                    {React.cloneElement(toolbar, {
+                        handleSubmitWithRedirect: this.handleSubmitWithRedirect,
+                        ...props,
+                    })}
+                </form>
+            </FormProvider>
         );
     }
 }
 
 TabbedForm.propTypes = {
+    basePath: PropTypes.string,
     children: PropTypes.node,
     classes: PropTypes.object,
     className: PropTypes.string,
     form: PropTypes.string,
     handleSubmit: PropTypes.func,
+    record: PropTypes.object,
     redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     render: PropTypes.func,
+    resource: PropTypes.string,
     save: PropTypes.func,
     submitOnEnter: PropTypes.bool,
     tabsWithErrors: PropTypes.arrayOf(PropTypes.string),
@@ -138,12 +148,16 @@ export const findTabsWithErrors = (
 
 const enhance = compose(
     withStyles(styles),
-    withProps(({ form, resource }) => ({ form: form || `${resource}-form` })),
-    withProps(props => ({
-        selectSyncErrors: getFormSyncErrors(props.form),
-        selectAsyncErrors: getFormAsyncErrors(props.form),
-        selectSubmitErrors: getFormSubmitErrors(props.form),
-    })),
+    mapProps(props => {
+        const form = props.form || `${props.resource}-tabbed-form`;
+        return {
+            form,
+            selectSyncErrors: getFormSyncErrors(form),
+            selectAsyncErrors: getFormAsyncErrors(form),
+            selectSubmitErrors: getFormSubmitErrors(form),
+            ...props,
+        };
+    }),
     connect((state, props) => {
         return {
             tabsWithErrors: findTabsWithErrors(state, props),

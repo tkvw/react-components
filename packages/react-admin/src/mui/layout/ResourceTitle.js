@@ -27,7 +27,7 @@ const ResourceTitle = ({
                 _: title,
                 record,
             });
-        return <Title title={title || defaultTitle} />;
+        return <Title title={title} defaultTitle={defaultTitle} />;
     }
 };
 

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import MuiTabs from 'material-ui/Tabs';
 import Divider from 'material-ui/Divider';
 import { withStyles } from 'material-ui/styles';
-import { WithDefaultProps } from '../layout';
+import { RenderChildren } from '../layout';
 
 const styles = () => ({
     root: {
@@ -87,9 +87,9 @@ class Tabs extends React.Component {
                 </MuiTabs>
                 <Divider />
                 <div className={classes.activeTab}>
-                    <WithDefaultProps {...props} context="content">
+                    <RenderChildren {...props} context="content">
                         {activeTab}
-                    </WithDefaultProps>
+                    </RenderChildren>
                 </div>
             </div>
         );

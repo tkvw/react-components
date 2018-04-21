@@ -5,17 +5,25 @@ import pure from 'recompose/pure';
 import classnames from 'classnames';
 import { Header } from '../layout';
 import { EditOneController } from '../../controller';
+import LoadingRecord from './LoadingRecord';
 
-const EditOneView = pure(({ actions, children, className, ...rest }) => (
-    <Card className={classnames('edit-page', className)}>
-        <Header {...rest}>
-            {actions && React.cloneElement(actions, rest)}
-        </Header>
-        {typeof children === 'function'
-            ? children(rest)
-            : React.cloneElement(children, rest)}
-    </Card>
-));
+const EditOneView = pure(({ actions, children, className, ...rest }) => {
+    const { record } = rest;
+    return (
+        <Card className={classnames('edit-page', className)}>
+            <Header {...rest}>
+                {actions && React.cloneElement(actions, rest)}
+            </Header>
+            {!record ? (
+                <LoadingRecord />
+            ) : typeof children === 'function' ? (
+                children(rest)
+            ) : (
+                React.cloneElement(children, rest)
+            )}
+        </Card>
+    );
+});
 
 const EditOne = props => (
     <EditOneController {...props}>

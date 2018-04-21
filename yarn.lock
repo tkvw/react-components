@@ -518,6 +518,12 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@material-ui/icons@1.0.0-beta.42", "@material-ui/icons@^1.0.0-beta.42":
+  version "1.0.0-beta.42"
+  resolved "http://localhost:4873/@material-ui%2ficons/-/icons-1.0.0-beta.42.tgz#1e0e45e8f4de533071c7e4532508fa79bf1f29d9"
+  dependencies:
+    recompose "^0.26.0"
+
 "@storybook/addon-actions@^3.3.14":
   version "3.3.14"
   resolved "http://localhost:4873/@storybook%2faddon-actions/-/addon-actions-3.3.14.tgz#b78e707b32130ad16ea8a0af62a66f23b5df502b"
@@ -756,9 +762,9 @@
   version "9.4.6"
   resolved "http://localhost:4873/@types%2fnode/-/node-9.4.6.tgz#d8176d864ee48753d053783e4e463aec86b8d82e"
 
-"@types/react-transition-group@^2.0.6":
-  version "2.0.7"
-  resolved "http://localhost:4873/@types%2freact-transition-group/-/react-transition-group-2.0.7.tgz#2847292d54c5685d982ae5a3ecb6960946689d87"
+"@types/react-transition-group@^2.0.8":
+  version "2.0.8"
+  resolved "http://localhost:4873/@types%2freact-transition-group/-/react-transition-group-2.0.8.tgz#1ea86f6d8288e4bba8d743317ba9cc61cdacc1ad"
   dependencies:
     "@types/react" "*"
 
@@ -3570,7 +3576,7 @@ es5-shim@^4.5.10:
   version "4.5.10"
   resolved "http://localhost:4873/es5-shim/-/es5-shim-4.5.10.tgz#b7e17ef4df2a145b821f1497b50c25cf94026205"
 
-es6-error@^4.0.0:
+es6-error@^4.1.1:
   version "4.1.1"
   resolved "http://localhost:4873/es6-error/-/es6-error-4.1.1.tgz#9e3af407459deed47e9a91f9b885a84eb05c561d"
 
@@ -4864,6 +4870,12 @@ invariant@^2.0.0, invariant@^2.2.0, invariant@^2.2.1, invariant@^2.2.2:
   dependencies:
     loose-envify "^1.0.0"
 
+invariant@^2.2.3:
+  version "2.2.4"
+  resolved "http://localhost:4873/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  dependencies:
+    loose-envify "^1.0.0"
+
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "http://localhost:4873/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
@@ -5808,7 +5820,7 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
-lodash-es@^4.17.3, lodash-es@^4.17.5, lodash-es@^4.2.1:
+lodash-es@^4.17.5, lodash-es@^4.2.1:
   version "4.17.5"
   resolved "http://localhost:4873/lodash-es/-/lodash-es-4.17.5.tgz#9fc6e737b1c4d151d8f9cae2247305d552ce748f"
 
@@ -6001,24 +6013,18 @@ material-colors@^1.2.1:
   version "1.2.5"
   resolved "http://localhost:4873/material-colors/-/material-colors-1.2.5.tgz#5292593e6754cb1bcc2b98030e4e0d6a3afc9ea1"
 
-material-ui-icons@^1.0.0-beta.17:
-  version "1.0.0-beta.35"
-  resolved "http://localhost:4873/material-ui-icons/-/material-ui-icons-1.0.0-beta.35.tgz#f795fafa385918ef7c88ee382e5e5bf4401f008c"
-  dependencies:
-    recompose "^0.26.0"
-
-material-ui@^1.0.0-beta.32:
-  version "1.0.0-beta.35"
-  resolved "http://localhost:4873/material-ui/-/material-ui-1.0.0-beta.35.tgz#eeac6be307c0469943c7686e5c6bd4eaa6b1b563"
+material-ui@1.0.0-beta.42:
+  version "1.0.0-beta.42"
+  resolved "http://localhost:4873/material-ui/-/material-ui-1.0.0-beta.42.tgz#a0dea15fd433d521b41912802041eee8b3f30589"
   dependencies:
     "@types/jss" "^9.3.0"
-    "@types/react-transition-group" "^2.0.6"
+    "@types/react-transition-group" "^2.0.8"
     babel-runtime "^6.26.0"
     brcast "^3.0.1"
     classnames "^2.2.5"
     deepmerge "^2.0.1"
     dom-helpers "^3.2.1"
-    hoist-non-react-statics "^2.3.1"
+    hoist-non-react-statics "^2.5.0"
     jss "^9.3.3"
     jss-camel-case "^6.0.0"
     jss-default-unit "^8.0.2"
@@ -6032,7 +6038,8 @@ material-ui@^1.0.0-beta.32:
     prop-types "^15.6.0"
     react-event-listener "^0.5.1"
     react-jss "^8.1.0"
-    react-popper "^0.8.0"
+    react-lifecycles-compat "^2.0.0"
+    react-popper "^0.10.0"
     react-scrollbar-size "^2.0.2"
     react-transition-group "^2.2.1"
     recompose "^0.26.0"
@@ -6836,6 +6843,10 @@ popper.js@^1.12.9:
   version "1.12.9"
   resolved "http://localhost:4873/popper.js/-/popper.js-1.12.9.tgz#0dfbc2dff96c451bb332edcfcfaaf566d331d5b3"
 
+popper.js@^1.14.1:
+  version "1.14.3"
+  resolved "http://localhost:4873/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
+
 postcss-calc@^5.2.0:
   version "5.3.1"
   resolved "http://localhost:4873/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -7236,12 +7247,13 @@ prop-types@15.6.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, 
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@~15.5.7:
-  version "15.5.10"
-  resolved "http://localhost:4873/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+prop-types@^15.6.1, prop-types@~15.6.1:
+  version "15.6.1"
+  resolved "http://localhost:4873/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
-    fbjs "^0.8.9"
+    fbjs "^0.8.16"
     loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
 proxy-addr@~2.0.2:
   version "2.0.3"
@@ -7314,9 +7326,9 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@~5.0.0:
-  version "5.0.1"
-  resolved "http://localhost:4873/query-string/-/query-string-5.0.1.tgz#6e2b86fe0e08aef682ecbe86e85834765402bd88"
+query-string@~5.1.1:
+  version "5.1.1"
+  resolved "http://localhost:4873/query-string/-/query-string-5.1.1.tgz#a78c012b71c17e05f2e3fa2319dd330682efb3cb"
   dependencies:
     decode-uri-component "^0.2.0"
     object-assign "^4.1.0"
@@ -7334,52 +7346,53 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "http://localhost:4873/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-ra-core@2.0.0-beta-tkvw90, ra-core@^2.0.0-beta-tkvw90:
-  version "2.0.0-beta-tkvw90"
-  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-beta-tkvw90.tgz#eaede36a82c6f690159527fda176c3a0afa9e6df"
+ra-core@2.0.0-RC-002, ra-core@^2.0.0-RC-002:
+  version "2.0.0-RC-002"
+  resolved "http://localhost:4873/ra-core/-/ra-core-2.0.0-RC-002.tgz#17a43ae7f1d659e186aa8276d159788522c7397b"
   dependencies:
     babel-runtime "~6.26.0"
     classnames "~2.2.5"
     inflection "~1.12.0"
     lodash "~4.17.5"
     node-polyglot "2.2.2"
-    prop-types "~15.5.7"
-    query-string "~5.0.0"
-    ra-language-english "^2.0.0-beta-tkvw90"
-    react-redux "~5.0.4"
+    prop-types "~15.6.1"
+    query-string "~5.1.1"
+    ra-language-english "^2.0.0-RC-002"
+    react-redux "~5.0.7"
     react-router "~4.2.0"
     react-router-dom "~4.2.2"
-    react-router-redux "~5.0.0-alpha.6"
-    recompose "~0.25.0"
+    react-router-redux "~5.0.0-alpha.9"
+    recompose "~0.26.0"
     redux "~3.7.2"
-    redux-form "~7.1.2"
+    redux-form "~7.3.0"
     redux-saga "~0.16.0"
     reselect "~3.0.0"
     warning "~3.0.0"
 
-ra-language-english@^2.0.0-beta-tkvw90:
-  version "2.0.0-beta-tkvw90"
-  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-beta-tkvw90.tgz#638fdda5921589548d744487c3f79dcd22944faf"
+ra-language-english@^2.0.0-RC-002:
+  version "2.0.0-RC-002"
+  resolved "http://localhost:4873/ra-language-english/-/ra-language-english-2.0.0-RC-002.tgz#4249c923e911a6b025535eb308a7a34ed0d507fa"
 
-ra-ui-materialui@2.0.0-beta-tkvw90:
-  version "2.0.0-beta-tkvw90"
-  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-beta-tkvw90.tgz#85a478f18dd5a07b587e79476bcdd8c34c89e1f8"
+ra-ui-materialui@2.0.0-RC-002:
+  version "2.0.0-RC-002"
+  resolved "http://localhost:4873/ra-ui-materialui/-/ra-ui-materialui-2.0.0-RC-002.tgz#714b41954dd5c00736e86c959e53813f3252eddf"
   dependencies:
+    "@material-ui/icons" "1.0.0-beta.42"
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
     inflection "~1.12.0"
     lodash "~4.17.5"
-    material-ui "^1.0.0-beta.32"
-    material-ui-icons "^1.0.0-beta.17"
-    prop-types "~15.5.7"
-    ra-core "^2.0.0-beta-tkvw90"
+    material-ui "1.0.0-beta.42"
+    prop-types "~15.6.1"
+    ra-core "^2.0.0-RC-002"
     react-autosuggest "^9.3.2"
     react-dropzone "~4.0.1"
-    react-redux "~5.0.4"
+    react-redux "~5.0.7"
     react-router-dom "~4.2.2"
-    recompose "~0.25.0"
+    react-transition-group "^2.2.1"
+    recompose "~0.26.0"
     redux "~3.7.2"
-    redux-form "~7.1.2"
+    redux-form "~7.3.0"
 
 radium@^0.19.0:
   version "0.19.6"
@@ -7605,6 +7618,10 @@ react-jss@^8.1.0:
     prop-types "^15.6.0"
     theming "^1.3.0"
 
+react-lifecycles-compat@^2.0.0:
+  version "2.0.2"
+  resolved "http://localhost:4873/react-lifecycles-compat/-/react-lifecycles-compat-2.0.2.tgz#00a23160eec17a43b94dd74f95d44a1a2c3c5ec1"
+
 react-modal@^3.1.10:
   version "3.3.1"
   resolved "http://localhost:4873/react-modal/-/react-modal-3.3.1.tgz#7355db196482da0c7fa1cbecccf2bdd9bc366b14"
@@ -7617,14 +7634,21 @@ react-onclickoutside@^6.5.0:
   version "6.7.1"
   resolved "http://localhost:4873/react-onclickoutside/-/react-onclickoutside-6.7.1.tgz#6a5b5b8b4eae6b776259712c89c8a2b36b17be93"
 
-react-popper@^0.8.0, react-popper@^0.8.2:
+react-popper@^0.10.0:
+  version "0.10.1"
+  resolved "http://localhost:4873/react-popper/-/react-popper-0.10.1.tgz#6a1f2595faffda77105bed4e89ecf22607a4c452"
+  dependencies:
+    popper.js "^1.14.1"
+    prop-types "^15.6.1"
+
+react-popper@^0.8.2:
   version "0.8.2"
   resolved "http://localhost:4873/react-popper/-/react-popper-0.8.2.tgz#092095ff13933211d3856d9f325511ec3a42f12c"
   dependencies:
     popper.js "^1.12.9"
     prop-types "^15.6.0"
 
-react-redux@~5.0.4:
+react-redux@~5.0.4, react-redux@~5.0.7:
   version "5.0.7"
   resolved "http://localhost:4873/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"
   dependencies:
@@ -7646,7 +7670,7 @@ react-router-dom@~4.2.2:
     react-router "^4.2.0"
     warning "^3.0.0"
 
-react-router-redux@~5.0.0-alpha.6:
+react-router-redux@~5.0.0-alpha.6, react-router-redux@~5.0.0-alpha.9:
   version "5.0.0-alpha.9"
   resolved "http://localhost:4873/react-router-redux/-/react-router-redux-5.0.0-alpha.9.tgz#825431516e0e6f1fd93b8807f6bd595e23ec3d10"
   dependencies:
@@ -7875,18 +7899,9 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-recompose@^0.26.0:
+recompose@^0.26.0, recompose@~0.26.0:
   version "0.26.0"
   resolved "http://localhost:4873/recompose/-/recompose-0.26.0.tgz#9babff039cb72ba5bd17366d55d7232fbdfb2d30"
-  dependencies:
-    change-emitter "^0.1.2"
-    fbjs "^0.8.1"
-    hoist-non-react-statics "^2.3.1"
-    symbol-observable "^1.0.4"
-
-recompose@~0.25.0:
-  version "0.25.1"
-  resolved "http://localhost:4873/recompose/-/recompose-0.25.1.tgz#5eb9d6cf6e25a9ffad73cbbae5658b5b55d6e728"
   dependencies:
     change-emitter "^0.1.2"
     fbjs "^0.8.1"
@@ -7921,18 +7936,18 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-form@~7.1.2:
-  version "7.1.2"
-  resolved "http://localhost:4873/redux-form/-/redux-form-7.1.2.tgz#6b0f25c57fd8130a05ce00f6435fe1b051f402af"
+redux-form@^7.3.0, redux-form@~7.3.0:
+  version "7.3.0"
+  resolved "http://localhost:4873/redux-form/-/redux-form-7.3.0.tgz#b92ef1639c86a6009b0821aacfc80ad8b5ac8c05"
   dependencies:
     deep-equal "^1.0.1"
-    es6-error "^4.0.0"
-    hoist-non-react-statics "^2.3.1"
-    invariant "^2.2.2"
+    es6-error "^4.1.1"
+    hoist-non-react-statics "^2.5.0"
+    invariant "^2.2.3"
     is-promise "^2.1.0"
-    lodash "^4.17.3"
-    lodash-es "^4.17.3"
-    prop-types "^15.5.9"
+    lodash "^4.17.5"
+    lodash-es "^4.17.5"
+    prop-types "^15.6.1"
 
 redux-promising-modals@^2.1.2:
   version "2.1.2"

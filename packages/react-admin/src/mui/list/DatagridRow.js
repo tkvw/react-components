@@ -33,6 +33,7 @@ class DatagridRow extends Component {
             children,
             classes,
             className,
+            editing,
             hasBulkActions,
             hover,
             id,
@@ -43,7 +44,9 @@ class DatagridRow extends Component {
             styles,
             ...rest
         } = this.props;
-        return (
+
+        const rows = [];
+        rows.push(
             <TableRow
                 className={className}
                 key={id}
@@ -73,19 +76,36 @@ class DatagridRow extends Component {
                         field ? (
                             <DatagridCell
                                 key={`${id}-${field.props.source || index}`}
+                                basePath={basePath}
                                 className={classnames(
                                     `column-${field.props.source}`,
                                     `${resource}-column-${field.props.source}`,
                                     classes.rowCell
                                 )}
-                                record={record}
                                 id={id}
-                                {...{ field, basePath, resource }}
+                                field={field}
+                                record={record}
+                                resource={resource}
+                                editing={editing}
                             />
                         ) : null
                 )}
             </TableRow>
         );
+
+        if (editing) {
+            rows.push(
+                <TableRow key={`${id}-detail`}>
+                    <TableCell
+                        colspan={children.length + hasBulkActions ? 1 : 0}
+                    >
+                        Dennie
+                    </TableCell>
+                </TableRow>
+            );
+        }
+
+        return rows;
     }
 }
 
@@ -94,6 +114,7 @@ DatagridRow.propTypes = {
     children: PropTypes.node,
     classes: PropTypes.object,
     className: PropTypes.string,
+    editing: PropTypes.bool,
     hasBulkActions: PropTypes.bool.isRequired,
     hover: PropTypes.bool,
     id: PropTypes.any,

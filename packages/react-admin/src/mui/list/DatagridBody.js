@@ -26,8 +26,8 @@ const DatagridBody = ({
     ...rest
 }) => (
     <TableBody className={classnames('datagrid-body', className)} {...rest}>
-        {ids.reduce((acc, id, rowIndex) => {
-            return acc.concat(
+        {ids.map(
+            (id, rowIndex) => (
                 <RowComponent
                     basePath={basePath}
                     classes={classes}
@@ -47,8 +47,9 @@ const DatagridBody = ({
                 >
                     {children}
                 </RowComponent>
-            );
-        }, [])}
+            ),
+            []
+        )}
     </TableBody>
 );
 

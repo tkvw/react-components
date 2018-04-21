@@ -6,16 +6,24 @@ import pure from 'recompose/pure';
 import ShowActions from './ShowActions';
 import { Header } from '../layout';
 import { ShowController } from 'ra-core';
+import LoadingRecord from './LoadingRecord';
 
 const ShowView = pure(
-    ({ actions = <ShowActions />, children, className, ...props }) => (
-        <Card className={classnames('show-page', className)}>
-            <Header {...props}>{React.cloneElement(actions, props)}</Header>
-            {typeof children === 'function'
-                ? children(props)
-                : React.cloneElement(children, props)}
-        </Card>
-    )
+    ({ actions = <ShowActions />, children, className, ...props }) => {
+        const { record } = props;
+        return (
+            <Card className={classnames('show-page', className)}>
+                <Header {...props}>{React.cloneElement(actions, props)}</Header>
+                {!record ? (
+                    <LoadingRecord />
+                ) : typeof children === 'function' ? (
+                    children(props)
+                ) : (
+                    React.cloneElement(children, props)
+                )}
+            </Card>
+        );
+    }
 );
 
 const Show = props => (

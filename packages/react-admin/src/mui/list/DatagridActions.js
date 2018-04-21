@@ -2,7 +2,6 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import { ResourceConsumer } from '../../context';
 import { EditButton, ShowButton } from 'ra-ui-materialui';
 
 const styles = () => ({

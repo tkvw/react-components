@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import withProps from 'recompose/withProps';
+import mapProps from 'recompose/mapProps';
 import { withStyles } from 'material-ui/styles';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
@@ -8,7 +8,8 @@ import compose from 'recompose/compose';
 import classnames from 'classnames';
 import { getDefaultValues } from 'ra-core';
 import Toolbar from './Toolbar';
-import { WithDefaultProps } from '../layout';
+import { RenderChildren } from '../layout';
+import { FormProvider } from './FormContext';
 
 const styles = theme => ({
     form: {
@@ -19,10 +20,14 @@ const styles = theme => ({
             padding: '0 1em 5em 1em',
         },
     },
+    hidden: {
+        display: 'none',
+    },
 });
 
 export class SimpleForm extends Component {
     static propTypes = {
+        basePath: PropTypes.string,
         children: PropTypes.node,
         classes: PropTypes.object,
         className: PropTypes.string,
@@ -32,12 +37,16 @@ export class SimpleForm extends Component {
         invalid: PropTypes.bool,
         pristine: PropTypes.bool,
         save: PropTypes.func, // the handler defined in the parent, which triggers the REST submission
-        resource: PropTypes.string,
+        record: PropTypes.object,
         redirect: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+        resource: PropTypes.string,
         submitOnEnter: PropTypes.bool,
         toolbar: PropTypes.element,
         translate: PropTypes.func,
         version: PropTypes.number,
+    };
+    static defaultProps = {
+        submitOnEnter: true,
     };
 
     handleSubmitWithRedirect = (redirect = this.props.redirect) =>
@@ -47,34 +56,53 @@ export class SimpleForm extends Component {
 
     render() {
         const {
+            basePath,
             children,
             classes,
             className,
             toolbar = <Toolbar />,
             version,
+            submitOnEnter,
+            record,
+            resource,
             ...props
         } = this.props;
         return (
-            <form
-                className={classnames('simple-form', className)}
-                key={version}
-            >
-                <div className={classes.form}>
-                    <WithDefaultProps {...props} version={version}>{children}</WithDefaultProps>
-                </div>
-                {toolbar &&
-                    React.cloneElement(toolbar, {
-                        handleSubmitWithRedirect: this.handleSubmitWithRedirect,
-                        ...props,
-                    })}
-            </form>
+            <FormProvider value={props}>
+                <form
+                    className={classnames('simple-form', className)}
+                    onSubmit={props.handleSubmit}
+                >
+                    <div className={classes.form} key={version}>
+                        <RenderChildren
+                            basePath={basePath}
+                            record={record}
+                            resource={resource}
+                        >
+                            {children}
+                        </RenderChildren>
+                    </div>
+                    {submitOnEnter && (
+                        <button type="submit" className={classes.hidden} />
+                    )}
+                    {toolbar &&
+                        React.cloneElement(toolbar, {
+                            handleSubmitWithRedirect: this
+                                .handleSubmitWithRedirect,
+                            ...props,
+                        })}
+                </form>
+            </FormProvider>
         );
     }
 }
 
 const enhance = compose(
     withStyles(styles),
-    withProps(({ form, resource }) => ({ form: form || `${resource}-form` })),
+    mapProps(props => ({
+        form: `${props.resource}-simple-form`,
+        ...props,
+    })),
     connect((state, props) => ({
         initialValues: getDefaultValues(state, props),
     })),
